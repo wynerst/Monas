@@ -1,0 +1,50 @@
+<div class="col-lg-12">              
+  <div class="panel panel-default">
+    <div class="panel-body">                   
+      <div class="table-header">
+        <div class="row">                     
+          <div class="col-lg-12 text-right">
+            <a href="<?php echo current_url()?>/clear" class="btn btn-inverse"><i class="fa fa-refresh"></i> Clear Log</a>
+            <a href="<?php echo current_url()?>/csv" class="btn btn-inverse"><i class="fa fa-arrow-down"></i> Unduh CSV</a>
+          </div>
+        </div>
+      </div>  
+                         
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Modul</th>
+              <th>User</th>
+              <th>Message</th>
+              <th>Last Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php 
+            if(count($list) > 0 ) :
+              foreach ($list as $log) :
+            ?>
+            <tr>
+              <td><?php echo $log->id_user?></td>
+              <td><?php echo $log->id_modul?></td>
+              <td><?php echo $log->message?></td>
+              <td><?php echo $log->waktu?></td>
+            </tr>
+            <?php 
+              endforeach;
+            else : ?>
+            <tr>
+              <td colspan="5">Belum Ada Data</td>
+            </tr>
+          <?php endif; ?>
+          </tbody>
+        </table>
+      </div>
+       
+    </div>
+
+  </div>
+
+
+</div> 

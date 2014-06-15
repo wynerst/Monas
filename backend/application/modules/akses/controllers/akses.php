@@ -12,20 +12,20 @@ class Akses extends MX_Controller {
 		$sql 				= "	SELECT 
 									*
 								FROM 
-									user";
+									hak_akses";
 
 		$query 				= $this->db->query($sql);
 		$view['list'] 		= $query->result();			
 		
 		// HARUS ADA - Semua isi halaman akan diletakkan disini.
-		$view['content'] 		= $this->load->view('operator', $view, true);			
+		$view['content'] 		= $this->load->view('akses', $view, true);			
 
 		// HARUS ADA - Breadcrumbs - helper/monas_helper.php
 		$view['breadcrumb']		= breadcrumbs(
 									array(
-										array('link'=>'#', 'title'=>'Operator')
+										array('link'=>'#', 'title'=>'Pengguna')
 									), 
-									''
+									'Hak Akses'
 		);
 
 		// HARUS ADA - Proses keluaran untuk seluruh halaman

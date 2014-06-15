@@ -5,7 +5,7 @@ class Operator extends MX_Controller {
 	public function index()
 	{
 		// HARUS ADA - Silahkan beri judul halaman
-		$view['page_title'] = 'Operator';
+		$view['page_title'] = 'Data Operator';
 		$view['page_desc'] 	= 'Data Pengguna Sistem';  			
 
 		// Rekening Bank
@@ -23,9 +23,9 @@ class Operator extends MX_Controller {
 		// HARUS ADA - Breadcrumbs - helper/monas_helper.php
 		$view['breadcrumb']		= breadcrumbs(
 									array(
-										array('link'=>'#', 'title'=>'Operator')
+										array('link'=>'#', 'title'=>'Pengguna')
 									), 
-									''
+									'Data Operator'
 		);
 
 		// HARUS ADA - Proses keluaran untuk seluruh halaman

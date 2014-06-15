@@ -36,7 +36,7 @@ class Pribadi extends MX_Controller {
 		// HARUS ADA - Breadcrumbs - helper/monas_helper.php
 		$view['breadcrumb']		= breadcrumbs(
 									array(
-										array('link'=>'#', 'title'=>'Konfigurasi')
+										array('link'=>'#', 'title'=>'Pengguna')
 									), 
 									'Data Pribadi'
 		);
