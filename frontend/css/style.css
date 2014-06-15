@@ -1674,7 +1674,11 @@ select.input-lg {
 }
 
 #contact {
-  background: #f2f2f2 url(../img/h2.png) center right no-repeat;
+  background: #fff url(../img/h2.png) center right no-repeat;
+}
+
+#relawan {
+  background: #fff url(../img/pattern4.png) ;
 }
 
 #donatur {
