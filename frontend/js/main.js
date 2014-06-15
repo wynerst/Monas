@@ -103,4 +103,54 @@ $(function(){
 
   }
   lineChart();
+
+  //Line
+  var l = $('#line-chartjs');
+  var container = $(l).parent();
+  var cl = l.get(0).getContext("2d");
+  $(window).resize( lineChart );
+  function lineChart(){ 
+      l.attr('width', $(container).width() ); //max width
+      l.attr('height', $(container).height() ); //max height
+      //Call a function to redraw other content (texts, images etc)
+      var lineChart = new Chart(cl).Bar(chartData);
+
+  }
+  lineChart();  
+
+  var polarData = [
+    {
+      value : 3330,
+      color: "#333"
+    },
+    {
+      value : 9440,
+      color: "#666"
+    },
+    {
+      value : 34224,
+      color: "#999"
+    }
+  ]
+ 
+  var polarOption = 
+    {
+            segmentShowStroke : false,
+    }
+
+
+  //Polar
+  var p = $('#donut-chartjs');
+  var container = $(p).parent();
+  var cp = p.get(0).getContext("2d");
+  $(window).resize(donutChart);
+  function donutChart(){ 
+      p.attr('width', $(container).width() ); //max width
+      p.attr('height', $(container).height() ); //max height
+      //Call a function to redraw other content (texts, images etc)
+      var donutChart = new Chart(cp).Doughnut(polarData,polarOption);
+  }
+
+  donutChart();
+
 });
