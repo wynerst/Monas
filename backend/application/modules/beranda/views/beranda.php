@@ -48,9 +48,9 @@
                   </div>
                 </div>
                 <div class="panel-footer">
-                  <i class="fa fa-circle" style="color:#D8BE15;"></i> Bank A 
-                  <i class="fa fa-circle" style="color:#770C87;"></i> Bank B
-                  <i class="fa fa-circle" style="color:#770C87;"></i> Bank C
+                  <i class="fa fa-circle" style="color:#ccc;"></i> BRI 
+                  <i class="fa fa-circle" style="color:#666;"></i> BCA
+                  <i class="fa fa-circle" style="color:#333;"></i> Bank Mandiri
                 </div>
               </div>  
             </div> 

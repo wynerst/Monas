@@ -2688,13 +2688,13 @@ a.list-group-item-danger.active:focus {
   background-color: #f5f4f1;
 }
 #login header {
-  background-color: #800088;
+  background-color: #EF3131;
 }
 #register header {
-  background-color: #049cb7;
+  background-color: #EF3131;
 }
 #forgot header {
-  background-color: #e3d109;
+  background-color: #EF3131;
 }
 .login-error {
   font-size: 10px;
