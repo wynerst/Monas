@@ -2,6 +2,11 @@
 
 class Laporan extends MX_Controller {
 
+
+	public function index() {
+		$this->sumbangan();
+	}
+
 	public function sumbangan()
 	{
 		// Cek proses berdasarkan segmentasi pada alamat URL.
@@ -29,9 +34,15 @@ class Laporan extends MX_Controller {
 
 				$query 				= $this->db->query($sql);
 				$view['list'] 		= $query->result();			
-				
+
 				// HARUS ADA - Semua isi halaman akan diletakkan disini.
 				$view['content'] 		= $this->load->view('sumbangan', $view, true);			
+
+				// CSS dan Plugin
+				$view['js_files'] = array(
+											base_url().PLUGINS.'/chartjs/chart.min.js',     
+											base_url().CUSTOM.'/report.js'  
+				);
 
 				// HARUS ADA - Breadcrumbs - helper/monas_helper.php
 				$view['breadcrumb']		= breadcrumbs(
@@ -136,6 +147,12 @@ class Laporan extends MX_Controller {
 				
 				// HARUS ADA - Semua isi halaman akan diletakkan disini.
 				$view['content'] 		= $this->load->view('bank', $view, true);			
+
+				// CSS dan Plugin
+				$view['js_files'] = array(
+											base_url().PLUGINS.'/chartjs/chart.min.js',     
+											base_url().CUSTOM.'/report.js'  
+				);
 
 				// HARUS ADA - Breadcrumbs - helper/monas_helper.php
 				$view['breadcrumb']		= breadcrumbs(

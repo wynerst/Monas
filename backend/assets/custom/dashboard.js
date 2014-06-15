@@ -5,22 +5,23 @@ $(function(){
       labels : ["01/06","02/06","03/06","04/06"],
       datasets : [
           {
-              fillColor : "rgba(25,117,117,1)",
-              strokeColor : "rgba(25,117,117,1)",
-              pointColor : "rgba(25,117,117,1)",
+              fillColor : "#CCC",
+              strokeColor : "#fff",
+              pointColor : "#fff",
               pointStrokeColor : "#fff",
               data : [0,381,126,0]
           },
           {
-              fillColor : "rgba(128,0,136,1)",
-              strokeColor : "rgba(128,0,136,1)",
-              pointColor : "rgba(128,0,136,1)",
+              fillColor : "#666",
+              strokeColor : "#fff",
+              pointColor : "#fff",
               pointStrokeColor : "#fff",
               data : [0,219,96,0]
-          },                {
-              fillColor : "rgba(227,209,9,1)",
-              strokeColor : "rgba(227,209,9,1)",
-              pointColor : "rgba(227,209,9,1)",
+          },                
+          {
+              fillColor : "#333",
+              strokeColor : "#fff",
+              pointColor : "#fff",
               pointStrokeColor : "#fff",
               data : [0,142,29,0]
           }

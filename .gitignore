@@ -6,3 +6,5 @@ source/psd/*
 .DS_Store
 ._.*
 ._*
+dbase.php
+

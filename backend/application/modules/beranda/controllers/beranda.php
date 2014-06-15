@@ -13,9 +13,6 @@ class Beranda extends MX_Controller {
 
 		// CSS dan Plugin
 		$view['css_files'] = array( 
-									base_url().PLUGINS.'/easypiechart/jquery.easy-pie-chart.css',
-									base_url().PLUGINS.'/easypiechart/jquery.easy-pie-chart.css',
-									base_url().PLUGINS.'/easypiechart/jquery.easy-pie-chart.css',
 									base_url().PLUGINS.'/easypiechart/jquery.easy-pie-chart.css'
 		);
 

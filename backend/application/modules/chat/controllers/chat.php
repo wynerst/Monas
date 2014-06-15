@@ -1,43 +1,67 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Chat extends CI_Controller {
-  /* The default function that gets called when visiting the page */
-  public function index() {       
-    $this->load->view('chat-view');
-  }
-  
-  public function get_chats() {
-    /* Connect to the mySQL database - config values can be found at:
-    /application/config/database.php */
-    $dbconnect = $this->load->database();
-    
-    /* Load the database model:
-    /application/models/simple_model.php */
-    $this->load->model('Chat_model');
-    
-    /* Create a table if it doesn't exist already */
-    $this->Chat_model->create_table();
-    
-    echo json_encode($this->Chat_model->get_chat_after($_REQUEST["time"]));
-  }
-  
-  public function insert_chat() {
-    /* Connect to the mySQL database - config values can be found at:
-    /application/config/database.php */
-    $dbconnect = $this->load->database();
-    
-    /* Load the database model:
-    /application/models/simple_model.php */
-    $this->load->model('Chat_model');
-    
-    /* Create a table if it doesn't exist already */
-    $this->Chat_model->create_table();
+class Chat extends MX_Controller {
 
-    $this->Chat_model->insert_message($_REQUEST["message"]); 
-  }
-  
-  public function time() {
-    echo "[{\"time\":" +  time() + "}]";
-  }
-  
-}?>
+	public function index()
+	{
+		// HARUS ADA - Silahkan beri judul halaman
+		$view['page_title'] = 'Chat';
+		$view['page_desc'] 	= 'Wireless Communication';  			
+
+		// Rekening Bank
+		$sql 				= "	SELECT 
+									*
+								FROM 
+									mst_bank";
+
+		$query 				= $this->db->query($sql);
+		$view['list'] 		= $query->result();			
+		
+		// HARUS ADA - Semua isi halaman akan diletakkan disini.
+		$view['content'] 		= $this->load->view('chat', $view, true);			
+
+		// HARUS ADA - Breadcrumbs - helper/monas_helper.php
+		$view['breadcrumb']		= breadcrumbs(
+									array(
+									), 
+									'Chat'
+		);
+
+		// HARUS ADA - Proses keluaran untuk seluruh halaman
+		$this->load->view('master', $view);
+	}
+
+	public function add()
+	{
+		// HARUS ADA - Silahkan beri judul halaman
+		$view['page_title'] = 'Bank';
+		$view['page_desc'] 	= 'Tambah Data Bank';  			
+
+		// HARUS ADA - Semua isi halaman akan diletakkan disini.
+		$view['content'] 	= $this->load->view('bank_add',$view,true);			
+
+		// HARUS ADA - Breadcrumbs - helper/monas_helper.php
+		$view['breadcrumb']		= breadcrumbs(
+									array(
+										array('link'=>'#', 'title'=>'Masterfile'),
+										array('link'=>'#', 'title'=>'Bank')
+									), 
+									'Tambah Data Bank'
+		);
+		// HARUS ADA - Proses keluaran untuk seluruh halaman
+		$this->load->view('master', $view);
+	}
+
+	public function edit()
+	{
+		
+	}	
+
+	public function delete()
+	{
+	
+	}	
+
+}
+
+/* End of file welcome.php */
