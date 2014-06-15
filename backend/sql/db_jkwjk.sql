@@ -1,224 +1,225 @@
-﻿# Host: localhost  (Version: 5.0.37-community-nt)
-# Date: 2014-06-15 08:49:04
-# Generator: MySQL-Front 5.3  (Build 4.75)
+-- phpMyAdmin SQL Dump
+-- version 3.5.8
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Jun 15, 2014 at 09:46 PM
+-- Server version: 5.5.37-0ubuntu0.12.04.1
+-- PHP Version: 5.3.10-1ubuntu3.11
 
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
-#
-# Structure for table "belanja"
-#
+--
+-- Database: `db_jkwjk`
+--
 
-DROP TABLE IF EXISTS `belanja`;
-CREATE TABLE `belanja` (
-  `id_belanja` int(11) NOT NULL auto_increment,
-  `belanja` varchar(45) collate utf8_unicode_ci default NULL,
-  `nominal` decimal(20,2) default NULL,
-  `tgl_keluar` date default NULL,
-  `persetujuan` varchar(45) collate utf8_unicode_ci default NULL,
-  `catatan` text collate utf8_unicode_ci,
-  PRIMARY KEY  (`id_belanja`)
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `belanja`
+--
+
+CREATE TABLE IF NOT EXISTS `belanja` (
+  `id_belanja` int(11) NOT NULL AUTO_INCREMENT,
+  `belanja` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nominal` decimal(20,2) DEFAULT NULL,
+  `tgl_keluar` date DEFAULT NULL,
+  `persetujuan` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `catatan` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id_belanja`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `berita`
+--
+
+CREATE TABLE IF NOT EXISTS `berita` (
+  `id_berita` int(11) NOT NULL AUTO_INCREMENT,
+  `berita` tinytext COLLATE utf8_unicode_ci NOT NULL,
+  `sumber` tinytext COLLATE utf8_unicode_ci NOT NULL,
+  `create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `tanggal` date NOT NULL,
+  `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_berita`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chat`
+--
+
+CREATE TABLE IF NOT EXISTS `chat` (
+  `id_chat` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL,
+  `pesan` tinytext COLLATE utf8_unicode_ci NOT NULL,
+  `create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_chat`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `group_user`
+--
+
+CREATE TABLE IF NOT EXISTS `group_user` (
+  `group_id` int(11) NOT NULL AUTO_INCREMENT,
+  `group` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`group_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hak_akses`
+--
+
+CREATE TABLE IF NOT EXISTS `hak_akses` (
+  `id_modul` int(11) NOT NULL,
+  `id_group` int(11) NOT NULL,
+  `hak_akses` int(2) DEFAULT NULL,
+  PRIMARY KEY (`id_modul`,`id_group`),
+  KEY `fk_hak_akses_user1_idx` (`id_group`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-#
-# Data for table "belanja"
-#
+-- --------------------------------------------------------
 
-/*!40000 ALTER TABLE `belanja` DISABLE KEYS */;
-INSERT INTO `belanja` VALUES (1,'Pembuatan Spanduk',1000000.00,'2014-06-01','0','Mockup Belum Ada');
-/*!40000 ALTER TABLE `belanja` ENABLE KEYS */;
+--
+-- Table structure for table `log`
+--
 
-#
-# Structure for table "hak_akses"
-#
-
-DROP TABLE IF EXISTS `hak_akses`;
-CREATE TABLE `hak_akses` (
-  `mst_modul_id_modul` int(11) NOT NULL,
-  `user_id_user` int(11) NOT NULL,
-  `hak_akses` int(2) default NULL,
-  PRIMARY KEY  (`mst_modul_id_modul`,`user_id_user`),
-  KEY `fk_hak_akses_user1_idx` (`user_id_user`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-#
-# Data for table "hak_akses"
-#
-
-/*!40000 ALTER TABLE `hak_akses` DISABLE KEYS */;
-/*!40000 ALTER TABLE `hak_akses` ENABLE KEYS */;
-
-#
-# Structure for table "log"
-#
-
-DROP TABLE IF EXISTS `log`;
-CREATE TABLE `log` (
+CREATE TABLE IF NOT EXISTS `log` (
   `id_log` int(11) NOT NULL,
   `id_modul` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `message` varchar(100) collate utf8_unicode_ci default NULL,
-  `waktu` timestamp NULL default NULL,
-  PRIMARY KEY  (`id_log`,`id_modul`,`id_user`),
+  `message` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `waktu` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_log`,`id_modul`,`id_user`),
   KEY `fk_log_mst_modul1_idx` (`id_modul`),
   KEY `fk_log_user1_idx` (`id_user`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-#
-# Data for table "log"
-#
+-- --------------------------------------------------------
 
-/*!40000 ALTER TABLE `log` DISABLE KEYS */;
-/*!40000 ALTER TABLE `log` ENABLE KEYS */;
+--
+-- Table structure for table `mst_bank`
+--
 
-#
-# Structure for table "mst_bank"
-#
-
-DROP TABLE IF EXISTS `mst_bank`;
-CREATE TABLE `mst_bank` (
-  `id_bank` int(11) NOT NULL auto_increment,
-  `nama` varchar(255) collate utf8_unicode_ci NOT NULL,
-  `no_akun` varchar(45) collate utf8_unicode_ci default NULL,
-  `atas_nama` varchar(45) collate utf8_unicode_ci default NULL,
+CREATE TABLE IF NOT EXISTS `mst_bank` (
+  `id_bank` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `no_akun` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `atas_nama` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `kel_penyumbang_id` int(11) NOT NULL,
-  PRIMARY KEY  (`id_bank`,`kel_penyumbang_id`),
+  PRIMARY KEY (`id_bank`,`kel_penyumbang_id`),
   KEY `fk_mst_bank_mst_kel_penyumbang1_idx` (`kel_penyumbang_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mst_kel_penyumbang`
+--
+
+CREATE TABLE IF NOT EXISTS `mst_kel_penyumbang` (
+  `kel_penyumbang_id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`kel_penyumbang_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mst_modul`
+--
+
+CREATE TABLE IF NOT EXISTS `mst_modul` (
+  `id_modul` int(11) NOT NULL AUTO_INCREMENT,
+  `modul` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id_modul`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penyumbang`
+--
+
+CREATE TABLE IF NOT EXISTS `penyumbang` (
+  `id_penyumbang` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `bank_nama` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `bank_akun` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `no_id` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `jenis_id` enum('KTP','SIM','PASSPORT') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` int(2) DEFAULT NULL,
+  `kontak` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `alamat` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `kodepos` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `hp` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fax` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `npwp` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `umur` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id_penyumbang`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE IF NOT EXISTS `settings` (
+  `app_name` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `versi` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-#
-# Data for table "mst_bank"
-#
+-- --------------------------------------------------------
 
-/*!40000 ALTER TABLE `mst_bank` DISABLE KEYS */;
-INSERT INTO `mst_bank` VALUES (1,'BRI KC Mall Ambassador','122301000172309','Joko Widodo Jusuf Kalla',1),(2,'MANDIRI ','0700009090956','Joko Widodo Jusuf Kalla',2),(3,'BCA','5015500015','Joko Widodo Jusuf Kalla',1);
-/*!40000 ALTER TABLE `mst_bank` ENABLE KEYS */;
+--
+-- Table structure for table `sumbangan`
+--
 
-#
-# Structure for table "mst_kel_penyumbang"
-#
-
-DROP TABLE IF EXISTS `mst_kel_penyumbang`;
-CREATE TABLE `mst_kel_penyumbang` (
-  `kel_penyumbang_id` int(11) NOT NULL auto_increment,
-  `nama` varchar(255) collate utf8_unicode_ci NOT NULL,
-  PRIMARY KEY  (`kel_penyumbang_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-#
-# Data for table "mst_kel_penyumbang"
-#
-
-/*!40000 ALTER TABLE `mst_kel_penyumbang` DISABLE KEYS */;
-INSERT INTO `mst_kel_penyumbang` VALUES (1,'Pribadi'),(2,'Korporat');
-/*!40000 ALTER TABLE `mst_kel_penyumbang` ENABLE KEYS */;
-
-#
-# Structure for table "mst_modul"
-#
-
-DROP TABLE IF EXISTS `mst_modul`;
-CREATE TABLE `mst_modul` (
-  `id_modul` int(11) NOT NULL auto_increment,
-  `modul` varchar(45) collate utf8_unicode_ci default NULL,
-  PRIMARY KEY  (`id_modul`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-#
-# Data for table "mst_modul"
-#
-
-/*!40000 ALTER TABLE `mst_modul` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mst_modul` ENABLE KEYS */;
-
-#
-# Structure for table "penyumbang"
-#
-
-DROP TABLE IF EXISTS `penyumbang`;
-CREATE TABLE `penyumbang` (
-  `id_penyumbang` int(11) NOT NULL auto_increment,
-  `nama` varchar(50) collate utf8_unicode_ci NOT NULL,
-  `bank_nama` varchar(45) collate utf8_unicode_ci default NULL,
-  `bank_akun` varchar(45) collate utf8_unicode_ci default NULL,
-  `no_id` varchar(45) collate utf8_unicode_ci default NULL,
-  `jenis_id` enum('KTP','SIM','PASSPORT') collate utf8_unicode_ci default NULL,
-  `status` int(2) default NULL,
-  `alamat` varchar(100) collate utf8_unicode_ci default NULL,
-  `kodepos` varchar(10) collate utf8_unicode_ci default NULL,
-  `hp` varchar(15) collate utf8_unicode_ci default NULL,
-  `email` varchar(45) collate utf8_unicode_ci default NULL,
-  `umur` varchar(45) collate utf8_unicode_ci default NULL,
-  PRIMARY KEY  (`id_penyumbang`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-#
-# Data for table "penyumbang"
-#
-
-/*!40000 ALTER TABLE `penyumbang` DISABLE KEYS */;
-INSERT INTO `penyumbang` VALUES (1,'Danang Syaifullah','BCA','123-123-123','32100202912381912312','KTP',NULL,'Jakarta','123456','123456','dan.ang@mail.com','32');
-/*!40000 ALTER TABLE `penyumbang` ENABLE KEYS */;
-
-#
-# Structure for table "settings"
-#
-
-DROP TABLE IF EXISTS `settings`;
-CREATE TABLE `settings` (
-  `app_name` varchar(45) collate utf8_unicode_ci default NULL,
-  `versi` varchar(45) collate utf8_unicode_ci default NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-#
-# Data for table "settings"
-#
-
-/*!40000 ALTER TABLE `settings` DISABLE KEYS */;
-/*!40000 ALTER TABLE `settings` ENABLE KEYS */;
-
-#
-# Structure for table "sumbangan"
-#
-
-DROP TABLE IF EXISTS `sumbangan`;
-CREATE TABLE `sumbangan` (
-  `id_sumbangan` int(11) NOT NULL auto_increment,
-  `nominal` decimal(13,2) default NULL,
-  `tgl` date default NULL,
+CREATE TABLE IF NOT EXISTS `sumbangan` (
+  `id_sumbangan` int(11) NOT NULL AUTO_INCREMENT,
+  `nominal` decimal(13,2) DEFAULT NULL,
+  `tgl` date DEFAULT NULL,
   `id_penyumbang` int(11) NOT NULL,
   `id_bank` int(11) NOT NULL,
-  `create` timestamp NULL default NULL,
-  PRIMARY KEY  (`id_sumbangan`,`id_penyumbang`,`id_bank`),
+  `create` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_sumbangan`,`id_penyumbang`,`id_bank`),
   KEY `fk_sumbangan_penyumbang_idx` (`id_penyumbang`),
   KEY `fk_sumbangan_mst_bank1_idx` (`id_bank`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
-#
-# Data for table "sumbangan"
-#
+-- --------------------------------------------------------
 
-/*!40000 ALTER TABLE `sumbangan` DISABLE KEYS */;
-/*!40000 ALTER TABLE `sumbangan` ENABLE KEYS */;
+--
+-- Table structure for table `user`
+--
 
-#
-# Structure for table "user"
-#
-
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
-  `id_user` int(11) NOT NULL auto_increment,
-  `username` varchar(16) collate utf8_unicode_ci NOT NULL,
-  `nama` varchar(45) collate utf8_unicode_ci default NULL,
-  `email` varchar(255) collate utf8_unicode_ci default NULL,
-  `password` varchar(32) collate utf8_unicode_ci NOT NULL,
-  `create_time` timestamp NULL default CURRENT_TIMESTAMP,
-  PRIMARY KEY  (`id_user`,`username`),
+CREATE TABLE IF NOT EXISTS `user` (
+  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `nama` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_user`,`username`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
-#
-# Data for table "user"
-#
-
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
