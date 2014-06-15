@@ -1,4 +1,0 @@
-Monas
-=====
-
-Monitoring of activites

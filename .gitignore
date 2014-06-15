@@ -1,0 +1,8 @@
+screenshot/*
+source/*
+source/backend/*
+source/frontend/*
+source/psd/*
+.DS_Store
+._.*
+._*
