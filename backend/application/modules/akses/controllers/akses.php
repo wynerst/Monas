@@ -36,18 +36,18 @@ class Akses extends MX_Controller {
 	{
 		// HARUS ADA - Silahkan beri judul halaman
 		$view['page_title'] = 'Pengguna';
-		$view['page_desc'] 	= 'Tambah Data Operator';  			
+		$view['page_desc'] 	= 'Menentukan Akses Sistem Berdasarkan User';  			
 
 		// HARUS ADA - Semua isi halaman akan diletakkan disini.
-		$view['content'] 	= $this->load->view('operator_add',$view,true);			
+		$view['content'] 	= $this->load->view('akses_add',$view,true);			
 
 		// HARUS ADA - Breadcrumbs - helper/monas_helper.php
 		$view['breadcrumb']		= breadcrumbs(
 									array(
 										array('link'=>'#', 'title'=>'Pengguna'),
-										array('link'=>'#', 'title'=>'Data Operator')
+										array('link'=>'#', 'title'=>'Hak Akses')
 									), 
-									'Tambah Data Operator'
+									'Tambah Data Hak Akses'
 		);
 		// HARUS ADA - Proses keluaran untuk seluruh halaman
 		$this->load->view('master', $view);

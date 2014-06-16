@@ -4,7 +4,7 @@
       <div class="table-header">
         <div class="row">                     
           <div class="col-lg-3">
-            <a href="<?php echo current_url()?>/add" class="btn btn-danger"><i class="fa fa-plus"></i> Tambah Data Operator</a>
+            <a href="<?php echo current_url()?>/add" class="btn btn-danger"><i class="fa fa-plus"></i> Tambah Data Hak Akses</a>
           </div>
         </div>
       </div>  

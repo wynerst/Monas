@@ -92,7 +92,7 @@
                   <li><a href="<?php echo site_url(); ?>/laporan/bank"><i class="nav-icon fa fa-building-o"></i> Sumbangan Per Bank</a></li>
                 </ul>                    
               </li>
-              <li><a href="chat.html"><i class="nav-icon fa fa-comments"></i> Chat</a></li>
+              <li><a href="<?php echo site_url(); ?>/chat"><i class="nav-icon fa fa-comments"></i> Chat</a></li>
               <li><a href="#"><i class="nav-icon fa fa-users"></i> Pengguna</a>                                   
                 <ul class="dropdown-menu animated-fast flipInY">
                   <li><a href="<?php echo site_url(); ?>/operator"><i class="nav-icon fa fa-users"></i> Data Operator</a></li>
