@@ -29,6 +29,7 @@ $(function() {
 
 // Highlight the top nav as scrolling occurs
 $('body').scrollspy({
+    offset: 12,
     target: '.navbar-fixed-top'
 })
 
@@ -62,6 +63,10 @@ $(function(){
       ]
   }
 
+  var chartOption = {
+      animation : false
+  }
+
   //Line
   var l = $('#bri-chartjs');
   var container = $(l).parent();
@@ -71,7 +76,7 @@ $(function(){
       l.attr('width', $(container).width() ); //max width
       l.attr('height', $(container).height() ); //max height
       //Call a function to redraw other content (texts, images etc)
-      var briChart = new Chart(cl).Bar(chartData);
+      var briChart = new Chart(cl).Bar(chartData,chartOption);
 
   }
   lineChart();
@@ -85,7 +90,7 @@ $(function(){
       l.attr('width', $(container).width() ); //max width
       l.attr('height', $(container).height() ); //max height
       //Call a function to redraw other content (texts, images etc)
-      var briChart = new Chart(cl).Bar(chartData);
+      var briChart = new Chart(cl).Bar(chartData,chartOption);
 
   }
   lineChart();
@@ -99,7 +104,7 @@ $(function(){
       l.attr('width', $(container).width() ); //max width
       l.attr('height', $(container).height() ); //max height
       //Call a function to redraw other content (texts, images etc)
-      var briChart = new Chart(cl).Bar(chartData);
+      var briChart = new Chart(cl).Bar(chartData,chartOption);
 
   }
   lineChart();
@@ -113,7 +118,7 @@ $(function(){
       l.attr('width', $(container).width() ); //max width
       l.attr('height', $(container).height() ); //max height
       //Call a function to redraw other content (texts, images etc)
-      var lineChart = new Chart(cl).Bar(chartData);
+      var lineChart = new Chart(cl).Bar(chartData,chartOption);
 
   }
   lineChart();  
@@ -134,9 +139,10 @@ $(function(){
   ]
  
   var polarOption = 
-    {
-            segmentShowStroke : false,
-    }
+  {
+              segmentShowStroke : false,
+              animation : false
+  }
 
 
   //Polar
