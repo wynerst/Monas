@@ -180,12 +180,12 @@ header .revolusi {
   letter-spacing: -1px;
   color: #666 !important;
 }
-
 section {
   padding: 75px 0;
 }
 section h2 {
   margin: 0;
+  padding: 50px 0px;
   font-size: 24px;
 }
 section.success {
@@ -208,15 +208,6 @@ section.success {
 
 #belanja {
   background: #fff url(../img/pattern1.png);
-}
-
-
-#belanja h2,
-#penyumbang h2,
-#contact h2,
-#infographic h2 {
-  padding-top: 30px;
-  padding-bottom: 30px;
 }
 
 #infographic .infographic-item {
@@ -1696,8 +1687,6 @@ select.input-lg {
 }
 
 #tentang h2 {
-  padding-top: 30px;
-  padding-bottom: 30px;
   color: #c33;
 }
 
@@ -1709,12 +1698,16 @@ select.input-lg {
   background: #fff url(../img/pattern4.png) ;
 }
 
-#donatur {
-  background-color: #fff;
+#berita {
+  background: #fff url(../img/pattern3.png) ;
 }
 
-#donatur h2 {
-  padding: 30px 0;
+#penyumbang {
+  background: #fff url(../img/pattern2.png) ;
+}
+
+#donatur {
+  background-color: #fff;
 }
 
 .splitter {
