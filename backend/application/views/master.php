@@ -21,6 +21,7 @@
   <link href="<?php echo base_url().CSS; ?>bootstrap.min.css" rel="stylesheet">  
   <link href="<?php echo base_url().CSS; ?>main.css" rel="stylesheet">     
   <script src="<?php echo base_url().JS; ?>modernizr.js"></script>
+  <script src="<?php echo base_url().JS?>/jquery.min.js"></script>  
 </head>
 <body>
   <!--[if lte IE 7]>
@@ -150,7 +151,6 @@
     </footer>
 
   </div>  
-  <script src="<?php echo base_url().JS?>/jquery.min.js"></script>  
   <script src="<?php echo base_url().JS?>/bootstrap.min.js"></script>  
   <script src="<?php echo base_url().PLUGINS?>/sidr/dist/jquery.sidr.js"></script>  
   <script src="<?php echo base_url().PLUGINS?>/smartmenus/src/jquery.smartmenus.js"></script>  

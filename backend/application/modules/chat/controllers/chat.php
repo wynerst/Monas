@@ -7,15 +7,6 @@ class Chat extends MX_Controller {
 		// HARUS ADA - Silahkan beri judul halaman
 		$view['page_title'] = 'Chat';
 		$view['page_desc'] 	= 'Wireless Communication';  			
-
-		// Rekening Bank
-		$sql 				= "	SELECT 
-									*
-								FROM 
-									mst_bank";
-
-		$query 				= $this->db->query($sql);
-		$view['list'] 		= $query->result();			
 		
 		// HARUS ADA - Semua isi halaman akan diletakkan disini.
 		$view['content'] 		= $this->load->view('chat', $view, true);			
@@ -31,37 +22,25 @@ class Chat extends MX_Controller {
 		$this->load->view('master', $view);
 	}
 
-	public function add()
+
+	public function get_chats()
 	{
-		// HARUS ADA - Silahkan beri judul halaman
-		$view['page_title'] = 'Bank';
-		$view['page_desc'] 	= 'Tambah Data Bank';  			
 
-		// HARUS ADA - Semua isi halaman akan diletakkan disini.
-		$view['content'] 	= $this->load->view('bank_add',$view,true);			
-
-		// HARUS ADA - Breadcrumbs - helper/monas_helper.php
-		$view['breadcrumb']		= breadcrumbs(
-									array(
-										array('link'=>'#', 'title'=>'Masterfile'),
-										array('link'=>'#', 'title'=>'Bank')
-									), 
-									'Tambah Data Bank'
-		);
-		// HARUS ADA - Proses keluaran untuk seluruh halaman
-		$this->load->view('master', $view);
+		$this->load->model('chat_model');
+		echo json_encode($this->chat_model->get_chat_after($_REQUEST["time"]));
 	}
 
-	public function edit()
+	public function insert_chat()
 	{
-		
-	}	
 
-	public function delete()
+		$this->load->model('chat_model');
+		$this->chat_model->insert_message($_REQUEST["message"], $_REQUEST["user"]);
+	}
+
+	public function time()
 	{
-	
-	}	
-
+		echo "[{\"time\":" + time() + "}]";
+	}
 }
 
 /* End of file welcome.php */
