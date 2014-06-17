@@ -8,9 +8,9 @@
   <meta name="viewport"               content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible"  content="IE=edge,chrome=1" />
   <title><?php echo $page_title?> :: <?php echo $this->config->item('brand'); ?></title>
-  <meta name="description"            content="<?php echo $this->config->item('description'); ?>" /> 
+  <meta name="description"            content="<?php echo $this->config->item('description'); ?>" />
   <meta name="keywords"               content="<?php echo $this->config->item('keywords'); ?>">
-  <meta name="author"                 content="<?php echo $this->config->item('author'); ?>">   
+  <meta name="author"                 content="<?php echo $this->config->item('author'); ?>">
   <link rel="shortcut icon" href="<?php echo base_url().ICO; ?>/favicon.png">
   <link rel="apple-touch-icon" href="<?php echo base_url().ICO; ?>/apple-touch-icon-precomposed.png">
   <link rel="apple-touch-icon" sizes="72x72" href="<?php echo base_url().ICO; ?>/apple-touch-icon-72-precomposed.png">
@@ -18,14 +18,14 @@
   <link href="<?php echo base_url().PLUGINS?>select/bootstrap-select.min.css" rel="stylesheet">
   <link href="<?php echo base_url().PLUGINS?>tablesorter/addons/pager/jquery.tablesorter.pager.css" rel="stylesheet">
   <link href="<?php echo base_url().PLUGINS?>tablesorter/css/theme.bootstrap.css" rel="stylesheet">
-  <link href="<?php echo base_url().CSS?>bootstrap.min.css" rel="stylesheet">  
-  <link href="<?php echo base_url().CSS?>style.css" rel="stylesheet">     
+  <link href="<?php echo base_url().CSS?>bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo base_url().CSS?>style.css" rel="stylesheet">
   <script src="<?php echo base_url().JS?>modernizr.js"></script>
 </head>
 <body id="page-top">
   <!--[if lte IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->   
+  <![endif]-->
 
   <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -77,7 +77,7 @@
                       <br>
                       <div class="row">
                         <div class="col-lg-6 col-xs-12">
-                          <a href="#">
+                          <a href="http://youtu.be/cpmqFBBCiRo" target="blank">
                           <img src="<?php echo base_url().IMG?>video.png" alt="">
                           <br>
                           Lihat Videonya
@@ -90,7 +90,8 @@
                   </div>
               </div>
               <div class="col-lg-3">
-                <a href="https://ib.bri.co.id/ib-bri/Login.html" target="_blank">
+<!--                <a href="https://ib.bri.co.id/ib-bri/Login.html" target="_blank"> -->
+                <a>
                 <img src="<?php echo base_url().IMG?>bri.png" alt="" class="text-right">
                 <p class="rekening">
                   1223 0 1000 1723 09
@@ -99,7 +100,8 @@
                 </p>
                 </a>
                 <br>
-                <a href="https://ib.bankmandiri.co.id/retail/Login.do?action=form&lang=in_ID" target="_blank">
+<!--                <a href="https://ib.bankmandiri.co.id/retail/Login.do?action=form&lang=in_ID" target="_blank"> -->
+                <a >
                 <img src="<?php echo base_url().IMG?>mandiri.png" alt="" class="text-right">
                 <p class="rekening">
                   070-00-0909096-5
@@ -108,7 +110,8 @@
                 </p>
                 </a>
                 <br>
-                <a href="http://www.klikbca.com/" target="_blank">
+<!--                <a href="http://www.klikbca.com/" target="_blank"> -->
+                <a >
                 <img src="<?php echo base_url().IMG?>bca.png" alt="" class="text-right">
                 <p class="rekening">
                   5015.500015
@@ -146,7 +149,7 @@
               </div>
               <div class="col-lg-4">
                   <p>
-                    Pembukaan rekening Dana Gotong-Royong sesuai amanat Undang-undang Pilpres dan peraturan KPU. Penjelasan KPK menyatakan bahwa gratifikasi tidak berlaku untuk kepentingan kampanye Pilpres                      
+                    Pembukaan rekening Dana Gotong-Royong sesuai amanat Undang-undang Pilpres dan peraturan KPU. Penjelasan KPK menyatakan bahwa gratifikasi tidak berlaku untuk kepentingan kampanye Pilpres
                   </p>
                   <p>
                     Berikut ini adalah Akuntan Publik yang mengawasi penggunaan Dana Gotong-Royong Jokowi-JK :
@@ -264,7 +267,7 @@
                         <td>Didi Mulyadi</td>
                         <td class="text-right">Rp1.000.001</td>
                         <td>Mandiri</td>
-                      </tr>                        
+                      </tr>
                       <tr>
                         <td>1</td>
                         <td>13 Juni 2014</td>
@@ -286,7 +289,7 @@
                 <div class="table-footer">
                   <div class="ts-pager">
                     <div class="row">
-                                             
+
                       <div class="col-lg-6">
                         <form class="form-inline" role="form">
                           <div class="btn-group">
@@ -347,7 +350,7 @@
                           <td>16 Juni 2014</td>
                           <td>Belanja Spanduk &amp; Poster Kampanye</td>
                           <td class="text-right">Rp1.000.001</td>
-                        </tr>                        
+                        </tr>
                         <tr>
                           <td>1</td>
                           <td>13 Juni 2014</td>
@@ -367,7 +370,7 @@
                   <div class="table-footer">
                     <div class="ts-pager">
                       <div class="row">
-                                               
+
                         <div class="col-lg-6">
                           <form class="form-inline" role="form">
                             <div class="btn-group">
@@ -522,27 +525,27 @@
                   <strong>
                   Bank BRI
                   <br>
-                  1223 0 1000 1723 09 a.n 
+                  1223 0 1000 1723 09 a.n
                   <br>
-                  Joko Widodo Jusuf Kalla 
+                  Joko Widodo Jusuf Kalla
                   </strong>
                 </p>
                 <p>
                   <strong>
                   Bank Mandiri
                   <br>
-                  070-00-0909096-5 a.n 
+                  070-00-0909096-5 a.n
                   <br>
-                  Joko Widodo Jusuf Kalla 
+                  Joko Widodo Jusuf Kalla
                   </strong>
                 </p>
                 <p>
                   <strong>
                   Bank BCA
                   <br>
-                  5015.500015 a.n 
+                  5015.500015 a.n
                   <br>
-                  Joko Widodo Jusuf Kalla 
+                  Joko Widodo Jusuf Kalla
                   </strong>
                 </p>
               </div>
@@ -559,7 +562,7 @@
                   <li>Penyumbang atas nama koporate atau yayasan hanya diperkenankan maksimal X Rupiah</li>
                 </ul>
                 <p>
-                  * Tambahkan 3 digit unik dari nilai nominal jika ingin memastikan sumbangan anda ditemukan dengan lebih cepat. 
+                  * Tambahkan 3 digit unik dari nilai nominal jika ingin memastikan sumbangan anda ditemukan dengan lebih cepat.
                 </p>
               </div>
           </div>
@@ -591,13 +594,13 @@
   <script src="<?php echo base_url().JS?>jquery.easing.min.js"></script>
   <script src="<?php echo base_url().JS?>classie.js"></script>
   <script src="<?php echo base_url().JS?>cbpAnimatedHeader.min.js"></script>
-  <script src="<?php echo base_url().PLUGINS?>chartjs/chart.min.js"></script>     
-  <script src="<?php echo base_url().PLUGINS?>select/bootstrap-select.min.js"></script>  
-  <script src="<?php echo base_url().PLUGINS?>tablesorter/js/jquery.tablesorter.min.js"></script>  
-  <script src="<?php echo base_url().PLUGINS?>tablesorter/js/jquery.tablesorter.widgets.min.js"></script>  
-  <script src="<?php echo base_url().PLUGINS?>tablesorter/addons/pager/jquery.tablesorter.pager.min.js"></script>  
-  <script src="<?php echo base_url().PLUGINS?>tablesorter/js/widgets/widget-print.js"></script>  
-  <script src="<?php echo base_url().PLUGINS?>tablesorter/js/widgets/widget-output.js"></script>  
+  <script src="<?php echo base_url().PLUGINS?>chartjs/chart.min.js"></script>
+  <script src="<?php echo base_url().PLUGINS?>select/bootstrap-select.min.js"></script>
+  <script src="<?php echo base_url().PLUGINS?>tablesorter/js/jquery.tablesorter.min.js"></script>
+  <script src="<?php echo base_url().PLUGINS?>tablesorter/js/jquery.tablesorter.widgets.min.js"></script>
+  <script src="<?php echo base_url().PLUGINS?>tablesorter/addons/pager/jquery.tablesorter.pager.min.js"></script>
+  <script src="<?php echo base_url().PLUGINS?>tablesorter/js/widgets/widget-print.js"></script>
+  <script src="<?php echo base_url().PLUGINS?>tablesorter/js/widgets/widget-output.js"></script>
   <script src="<?php echo base_url().JS?>table.js"></script>
   <script src="<?php echo base_url().JS?>main.js"></script>
 </body>
