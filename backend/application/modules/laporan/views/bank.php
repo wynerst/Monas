@@ -78,5 +78,80 @@
       </div>  
     </div>
   </div>
-
 </div> 
+
+<script type="text/javascript">
+$(function(){
+  //Line
+  var chartData = {
+      labels : ["01/06","02/06","02/06","04/06",'05/06'],
+      datasets : [
+          {
+              fillColor         : "#ccc",
+              strokeColor       : "#fff",
+              pointColor        : "#000",
+              pointStrokeColor  : "#fff",
+              data : [<?php
+                  if($bank_bri->num_rows() > 0 )
+                  {
+                    foreach($bank_bri->result() as $bri)
+                    {
+                      echo $bri->nominal.',';
+                    }
+                  } else {
+                    echo '0';
+                  }
+                ?>]
+          },
+          {
+              fillColor         : "#66",
+              strokeColor       : "#fff",
+              pointColor        : "#000",
+              pointStrokeColor  : "#fff",
+              data : [<?php
+                  if($bank_bca->num_rows() > 0 )
+                  {
+                    foreach($bank_bca->result() as $bca)
+                    {
+                      echo $bca->nominal.',';
+                    }
+                  } else {
+                    echo '0';
+                  }
+                ?>]
+          },                
+          {
+              fillColor         : "#333",
+              strokeColor       : "#fff",
+              pointColor        : "#000",
+              pointStrokeColor  : "#fff",
+              data : [<?php
+                  if($bank_mandiri->num_rows() > 0 )
+                  {
+                    foreach($bank_mandiri->result() as $mandiri)
+                    {
+                      echo $mandiri->nominal.',';
+                    }
+                  } else {
+                    echo '0';
+                  }
+                ?>]
+          }
+      ]
+  }
+
+  //Line
+  var l = $('#perbank');
+  var container = $(l).parent();
+  var cl = l.get(0).getContext("2d");
+  $(window).resize( lineChart );
+  function lineChart(){ 
+      l.attr('width', $(container).width() ); //max width
+      l.attr('height', $(container).height() ); //max height
+      //Call a function to redraw other content (texts, images etc)
+      var lineChart = new Chart(cl).Bar(chartData);
+
+  }
+  lineChart();
+});
+</script>

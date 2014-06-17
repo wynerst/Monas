@@ -7,4 +7,5 @@ source/psd/*
 ._.*
 ._*
 backend/application/config/database.php
+frontend/application/config/database.php
 *.zip

@@ -119,13 +119,19 @@ class Laporan extends MX_Controller {
 				$query 				= $this->db->query($sql);
 				$view['list'] 		= $query->result();			
 				
+				// Chart
+				$view['bank_bri']		= $this->general_model->per_bank('BRI');
+				$view['bank_bca']		= $this->general_model->per_bank('BCA');
+				$view['bank_mandiri']	= $this->general_model->per_bank('MANDIRI');
+
 				// HARUS ADA - Semua isi halaman akan diletakkan disini.
-				$view['content'] 		= $this->load->view('bank', $view, true);			
+				$view['content'] 	= $this->load->view('bank', $view, true);			
+
+
 
 				// CSS dan Plugin
 				$view['js_files'] = array(
-											base_url().PLUGINS.'/chartjs/chart.min.js',     
-											base_url().CUSTOM.'/report.js'  
+											base_url().PLUGINS.'chartjs/chart.min.js'
 				);
 
 				// HARUS ADA - Breadcrumbs - helper/monas_helper.php

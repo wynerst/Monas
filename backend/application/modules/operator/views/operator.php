@@ -29,8 +29,8 @@
               <td><?php echo $operator->email?></td>
               <td><?php echo $operator->create_time?></td>
               <td nowrap>
-                <a href="<?php echo base_url()?>bank/edit/<?php echo $operator->id_user?>" class="btn btn-inverse btn-xs"><i class="fa fa-pencil"></i></a>
-                <a href="<?php echo base_url()?>bank/delete/<?php echo $operator->id_user?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                <a href="<?php echo site_url()?>/operator/edit/<?php echo $operator->id_user?>" class="btn btn-inverse btn-xs"><i class="fa fa-pencil"></i></a>
+                <a href="<?php echo site_url()?>/operator/delete/<?php echo $operator->id_user?>" class="btn btn-danger btn-xs" onClick="return deletechecked('<?php echo site_url()?>/operator/delete/<?php echo $operator->id_user?>')"><i class="fa fa-trash-o"></i></a>
               </td>
             </tr>
             <?php 

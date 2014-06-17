@@ -18,10 +18,10 @@
   <?php if(isset($css_files)):
   foreach($css_files as $file): ?><link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />  
   <?php endforeach; endif; ?>  
-  <link href="<?php echo base_url().CSS; ?>bootstrap.min.css" rel="stylesheet">  
-  <link href="<?php echo base_url().CSS; ?>main.css" rel="stylesheet">     
-  <script src="<?php echo base_url().JS; ?>modernizr.js"></script>
-  <script src="<?php echo base_url().JS?>/jquery.min.js"></script>  
+  <link href="<?php echo base_url().CSS?>bootstrap.min.css" rel="stylesheet">  
+  <link href="<?php echo base_url().CSS?>main.css" rel="stylesheet">     
+  <script src="<?php echo base_url().JS?>modernizr.js"></script>
+  <script src="<?php echo base_url().JS?>jquery.min.js"></script>  
 </head>
 <body>
   <!--[if lte IE 7]>
@@ -77,7 +77,7 @@
               <li><a href="<?php echo site_url(); ?>/beranda"><i class="nav-icon fa fa-home"></i> Beranda </a></li>
               <li><a href="#"><i class="nav-icon fa fa-users"></i> Sumbangan </a>
                 <ul class="dropdown-menu animated-fast flipInY">
-                  <li><a href="<?php echo site_url(); ?>/penyumbang"><i class="nav-icon fa fa-users"></i> Data Penyumbang</a></li>
+                  <li><a href="<?php echo site_url(); ?>/penyumbang"><i class="nav-icon fa fa-users"></i> Penyumbang</a></li>
                   <li><a href="#"><i class="nav-icon fa fa-print"></i> Laporan</a>                                   
                     <ul class="dropdown-menu animated-fast flipInY">
                       <li><a href="<?php echo site_url(); ?>/laporan/sumbangan"><i class="nav-icon fa fa-users"></i> Seluruh Sumbangan</a></li>
@@ -145,10 +145,10 @@
     </footer>
 
   </div>  
-  <script src="<?php echo base_url().JS?>/bootstrap.min.js"></script>  
-  <script src="<?php echo base_url().PLUGINS?>/smartmenus/src/jquery.smartmenus.js"></script>  
-  <script src="<?php echo base_url().PLUGINS?>/smartmenus/src/addons/bootstrap/jquery.smartmenus.bootstrap.js"></script>  
-  <script src="<?php echo base_url().JS?>/script.js"></script>     
+  <script src="<?php echo base_url().JS?>bootstrap.min.js"></script>  
+  <script src="<?php echo base_url().PLUGINS?>smartmenus/src/jquery.smartmenus.js"></script>  
+  <script src="<?php echo base_url().PLUGINS?>smartmenus/src/addons/bootstrap/jquery.smartmenus.bootstrap.js"></script>  
+  <script src="<?php echo base_url().JS?>script.js"></script>     
   <?php if(isset($js_files)):
     foreach($js_files as $file): ?><script src="<?php echo $file; ?>"></script>
   <?php endforeach; endif; ?>  
