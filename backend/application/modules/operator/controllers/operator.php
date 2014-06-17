@@ -8,15 +8,15 @@ class Operator extends MX_Controller {
 		$view['page_title'] = 'Data Operator';
 		$view['page_desc'] 	= 'Data Pengguna Sistem';  			
 
-		// Rekening Bank
+		// Operator
 		$sql 				= "	SELECT 
 									*
 								FROM 
 									user";
 
 		$query 				= $this->db->query($sql);
-		$view['list'] 		= $query->result();			
-		
+		$view['list'] 		= $query->result();					
+
 		// HARUS ADA - Semua isi halaman akan diletakkan disini.
 		$view['content'] 		= $this->load->view('operator', $view, true);			
 
@@ -37,6 +37,19 @@ class Operator extends MX_Controller {
 		// HARUS ADA - Silahkan beri judul halaman
 		$view['page_title'] = 'Pengguna';
 		$view['page_desc'] 	= 'Tambah Data Operator';  			
+
+		// Group User
+		$sql 				= "	SELECT 
+									*
+								FROM 
+									group_user";
+
+		$query 				= $this->db->query($sql);
+		if($query->num_rows() > 0 ){
+			$view['group'] 	= $query->result();						
+		} else {
+			$view['group']	= 0;
+		}
 
 		// HARUS ADA - Semua isi halaman akan diletakkan disini.
 		$view['content'] 	= $this->load->view('operator_add',$view,true);			

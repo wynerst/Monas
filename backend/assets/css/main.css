@@ -2136,6 +2136,16 @@ a.list-group-item-danger.active:focus {
   border-top-right-radius: 2px;
 }
 
+.pagination > li > a {
+  color: #666;
+}
+
+.pagination > li.active > a {
+  background-color: #f2f2f2;
+  border-color: #ddd;
+  color: #666;
+}
+
 .progress {
   border-radius: 2px;
 }

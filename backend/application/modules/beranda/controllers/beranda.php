@@ -2,6 +2,13 @@
 
 class Beranda extends MX_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();		
+		$this->output->enable_profiler(false); //for debug set as true
+		$this->login->is_logged();
+	}
+
 	public function index()
 	{
 		// HARUS ADA - Silahkan beri judul halaman

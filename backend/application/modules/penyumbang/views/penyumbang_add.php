@@ -1,72 +1,44 @@
       <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-body">
-            <form action="<?php echo site_url()?>/penyumbang" method="post" role="form" class="form-horizontal" data-validate="parsley">
+            <form action="<?php echo current_url()?>" method="post" role="form" class="form-horizontal" data-validate="parsley">
+              <div class="col-lg-12">
+                <?php echo $custom_error; ?>
+              </div>
               <div class="col-lg-10">              
                 <div class="form-group">
-                  <label for="input-3" class="col-lg-4 control-label">Nama Penyumbang</label>
+                  <label for="nama" class="col-lg-4 control-label">Nama Penyumbang</label>
                   <div class="col-lg-8">
-                    <input type="text" id="input-3" class="form-control" name="website" data-trigger="change" data-type="url" />                    
+                    <input id="nama" type="text" class="form-control" name="nama" value="<?php echo set_value('nama'); ?>" data-required="true" />
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="input-3" class="col-lg-4 control-label">Nama Bank</label>
+                  <label for="bank_nama" class="col-lg-4 control-label">Transfer Ke Bank</label>
                   <div class="col-lg-8">
-                    <input type="text" id="input-3" class="form-control" name="website" data-trigger="change" data-type="url" />                    
+                  <?php 
+                  echo form_dropdown('bank_transfer', $bank_list, 'BRI');
+                  ?>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="input-3" class="col-lg-4 control-label">Nomor Rekening</label>
+                  <label for="tanggal_transfer" class="col-lg-4 control-label">Tanggal Transfer</label>
                   <div class="col-lg-8">
-                    <input type="text" id="input-3" class="form-control" name="website" data-trigger="change" data-type="url" />                    
+                    <input id="tanggal_transfer" type="text" class="form-control date-range" name="tanggal_transfer" placeholder="yyyy/mm/dd" data-required="true" />
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="input-3" class="col-lg-4 control-label">Jenis Identitas</label>
+                  <label for="nominal" class="col-lg-4 control-label">Nominal</label>
                   <div class="col-lg-8">
-                    <input type="text" id="input-3" class="form-control" name="website" data-trigger="change" data-type="url" />                    
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="input-3" class="col-lg-4 control-label">Nomor Identitas</label>
-                  <div class="col-lg-8">
-                    <input type="text" id="input-3" class="form-control" name="website" data-trigger="change" data-type="url" />                    
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="input-3" class="col-lg-4 control-label">Status</label>
-                  <div class="col-lg-8">
-                    <input type="text" id="input-3" class="form-control" name="website" data-trigger="change" data-type="url" />                    
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="input-3" class="col-lg-4 control-label">Alamat</label>
-                  <div class="col-lg-8">
-                    <input type="text" id="input-3" class="form-control" name="website" data-trigger="change" data-type="url" />                    
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="input-3" class="col-lg-4 control-label">Kode Pos</label>
-                  <div class="col-lg-8">
-                    <input type="text" id="input-3" class="form-control" name="website" data-trigger="change" data-type="url" />                    
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="input-3" class="col-lg-4 control-label">Telepon</label>
-                  <div class="col-lg-8">
-                    <input type="text" id="input-3" class="form-control" name="website" data-trigger="change" data-type="url" />                    
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="input-3" class="col-lg-4 control-label">Email</label>
-                  <div class="col-lg-8">
-                    <input type="text" id="input-3" class="form-control" name="website" data-trigger="change" data-type="url" />                    
+                    <div class="input-group">
+                      <span class="input-group-addon">RP</span>
+                      <input id="nominal" type="text" class="form-control text-right" name="nominal" value="<?php echo set_value('nominal'); ?>"  />
+                      <span class="input-group-addon">.00</span>
+                    </div>
+                    
                   </div>
                 </div>
               </div>
-
               <div class="clearfix"></div>
-
               <div class="col-lg-12">
                 <hr>
                 <div class="text-right">

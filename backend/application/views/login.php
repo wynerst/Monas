@@ -30,77 +30,14 @@
   <!--[if lte IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->   
-  <section class="login nav nav-tabs">
+  <section class="login">
     <div class="container">
-      <div class="row tab-content">                 
-        <div id="login" class="tab-pane active animated-fast flipInY">
-          <header>Login</header>
-          <form action="<?php echo current_url()?>" role="form" method="post">
-            <?php if(isset($message)) { ?>
-            <p class="text-danger text-center"><?php echo $message?></p>
-            <?php } ?>
-            <div class="login-error nousername hide animated shake text-center">Mohon isikan username</div>
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-male"></i></span>
-                <input type="text" class="form-control" name="username" id="username" placeholder="Username">
-              </div>
-            </div> 
-            <div class="login-error nopassword hide animated shake text-center">Mohon isikan sandi</div>
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                <input type="password" class="form-control" name="password" id="password" placeholder="Kata Sandi">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <div class="icheck fa">
-                    <input type="checkbox" id="remember">
-                  </div>
-                </span>
-                <label for="remember" class="form-control">Ingat Saya</label>
-              </div>
-            </div>
-            <button type="submit" name="submit" class="btn btn-rounded btn-block btn-inverse">Proses</button>
-            <br>             
-            <br>             
-            <br>             
-            <br>             
-            <br>             
-          </form>
-        </div>
-         
-        <div id="forgot" class="tab-pane animated-fast flipInY">
-          <header>Pengingat Sandi</header>
-          <form action="#" role="form">
-            <div class="form-group">
-              <p class="text-center">
-                Silahkan Masukkan Alamat Surel Anda
-                <br/>
-              </p>
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                <input type="text" class="form-control" placeholder="yourmail@address">
-              </div>
-            </div> 
-            <button type="submit" class="btn btn-block btn-rounded btn-inverse">Reset Password</button>
-            <br>             
-            <br>             
-            <br>             
-            <br>             
-            <br>             
-          </form>
-        </div>
-                 
-       <footer>
-          <ul>
-            <li><a href="#login" data-toggle="tab">Login</a></li>
-            <li><a href="#forgot" data-toggle="tab">Lupa ?</a></li>
-          </ul>
-        </footer>        
-        
+      <div class="row">                
+        <?php echo $content?>                          
+
+        <footer>
+          Monas System
+        </footer>                
       </div>
     </div> 
   </section> 

@@ -1,6 +1,7 @@
       <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-body">
+            <?php if($group != 0 ) { ?>
             <form action="<?php echo site_url()?>/operator" method="post" role="form" class="form-horizontal" data-validate="parsley">
               <div class="col-lg-7">              
                 <div class="form-group">
@@ -8,7 +9,6 @@
                   <div class="col-lg-7">
                     <select name="" id="input" class="form-control" required="required">
                       <option value="1">Administrator</option>
-                      <option value="2">Staf</option>
                     </select>
                   </div>
                 </div>
@@ -48,6 +48,11 @@
                 </div>
               </div>
             </form>
+            <?php } else { ?>
+              <div class="alert alert-info">
+                Data Group Operator belum Tersedia. Mohon isikan terlebih dahulu. <a href="<?php echo site_url()?>/group/add">Klik Disini</a>
+              </div>
+            <?php } ?>
         </div>
       </div>
     </div>

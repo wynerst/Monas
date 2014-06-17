@@ -1,31 +1,37 @@
       <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-body">
-            <form action="<?php echo site_url()?>/bank" method="post" role="form" class="form-horizontal" data-validate="parsley">
+            <?php if($group != 0 ) { ?>
+            <form action="<?php echo site_url()?>/operator" method="post" role="form" class="form-horizontal" data-validate="parsley">
               <div class="col-lg-7">              
                 <div class="form-group">
-                  <label for="input-3" class="col-lg-5 control-label">Kelompok Penyumbang</label>
+                  <label for="input-3" class="col-lg-5 control-label">Hak Akses</label>
                   <div class="col-lg-7">
                     <select name="" id="input" class="form-control" required="required">
-                      <option value="1">Pribadi</option>
-                      <option value="2">Korporat</option>
+                      <option value="1">Administrator</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="input-3" class="col-lg-5 control-label">Nama Bank</label>
+                  <label for="input-3" class="col-lg-5 control-label">Username</label>
                   <div class="col-lg-7">
                     <input type="text" id="input-3" class="form-control" name="website" data-trigger="change" data-type="url" />                    
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="input-3" class="col-lg-5 control-label">Nomor Rekening</label>
+                  <label for="input-3" class="col-lg-5 control-label">Password</label>
                   <div class="col-lg-7">
                     <input type="text" id="input-3" class="form-control" name="website" data-trigger="change" data-type="url" />                    
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="input-3" class="col-lg-5 control-label">Atas Nama</label>
+                  <label for="input-3" class="col-lg-5 control-label">Nama Lengkap</label>
+                  <div class="col-lg-7">
+                    <input type="text" id="input-3" class="form-control" name="website" data-trigger="change" data-type="url" />                    
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="input-3" class="col-lg-5 control-label">Email</label>
                   <div class="col-lg-7">
                     <input type="text" id="input-3" class="form-control" name="website" data-trigger="change" data-type="url" />                    
                   </div>
@@ -42,6 +48,11 @@
                 </div>
               </div>
             </form>
+            <?php } else { ?>
+              <div class="alert alert-info">
+                Data Group Operator belum Tersedia. Mohon isikan terlebih dahulu. <a href="<?php echo site_url()?>/group/add">Klik Disini</a>
+              </div>
+            <?php } ?>
         </div>
       </div>
     </div>

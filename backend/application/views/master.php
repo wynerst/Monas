@@ -36,7 +36,7 @@
           <small class="brand-tag"><?php echo $this->config->item('tagline'); ?></small>
         </h3>         
         <div class="user">           
-          <h4 class="user-name">Eddy Subratha</h4>
+          <h4 class="user-name"><?php echo ucwords($this->session->userdata('name'))?></h4>
           <a href="#" class="user-photo dropdown-toggle" data-toggle="dropdown" id="user">
             <img src="<?php echo base_url().IMG?>avatar/a1.jpg" width="60" alt="Eddy Subratha">
           </a>           
@@ -54,7 +54,7 @@
               <a href="<?php echo site_url(); ?>/auth/logout" class="user-link-right"><i class="fa fa-times"></i></a>
             </div>             
             <div class="user-profil">
-              <h4>Eddy Subratha</h4>
+              <h4><?php echo ucwords($this->session->userdata('name'))?></h4>
               <small>Administrasi Keuangan</small>
             </div>             
             <div class="user-network">
@@ -75,28 +75,26 @@
           <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
               <li><a href="<?php echo site_url(); ?>/beranda"><i class="nav-icon fa fa-home"></i> Beranda </a></li>
-              <li><a href="#"><i class="nav-icon fa fa-list"></i> Masterfile</a>                                   
+              <li><a href="#"><i class="nav-icon fa fa-users"></i> Sumbangan </a>
                 <ul class="dropdown-menu animated-fast flipInY">
-                  <li><a href="<?php echo site_url(); ?>/kelompok"><i class="nav-icon fa fa-users"></i> Kelompok Penyumbang </a></li>
-                  <li><a href="<?php echo site_url(); ?>/bank"><i class="nav-icon fa fa-building-o"></i> Bank</a></li>
+                  <li><a href="<?php echo site_url(); ?>/penyumbang"><i class="nav-icon fa fa-users"></i> Data Penyumbang</a></li>
+                  <li><a href="#"><i class="nav-icon fa fa-print"></i> Laporan</a>                                   
+                    <ul class="dropdown-menu animated-fast flipInY">
+                      <li><a href="<?php echo site_url(); ?>/laporan/sumbangan"><i class="nav-icon fa fa-users"></i> Seluruh Sumbangan</a></li>
+                      <li><a href="<?php echo site_url(); ?>/laporan/bank"><i class="nav-icon fa fa-building-o"></i> Sumbangan Per Bank</a></li>
+                    </ul>                    
+                  </li>
                 </ul>                    
               </li>
-              <li><a href="#"><i class="nav-icon fa fa-dollar"></i> Sumbangan</a>                                   
+              <li><a href="#"><i class="nav-icon fa fa-desktop"></i> Konten</a>                                   
                 <ul class="dropdown-menu animated-fast flipInY">
-                  <li><a href="<?php echo site_url(); ?>/penyumbang"><i class="nav-icon fa fa-users"></i> Penyumbang </a></li>
-                  <li><a href="<?php echo site_url(); ?>/belanja"><i class="nav-icon fa fa-money"></i> Belanja</a></li>
+                  <li><a href="<?php echo site_url(); ?>/relawan"><i class="nav-icon fa fa-building-o"></i> Relawan</a></li>
                 </ul>                    
               </li>
-              <li><a href="#"><i class="nav-icon fa fa-print"></i> Laporan</a>                                   
-                <ul class="dropdown-menu animated-fast flipInY">
-                  <li><a href="<?php echo site_url(); ?>/laporan/sumbangan"><i class="nav-icon fa fa-users"></i> Seluruh Sumbangan</a></li>
-                  <li><a href="<?php echo site_url(); ?>/laporan/bank"><i class="nav-icon fa fa-building-o"></i> Sumbangan Per Bank</a></li>
-                </ul>                    
-              </li>
-              <li><a href="<?php echo site_url(); ?>/chat"><i class="nav-icon fa fa-comments"></i> Chat</a></li>
               <li><a href="#"><i class="nav-icon fa fa-users"></i> Pengguna</a>                                   
                 <ul class="dropdown-menu animated-fast flipInY">
                   <li><a href="<?php echo site_url(); ?>/operator"><i class="nav-icon fa fa-users"></i> Data Operator</a></li>
+                  <li><a href="<?php echo site_url(); ?>/group"><i class="nav-icon fa fa-check"></i> Group</a></li>
                   <li><a href="<?php echo site_url(); ?>/akses"><i class="nav-icon fa fa-check"></i> Hak Akses</a></li>
                   <li><a href="<?php echo site_url(); ?>/pribadi"><i class="nav-icon fa fa-user"></i> Data Pribadi</a></li>
                 </ul>                    
@@ -152,7 +150,6 @@
 
   </div>  
   <script src="<?php echo base_url().JS?>/bootstrap.min.js"></script>  
-  <script src="<?php echo base_url().PLUGINS?>/sidr/dist/jquery.sidr.js"></script>  
   <script src="<?php echo base_url().PLUGINS?>/smartmenus/src/jquery.smartmenus.js"></script>  
   <script src="<?php echo base_url().PLUGINS?>/smartmenus/src/addons/bootstrap/jquery.smartmenus.bootstrap.js"></script>  
   <script src="<?php echo base_url().JS?>/script.js"></script>     

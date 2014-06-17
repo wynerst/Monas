@@ -1,32 +1,31 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Kelompok extends MX_Controller {
+class Group extends MX_Controller {
 
 	public function index()
 	{
 		// HARUS ADA - Silahkan beri judul halaman
-		$view['page_title'] = 'Kelompok Penyumbang';
-		$view['page_desc'] 	= 'Pembagian Jenis Penyumbang';  			
+		$view['page_title'] = 'Data Operator';
+		$view['page_desc'] 	= 'Data Pengguna Sistem';  			
 
-		// Kelompok Penyumbang
+		// Operator
 		$sql 				= "	SELECT 
-									kel_penyumbang_id, 
-									nama 
+									*
 								FROM 
-									mst_kel_penyumbang";
+									user";
 
 		$query 				= $this->db->query($sql);
-		$view['list'] 		= $query->result();			
+		$view['list'] 		= $query->result();					
 
 		// HARUS ADA - Semua isi halaman akan diletakkan disini.
-		$view['content'] 		= $this->load->view('kelompok', $view, true);			
+		$view['content'] 		= $this->load->view('operator', $view, true);			
 
 		// HARUS ADA - Breadcrumbs - helper/monas_helper.php
 		$view['breadcrumb']		= breadcrumbs(
 									array(
-										array('link'=>'#', 'title'=>'Masterfile')
+										array('link'=>'#', 'title'=>'Pengguna')
 									), 
-									'Kelompok Penyumbang'
+									'Data Operator'
 		);
 
 		// HARUS ADA - Proses keluaran untuk seluruh halaman
@@ -36,21 +35,33 @@ class Kelompok extends MX_Controller {
 	public function add()
 	{
 		// HARUS ADA - Silahkan beri judul halaman
-		$view['page_title'] = 'Tambah Kelompok Penyumbang';
-		$view['page_desc'] 	= 'Pembagian Jenis Penyumbang';  			
+		$view['page_title'] = 'Pengguna';
+		$view['page_desc'] 	= 'Tambah Data Operator';  			
+
+		// Group User
+		$sql 				= "	SELECT 
+									*
+								FROM 
+									group_user";
+
+		$query 				= $this->db->query($sql);
+		if($query->num_rows() > 0 ){
+			$view['group'] 	= $query->result();						
+		} else {
+			$view['group']	= 0;
+		}
 
 		// HARUS ADA - Semua isi halaman akan diletakkan disini.
-		$view['content'] 	= $this->load->view('kelompok_add',$view,true);			
+		$view['content'] 	= $this->load->view('operator_add',$view,true);			
 
 		// HARUS ADA - Breadcrumbs - helper/monas_helper.php
 		$view['breadcrumb']		= breadcrumbs(
 									array(
-										array('link'=>'#', 'title'=>'Masterfile'),
-										array('link'=>'#', 'title'=>'Kelompok Penyumbang')
+										array('link'=>'#', 'title'=>'Pengguna'),
+										array('link'=>'#', 'title'=>'Data Operator')
 									), 
-									'Tambah Kelompok Penyumbang'
+									'Tambah Data Operator'
 		);
-
 		// HARUS ADA - Proses keluaran untuk seluruh halaman
 		$this->load->view('master', $view);
 	}
