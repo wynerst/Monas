@@ -5,7 +5,7 @@
       <div class="table-header">
         <div class="row">                     
           <div class="col-lg-6">
-            <a href="<?php echo site_url()?>/penyumbang/add" class="btn btn-danger"><i class="fa fa-plus"></i> Tambah Data Penyumbang</a>
+            <a href="<?php echo site_url()?>/penyumbang/  add" class="btn btn-danger"><i class="fa fa-plus"></i> Tambah Data Penyumbang</a>
           </div>
           <div class="col-lg-6 text-right">
             <form action="<?php echo current_url()?>" method="POST" class="form-inline" role="form">
@@ -56,7 +56,7 @@
               <td><?php echo $penyumbang->nama?></td>
               <td><?php echo $penyumbang->bank_transfer?></td>
               <td><?php echo $penyumbang->tgl?></td>
-              <td class="text-right">Rp<?php echo ribuan($penyumbang->nominal)?></td>
+              <td class="text-right" title="<?php echo terbilang($penyumbang->nominal)?> Rupiah">Rp<?php echo ribuan($penyumbang->nominal)?></td>
               <td nowrap>
                 <a href="<?php echo site_url()?>/penyumbang/edit/<?php echo $penyumbang->id_sumbangan?>" class="btn btn-inverse btn-xs"><i class="fa fa-pencil"></i></a>
                 <a href="<?php echo site_url()?>/penyumbang/delete/<?php echo $penyumbang->id_sumbangan?>" class="btn btn-danger btn-xs" onClick="return deletechecked('<?php echo site_url()?>/penyumbang/delete/<?php echo $penyumbang->id_sumbangan?>')"><i class="fa fa-trash-o"></i></a>

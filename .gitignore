@@ -6,5 +6,5 @@ source/psd/*
 .DS_Store
 ._.*
 ._*
-database.php
+backend/application/config/database.php
 *.zip
