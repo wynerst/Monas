@@ -38,7 +38,7 @@
         <div class="user">           
           <h4 class="user-name"><?php echo ucwords($this->session->userdata('name'))?></h4>
           <a href="#" class="user-photo dropdown-toggle" data-toggle="dropdown" id="user">
-            <img src="<?php echo base_url().IMG?>avatar/a1.jpg" width="60" alt="Eddy Subratha">
+            <img src="<?php echo base_url().IMG?>avatar/blank.jpg" width="60" alt="Eddy Subratha">
           </a>           
           <div class="user-detail dropdown-menu animated-fast flipInY" role="menu" aria-labelledby="user">
             <i class="caret-alt"></i>             
@@ -47,7 +47,7 @@
             </div>
             <hr>             
             <div class="user-photo-lg">
-              <img src="<?php echo base_url().IMG?>/avatar/a1.jpg" alt="Bocah Brewok">
+              <img src="<?php echo base_url().IMG?>/avatar/blank.jpg" alt="Bocah Brewok">
             </div>             
             <div class="user-link">
               <a href="<?php echo site_url(); ?>/pribadi" class="user-link-left"><i class="fa fa-bars"></i></a>

@@ -25,7 +25,7 @@ class Auth extends MX_Controller {
 			$username 		= $this->input->post('username');
 			$password 		= $this->input->post('password');
 	
-		    $this->db->select('id_user, username, password, nama')
+		    $this->db->select('id_user, id_group, username, password, nama')
 		             ->from('user')
 		             ->where('username', $username)
 		             ->where('password', md5($password))
@@ -36,6 +36,7 @@ class Auth extends MX_Controller {
 		    	$row 		= $query->row();
 				$sess_array = array(
 					'id' 		=> $row->id_user,
+					'id_group'	=> $row->id_group,
 					'username' 	=> $row->username,
 					'name' 		=> $row->nama,
 					'logged_in'	=> TRUE

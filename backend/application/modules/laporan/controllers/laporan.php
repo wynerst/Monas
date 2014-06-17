@@ -2,6 +2,13 @@
 
 class Laporan extends MX_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();		
+		$this->output->enable_profiler(false); //for debug set as true
+		$this->login->is_logged();
+		$this->login->has_access();
+	}
 
 	public function index() {
 		$this->sumbangan();
