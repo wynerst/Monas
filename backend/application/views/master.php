@@ -84,10 +84,6 @@
                       <li><a href="<?php echo site_url(); ?>/laporan/bank"><i class="nav-icon fa fa-building-o"></i> Sumbangan Per Bank</a></li>
                     </ul>                    
                   </li>
-                </ul>                    
-              </li>
-              <li><a href="#"><i class="nav-icon fa fa-desktop"></i> Konten</a>                                   
-                <ul class="dropdown-menu animated-fast flipInY">
                   <li><a href="<?php echo site_url(); ?>/relawan"><i class="nav-icon fa fa-building-o"></i> Relawan</a></li>
                 </ul>                    
               </li>

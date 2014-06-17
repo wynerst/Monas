@@ -19,17 +19,10 @@ class Laporan extends MX_Controller {
 
 				// Sumbangan
 				$sql 				= "	SELECT 
-											a.nominal,
-											a.tgl,
-											a.create,
-											b.nama AS penyumbang,
-											c.nama AS bank
+											nama,
+											nominal
 										FROM 
-											sumbangan a
-										LEFT JOIN penyumbang b 
-											ON a.id_penyumbang = b.id_penyumbang
-										LEFT JOIN mst_bank c 
-											ON a.id_bank = c.id_bank
+											sumbangan
 										";
 
 				$query 				= $this->db->query($sql);
@@ -67,17 +60,10 @@ class Laporan extends MX_Controller {
 
 				// Sumbangan
 				$sql 				= "	SELECT 
-											a.nominal,
-											a.tgl,
-											a.create,
-											b.nama AS penyumbang,
-											c.nama AS bank
+											nama,
+											nominal
 										FROM 
-											sumbangan a
-										LEFT JOIN penyumbang b 
-											ON a.id_penyumbang = b.id_penyumbang
-										LEFT JOIN mst_bank c 
-											ON a.id_bank = c.id_bank
+											sumbangan
 										";
 
 				$query 	= $this->db->query($sql);
@@ -94,17 +80,10 @@ class Laporan extends MX_Controller {
 
 				// Sumbangan
 				$sql 				= "	SELECT 
-											a.nominal,
-											a.tgl,
-											a.create,
-											b.nama AS penyumbang,
-											c.nama AS bank
+											nama,
+											nominal
 										FROM 
-											sumbangan a
-										LEFT JOIN penyumbang b 
-											ON a.id_penyumbang = b.id_penyumbang
-										LEFT JOIN mst_bank c 
-											ON a.id_bank = c.id_bank
+											sumbangan
 										";
 
 				$query 	= $this->db->query($sql);
@@ -129,17 +108,12 @@ class Laporan extends MX_Controller {
 
 				// Sumbangan
 				$sql 				= "	SELECT 
-											a.nominal,
-											a.tgl,
-											a.create,
-											b.nama AS penyumbang,
-											c.nama AS bank
+											bank_transfer,
+											SUM(nominal) as total
 										FROM 
-											sumbangan a
-										LEFT JOIN penyumbang b 
-											ON a.id_penyumbang = b.id_penyumbang
-										LEFT JOIN mst_bank c 
-											ON a.id_bank = c.id_bank
+											sumbangan
+										GROUP BY
+											bank_transfer 
 										";
 
 				$query 				= $this->db->query($sql);

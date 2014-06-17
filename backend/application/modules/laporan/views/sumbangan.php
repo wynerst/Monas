@@ -18,28 +18,25 @@
             </div>
           </div>  
                              
-          <div class="table-responsive">
+          <div class="table-responsive" style="height:400px; overflow:auto;">
             <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th>Nominal</th>
-                  <th>Tanggal Menyumbang</th>
+                  <th class="text-center" width="1">No</th>
                   <th>Penyumbang</th>
-                  <th>Disimpan Dalam Rekening </th>
-                  <th>Tanggal Dibuat</th>
+                  <th>Nominal</th>
                 </tr>
               </thead>
               <tbody>
                 <?php 
                 if(count($list) > 0 ) :
+                  $i = 1;
                   foreach ($list as $laporan) :
                 ?>
                 <tr>
+                  <td class="text-center"><?php echo $i++?></td>
+                  <td><a href="#"><?php echo $laporan->nama?></a></td>
                   <td class="text-right">Rp<?php echo ribuan($laporan->nominal)?></td>
-                  <td><?php echo $laporan->tgl?></td>
-                  <td><a href="#"><?php echo $laporan->penyumbang?></a></td>
-                  <td><?php echo $laporan->bank?></td>
-                  <td><?php echo $laporan->create?></td>
                 </tr>
                 <?php 
                   endforeach;

@@ -22,26 +22,23 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th>Nominal</th>
-                  <th>Tanggal Menyumbang</th>
-                  <th>Penyumbang</th>
-                  <th>Disimpan Dalam Rekening </th>
-                  <th>Tanggal Dibuat</th>
+                  <th>Bank</th>
+                  <th width="1">Jumlah</th>
                 </tr>
               </thead>
               <tbody>
                 <?php 
                 if(count($list) > 0 ) :
+                  $jumlah = 0;
                   foreach ($list as $laporan) :
+
                 ?>
                 <tr>
-                  <td class="text-right">Rp<?php echo ribuan($laporan->nominal)?></td>
-                  <td><?php echo $laporan->tgl?></td>
-                  <td><a href="#"><?php echo $laporan->penyumbang?></a></td>
-                  <td><?php echo $laporan->bank?></td>
-                  <td><?php echo $laporan->create?></td>
+                  <td><?php echo $laporan->bank_transfer?></td>
+                  <td class="text-right" title="<?php echo terbilang($laporan->total)?>">Rp<?php echo ribuan($laporan->total)?></td>
                 </tr>
                 <?php 
+                  $jumlah += $laporan->total;
                   endforeach;
                 else : ?>
                 <tr>
@@ -49,6 +46,12 @@
                 </tr>
               <?php endif; ?>
               </tbody>
+              <tfooter>
+                <tr>
+                  <th>Jumlah</th>
+                  <th title="<?php echo terbilang($jumlah)?>">Rp<?php echo ribuan($jumlah)?></th>
+                </tr>
+              </tfoot>
             </table>
           </div>
            
