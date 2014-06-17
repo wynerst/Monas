@@ -97,4 +97,26 @@ class General_model extends CI_Model {
 
         return $config;        
     }
+
+
+    function per_bank($bank = 'BRI') 
+    {
+        $sql = '
+            SELECT 
+                tgl,
+                SUM(nominal) AS nominal  
+            FROM
+                sumbangan
+            WHERE
+                tgl BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL 7 DAY)
+                AND bank_transfer = \''.$bank.'\'
+            GROUP BY
+                tgl
+            ORDER BY
+                tgl
+        ';
+
+        $query = $this->db->query($sql);
+        return $query;
+    }
 }

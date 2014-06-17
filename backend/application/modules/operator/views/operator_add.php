@@ -1,39 +1,39 @@
       <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-body">
-            <?php if($group != 0 ) { ?>
-            <form action="<?php echo site_url()?>/operator" method="post" role="form" class="form-horizontal" data-validate="parsley">
+            <?php if($user_group != 0 ) { ?>
+            <form action="<?php echo current_url()?>" method="post" role="form" class="form-horizontal" data-validate="parsley">
               <div class="col-lg-7">              
                 <div class="form-group">
-                  <label for="input-3" class="col-lg-5 control-label">Hak Akses</label>
+                  <label for="akses" class="col-lg-5 control-label">Hak Akses</label>
                   <div class="col-lg-7">
-                    <select name="" id="input" class="form-control" required="required">
-                      <option value="1">Administrator</option>
-                    </select>
+                  <?php 
+                  echo form_dropdown('akses', $user_group, '2');
+                  ?>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="input-3" class="col-lg-5 control-label">Username</label>
+                  <label for="username" class="col-lg-5 control-label">Username</label>
                   <div class="col-lg-7">
-                    <input type="text" id="input-3" class="form-control" name="website" data-trigger="change" data-type="url" />                    
+                    <input type="text" id="username" class="form-control" name="username" data-required="true" />                    
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="input-3" class="col-lg-5 control-label">Password</label>
+                  <label for="password" class="col-lg-5 control-label">Password</label>
                   <div class="col-lg-7">
-                    <input type="text" id="input-3" class="form-control" name="website" data-trigger="change" data-type="url" />                    
+                    <input type="password" id="password" class="form-control" name="password" data-required="true" />                    
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="input-3" class="col-lg-5 control-label">Nama Lengkap</label>
+                  <label for="nama" class="col-lg-5 control-label">Nama Lengkap</label>
                   <div class="col-lg-7">
-                    <input type="text" id="input-3" class="form-control" name="website" data-trigger="change" data-type="url" />                    
+                    <input type="text" id="nama" class="form-control" name="nama" data-required="true" />                    
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="input-3" class="col-lg-5 control-label">Email</label>
+                  <label for="email" class="col-lg-5 control-label">Email</label>
                   <div class="col-lg-7">
-                    <input type="text" id="input-3" class="form-control" name="website" data-trigger="change" data-type="url" />                    
+                    <input type="text" id="email" class="form-control" name="email" data-type="email" data-required="true" />                    
                   </div>
                 </div>
               </div>

@@ -4,7 +4,7 @@
       <div class="table-header">
         <div class="row">                     
           <div class="col-lg-3">
-            <a href="<?php echo current_url()?>/add" class="btn btn-danger"><i class="fa fa-plus"></i> Tambah Data Operator</a>
+            <a href="<?php echo current_url()?>/add" class="btn btn-danger"><i class="fa fa-plus"></i> Tambah Data Group</a>
           </div>
         </div>
       </div>  
@@ -13,24 +13,20 @@
         <table class="table table-bordered">
           <thead>
             <tr>
-              <th>Nama Lengkap</th>
-              <th>Email</th>
-              <th>Last Update</th>
+              <th>Group</th>
               <th width="1">&nbsp;</th>
             </tr>
           </thead>
           <tbody>
             <?php 
             if(count($list) > 0 ) :
-              foreach ($list as $operator) :
+              foreach ($list as $group) :
             ?>
             <tr>
-              <td><?php echo $operator->nama?></td>
-              <td><?php echo $operator->email?></td>
-              <td><?php echo $operator->create_time?></td>
+              <td><?php echo $group->nama_group?></td>
               <td nowrap>
-                <a href="<?php echo base_url()?>bank/edit/<?php echo $operator->id_user?>" class="btn btn-inverse btn-xs"><i class="fa fa-pencil"></i></a>
-                <a href="<?php echo base_url()?>bank/delete/<?php echo $operator->id_user?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                <a href="<?php echo site_url()?>/group/edit/<?php echo $group->id_group?>" class="btn btn-inverse btn-xs"><i class="fa fa-pencil"></i></a>
+                <a href="<?php echo site_url()?>/group/delete/<?php echo $group->id_group?>" class="btn btn-danger btn-xs" onClick="return deletechecked('<?php echo site_url()?>/group/delete/<?php echo $group->id_group?>')"><i class="fa fa-trash-o"></i></a>
               </td>
             </tr>
             <?php 
