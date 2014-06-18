@@ -6,11 +6,11 @@
                     <h1 class="no-padding"><span class="text-muted">Rp</span>35 M</h1>
                     <small>Penerimaan</small>
                   </div>
-                </div>                                                           
+                </div>
               </div>
             </div>
-                          
-            <div class="col-lg-4 col-sm-6 col-xs-12">
+
+<!--            <div class="col-lg-4 col-sm-6 col-xs-12">
               <div class="well">
                 <div class="row">
                   <div class="col-lg-5 col-xs-6"><span class="sparkline-1">3,9,2,3,4,16,5,4,2,13,4,6,5,4</span></div>
@@ -18,9 +18,10 @@
                     <h1 class="no-padding"><span class="text-muted">Rp</span>1,5 M</h1>
                     <small>Pengeluaran</small>
                   </div>
-                </div>                                                           
+                </div>
               </div>
             </div>
+-->
 
             <div class="col-lg-4 col-sm-6 col-xs-12">
               <div class="well">
@@ -30,14 +31,14 @@
                     <h1 class="no-padding">1.352 K</h1>
                     <small>Jumlah Donatur</small>
                   </div>
-                </div>                                                           
+                </div>
               </div>
             </div>
-             
+
             <div class="clearfix"></div>
-                         
-            <div class="col-lg-12">               
-              <div class="panel panel-default">                
+
+            <div class="col-lg-12">
+              <div class="panel panel-default">
                 <div class="panel-heading">
                   <h3 class="panel-title">Jumlah Sumbangan Per Bank</h3>
                 </div>
@@ -48,9 +49,9 @@
                   </div>
                 </div>
                 <div class="panel-footer">
-                  <i class="fa fa-circle" style="color:#ccc;"></i> BRI 
+                  <i class="fa fa-circle" style="color:#ccc;"></i> BRI
                   <i class="fa fa-circle" style="color:#666;"></i> BCA
                   <i class="fa fa-circle" style="color:#333;"></i> Bank Mandiri
                 </div>
-              </div>  
-            </div> 
+              </div>
+            </div>
