@@ -49,14 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-<<<<<<< HEAD
 $db['default']['username'] = 'pengguna';
 $db['default']['password'] = 'everyone';
-=======
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
->>>>>>> d2a51400f5d899f04d7978319f801cf38aa70f15
-$db['default']['database'] = 'db_jkwjk2';
+$db['default']['database'] = 'db_jkwjk3';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
