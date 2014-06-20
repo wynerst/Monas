@@ -287,6 +287,42 @@ class Penyumbang extends MX_Controller {
 		force_download($filename, $data);
 	}
 
+	public function import()
+	{		
+		// HARUS ADA - Silahkan beri judul halaman
+		$view['page_title'] 	= 'Penyumbang';
+		$view['page_desc'] 		= 'Import File CSV Penyumbang';  			
+		$view['custom_error'] 	= '';			
+		
+		if(isset($_POST['submit'])) {
+			if ($_FILES["userfile"]["error"] > 0) {
+			  $view['custom_error'] = "Error: " . $_FILES["userfile"]["error"] . "<br>";
+			} else {
+				$file = $_FILES["userfile"]["tmp_name"];
+				$data = $this->csvimport->get_array($file);	
+				foreach ($data as $sql) {
+					$this->db->insert('penyumbang', $sql);
+				}
+				redirect(site_url().'/penyumbang');
+			}
+		}
+
+		// HARUS ADA - Semua isi halaman akan diletakkan disini.
+		$view['content'] 		= $this->load->view('penyumbang_import', $view, true);			
+
+		// HARUS ADA - Breadcrumbs - helper/monas_helper.php
+		$view['breadcrumb']		= breadcrumbs(
+									array(
+										array('link'=> '#', 'title'=>'Sumbangan'),
+										array('link'=> site_url().'/penyumbang', 'title'=>'Penyumbang')
+									), 
+									'Import CSV'
+		);
+
+		// HARUS ADA - Proses keluaran untuk seluruh halaman
+		$this->load->view('master', $view);
+	}
+
 }
 
 /* End of file welcome.php */

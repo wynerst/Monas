@@ -5,7 +5,8 @@
       <div class="table-header">
         <div class="row">                     
           <div class="col-lg-6">
-            <a href="<?php echo site_url()?>/penyumbang/add" class="btn btn-danger"><i class="fa fa-plus"></i> Tambah Data Penyumbang</a>
+            <a href="<?php echo site_url()?>/penyumbang/add" class="btn btn-danger"><i class="fa fa-plus"></i> Tambah Penyumbang</a>
+            <a href="<?php echo site_url()?>/penyumbang/import" class="btn btn-danger"><i class="fa fa-plus"></i> Import CSV</a>
             <a href="<?php echo site_url()?>/penyumbang/print_all" target="_blank" class="btn btn-inverse"><i class="fa fa-print"></i> Print All</a>
             <a href="<?php echo site_url()?>/penyumbang/csv_all" target="_blank" class="btn btn-inverse"><i class="fa fa-download"></i> CSV All</a>
           </div>
