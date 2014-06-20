@@ -45,7 +45,7 @@ class Penyumbang extends MX_Controller {
 			}
 		}
 
-		$view['list'] 			= $this->general_model->get('sumbangan','id_sumbangan, nama, bank_transfer, nominal, tgl','',$config['per_page'],$this->uri->segment(3));
+		$view['list'] 			= $this->general_model->get('penyumbang','id_penyumbang, nama, bank_transfer, nominal, tgl','',$config['per_page'],$this->uri->segment(3));
 		
 		// HARUS ADA - Semua isi halaman akan diletakkan disini.
 		$view['content'] 		= $this->load->view('penyumbang', $view, true);			
@@ -121,11 +121,19 @@ class Penyumbang extends MX_Controller {
             $data = array(
                     'nama' 			=> set_value('nama'),
 					'bank_transfer' => set_value('bank_transfer'),
+					'kota'			=> $this->input->post('kota'),
+					'akun_bank'		=> $this->input->post('akun_bank'),
 					'nominal' 		=> set_value('nominal'),
-					'tgl' 			=> set_value('tanggal_transfer')
+					'tgl' 			=> set_value('tanggal_transfer'),
+					'no_identitas'	=> $this->input->post('identitas'),
+					'npwp'			=> $this->input->post('npwp'),
+					'alamat'		=> $this->input->post('alamat'),
+					'pekerjaan'		=> $this->input->post('pekerjaan'),
+					'kantor'		=> $this->input->post('kantor'),
+					'asal_dana'		=> $this->input->post('sumber_dana'),
             );
            
-			if ($this->general_model->add('sumbangan', $data) == TRUE) {
+			if ($this->general_model->add('penyumbang', $data) == TRUE) {
 				redirect(base_url().'index.php/penyumbang');
 			} else {
 				$view['custom_error'] = '<div class="aler alert-danger">Data Tidak Dapat Disimpan. Mohon dicoba kembali.</div>';
@@ -243,6 +251,41 @@ class Penyumbang extends MX_Controller {
 	    $this->general_model->delete('sumbangan','id_sumbangan',$ID);             
 	    redirect(site_url().'/penyumbang');
     }
+
+    function print_all()
+    {
+		// Fasilitas untuk konversi hasil database menjadi CSV
+		$this->load->dbutil();
+
+		// Fasilitas generate table
+		$this->load->library('table');
+
+        $this->db->select('id_penyumbang, nama, bank_transfer, kota, akun_bank, nominal, tgl, no_identitas, npwp, alamat, pekerjaan, kantor, asal_dana, create')
+                 ->from('penyumbang');
+        
+        $query  = $this->db->get(); 
+		$tmpl 			= array ('table_open' => '<table border="0" cellpadding="4" cellspacing="0" class="table table-bordered">');
+		$this->table->set_template($tmpl);
+		$view['content'] = $this->table->generate($query);
+		$this->load->view('print', $view);    	
+    } 
+
+    public function csv_all()
+    {
+		// Helper untuk membuat download file
+		$this->load->helper('download');
+		$filename = 'bank-'.date('Y-m-d h:i:s').'.csv';
+
+		// Fasilitas untuk konversi hasil database menjadi CSV
+		$this->load->dbutil();
+
+		// Sumbangan
+        $this->db->select('id_penyumbang, nama, bank_transfer, kota, akun_bank, nominal, tgl, no_identitas, npwp, alamat, pekerjaan, kantor, asal_dana, create')
+                 ->from('penyumbang');        
+        $query  = $this->db->get(); 
+		$data 	= $this->dbutil->csv_from_result($query);			
+		force_download($filename, $data);
+	}
 
 }
 

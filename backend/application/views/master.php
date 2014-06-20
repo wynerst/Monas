@@ -38,7 +38,7 @@
         <div class="user">           
           <h4 class="user-name"><?php echo ucwords($this->session->userdata('name'))?></h4>
           <a href="#" class="user-photo dropdown-toggle" data-toggle="dropdown" id="user">
-            <img src="<?php echo base_url().IMG?>avatar/blank.jpg" width="60" alt="Eddy Subratha">
+            <img src="<?php echo base_url().IMG?>avatar/blank.jpg" width="60" alt="<?php echo ucwords($this->session->userdata('name'))?>">
           </a>           
           <div class="user-detail dropdown-menu animated-fast flipInY" role="menu" aria-labelledby="user">
             <i class="caret-alt"></i>             
@@ -74,34 +74,22 @@
           </div>                        
           <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
-              <li><a href="<?php echo site_url(); ?>/beranda"><i class="nav-icon fa fa-home"></i> Beranda </a></li>
-              <li><a href="#"><i class="nav-icon fa fa-users"></i> Sumbangan </a>
-                <ul class="dropdown-menu animated-fast flipInY">
-                  <li><a href="<?php echo site_url(); ?>/penyumbang"><i class="nav-icon fa fa-users"></i> Penyumbang</a></li>
-                  <li><a href="#"><i class="nav-icon fa fa-print"></i> Laporan</a>                                   
-                    <ul class="dropdown-menu animated-fast flipInY">
-                      <li><a href="<?php echo site_url(); ?>/laporan/sumbangan"><i class="nav-icon fa fa-users"></i> Seluruh Sumbangan</a></li>
-                      <li><a href="<?php echo site_url(); ?>/laporan/bank"><i class="nav-icon fa fa-building-o"></i> Sumbangan Per Bank</a></li>
-                    </ul>                    
-                  </li>
-                  <li><a href="<?php echo site_url(); ?>/relawan"><i class="nav-icon fa fa-building-o"></i> Relawan</a></li>
-                </ul>                    
+              <?php foreach($this->menu->access($this->session->userdata('id_group')) as $key => $menu_access) : ?>
+              <li>
+                <a href="#"><i class="nav-icon fa fa-home"></i> 
+                  <?php echo $menu_access['menu']?>
+                </a>
+                <?php if(count($menu_access['sub']) > 0 ) : ?>                 
+                  <ul class="dropdown-menu animated-fast flipInY">
+                    <?php foreach ($menu_access['sub'] as $key => $sub) : ?>
+                      <li>
+                        <a href="<?php echo site_url().'/'.$key?>/"><?php echo $sub?></a>
+                      </li>                
+                    <?php endforeach ?>
+                  </ul>
+                <?php endif ?>
               </li>
-              <li><a href="#"><i class="nav-icon fa fa-users"></i> Pengguna</a>                                   
-                <ul class="dropdown-menu animated-fast flipInY">
-                  <li><a href="<?php echo site_url(); ?>/operator"><i class="nav-icon fa fa-users"></i> Data Operator</a></li>
-                  <li><a href="<?php echo site_url(); ?>/group"><i class="nav-icon fa fa-check"></i> Group</a></li>
-                  <li><a href="<?php echo site_url(); ?>/akses"><i class="nav-icon fa fa-check"></i> Hak Akses</a></li>
-                  <li><a href="<?php echo site_url(); ?>/pribadi"><i class="nav-icon fa fa-user"></i> Data Pribadi</a></li>
-                </ul>                    
-              </li>
-              <li><a href="#"><i class="nav-icon fa fa-gears"></i> Konfigurasi</a>                                   
-                <ul class="dropdown-menu animated-fast flipInY">
-                  <li><a href="<?php echo site_url(); ?>/konfigurasi"><i class="nav-icon fa fa-gear"></i> Umum</a></li>
-                  <li><a href="<?php echo site_url(); ?>/log"><i class="nav-icon fa fa-gear"></i> Log System</a></li>
-                  <li><a href="<?php echo site_url(); ?>/tentang"><i class="nav-icon fa fa-sun-o"></i> Tentang </a></li>
-                </ul>                    
-              </li>
+              <?php endforeach; ?>
             </ul>
           </div>
         </nav>   
