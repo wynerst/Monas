@@ -184,9 +184,10 @@ if (defined('DB_ACCESS') && DB_ACCESS == 'fa' && file_exists(SENAYAN_BASE_DIR.'s
 /* DATABASE RELATED */
 if (!defined('DB_HOST')) { define('DB_HOST', 'localhost'); }
 if (!defined('DB_PORT')) { define('DB_PORT', '3306'); }
-if (!defined('DB_NAME')) { define('DB_NAME', 'db_jkwjk2'); }
-if (!defined('DB_USERNAME')) { define('DB_USERNAME', 'root'); }
-if (!defined('DB_PASSWORD')) { define('DB_PASSWORD', ''); }
+if (!defined('DB_NAME')) { define('DB_NAME', 'db_jkwjk3'); }
+if (!defined('DB_USERNAME')) { define('DB_USERNAME', 'pengguna'); }
+if (!defined('DB_PASSWORD')) { define('DB_PASSWORD', 'everyone'); }
+
 // database connection
 // we prefer to use mysqli extensions if its available
 if (extension_loaded('mysqli')) {

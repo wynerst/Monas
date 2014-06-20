@@ -15,7 +15,7 @@ while($row = $result->fetch_array()) {
 
 // Create table donuts
 //$sql="SELECT bca+bri+mandiri as total,bca,bri,mandiri,date_create FROM sumbangan2 ORDER BY date_create DESC LIMIT 0,1";
-$sql="SELECT sum(bca)+sum(bri)+sum(mandiri) as total,sum(bca) as bca,sum(bri) as bri,sum(mandiri) as mandiri, max(date_create) as date_create FROM sumbangan2";
+$sql="SELECT sum(bca)+sum(bri)+sum(mandiri) as total,sum(bca) as bca,sum(bri) as bri,sum(mandiri) as mandiri, max(date_create) as date_create FROM sumbangan";
 // Execute query
 $result=$dbs->query($sql);
 
@@ -28,7 +28,7 @@ while($row = $result->fetch_array()) {
 }
 
 // Create table daily bank
-$sql="SELECT bca,bri,mandiri,date_create FROM sumbangan2 ORDER BY date_create DESC LIMIT 0,7";
+$sql="SELECT bca,bri,mandiri,date_create FROM sumbangan ORDER BY date_create DESC LIMIT 0,7";
 // Execute query
 $result=$dbs->query($sql);
 $_bank = array();
@@ -293,7 +293,7 @@ while($row = $result->fetch_array()) {
                     </thead>
                     <tbody>
 <?php
-$sql='SELECT nama,bank_transfer as bank,kota,tgl,nominal FROM sumbangan ORDER BY tgl';
+$sql='SELECT nama,bank_transfer as bank,kota,tgl,nominal FROM penyumbang ORDER BY tgl';
 
 // Execute query
 $result=$dbs->query($sql);
