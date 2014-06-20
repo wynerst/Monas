@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.0.37-community-nt)
-# Date: 2014-06-20 09:40:40
+# Date: 2014-06-20 10:27:06
 # Generator: MySQL-Front 5.3  (Build 4.75)
 
 /*!40101 SET NAMES utf8 */;
@@ -161,6 +161,7 @@ CREATE TABLE `settings` (
 #
 
 /*!40000 ALTER TABLE `settings` DISABLE KEYS */;
+INSERT INTO `settings` VALUES (NULL,NULL,10281671036.00,104452651.00,214955057.00,'2014-06-20 10:21:47');
 /*!40000 ALTER TABLE `settings` ENABLE KEYS */;
 
 #
