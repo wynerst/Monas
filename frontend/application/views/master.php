@@ -53,10 +53,7 @@
                       <a href="#penyumbang">Penyumbang</a>
                   </li>
                   <li class="page-scroll">
-                      <a href="#belanja">Belanja Dana</a>
-                  </li>
-                  <li class="page-scroll">
-                      <a href="#berita">Berita</a>
+                      <a href="#relawan" alt="Relawan Jokowi-JK">Relawan</a>
                   </li>
               </ul>
           </div>
@@ -317,7 +314,7 @@
       </div>
   </section>
 
-  <section id="belanja">
+<!--  <section id="belanja">
       <div class="container">
           <div class="row">
               <div class="col-lg-12">
@@ -444,6 +441,7 @@
           </div>
       </div>
   </section>
+-->
 
   <section id="relawan">
       <div class="container">
