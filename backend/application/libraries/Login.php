@@ -25,22 +25,25 @@ class Login {
 		$modul = $this->ci->uri->segment(1);
 		$group = $this->ci->session->userdata('id_group');
 
-		$sql = "SELECT 
-				* 
-				FROM 
-					mst_modul a
-				LEFT JOIN
-					hak_akses b ON a.id_modul = b.id_modul
-				WHERE
-					a.path = '$modul'
-					AND b.id_group = '$group'
-				";
-		$query = $this->ci->db->query($sql);
-		if($query->num_rows() > 0)
-		{
-			//continue
-		} else {
-			show_error('Access Forbidden. Please contact your web administrator to change your privilledge to this page.');
+		if($modul != '')
+		{		
+			$sql = "SELECT 
+					* 
+					FROM 
+						mst_modul a
+					LEFT JOIN
+						hak_akses b ON a.id_modul = b.id_modul
+					WHERE
+						a.path = '$modul'
+						AND b.id_group = '$group'
+					";
+			$query = $this->ci->db->query($sql);
+			if($query->num_rows() > 0)
+			{
+				//continue
+			} else {
+				show_error('Access Forbidden. Please contact your web administrator to change your privilledge to this page.');
+			}
 		}
     }
 

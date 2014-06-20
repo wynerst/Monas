@@ -141,7 +141,7 @@ class Penyumbang extends MX_Controller {
 		}		   
 
 		$view['bank_list'] 			= $this->general_model->bank_list();
-		$view['content'] = $this->load->view('penyumbang_add', $view, true);   
+		$view['content'] 			= $this->load->view('penyumbang_add', $view, true);   
 
 		$view['css_files'] = array(
 			base_url().PLUGINS.'select/bootstrap-select.min.css',

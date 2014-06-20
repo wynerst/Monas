@@ -8,7 +8,7 @@ $(document).ready(function() {
   	{ 
   		singleDatePicker: true,
 	    format		: 'YYYY-MM-DD',
-	    startDate	: '2014-01-01',
+	    startDate	: '2014-05-01',
 	});
 });
 
