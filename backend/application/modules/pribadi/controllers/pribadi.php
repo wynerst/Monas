@@ -2,6 +2,14 @@
 
 class Pribadi extends MX_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();		
+		$this->output->enable_profiler(false); //for debug set as true
+		$this->login->is_logged();
+		$this->login->has_access();
+	}
+
 	public function index()
 	{
 		// HARUS ADA - Silahkan beri judul halaman
@@ -12,10 +20,13 @@ class Pribadi extends MX_Controller {
 		$sql 				= "	SELECT 
 									*
 								FROM 
-									user";
+									user
+								WHERE
+									id_user = '".$this->session->userdata('id')."'
+								";
 
 		$query 				= $this->db->query($sql);
-		$view['list'] 		= $query->result();			
+		$view['pribadi'] 		= $query->row();			
 
 		// CSS Files
 		$view['css_files'] 	= array(

@@ -2,6 +2,14 @@
 
 class Operator extends MX_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();		
+		$this->output->enable_profiler(false); //for debug set as true
+		$this->login->is_logged();
+		$this->login->has_access();
+	}
+
 	// -----------------------------------------------------------------------------------
 	// List
 	// -----------------------------------------------------------------------------------
@@ -101,7 +109,7 @@ class Operator extends MX_Controller {
         } else {                            
 
             $data = array(
-                    'id_group' 			=> set_value('akses	'),
+                    'id_group' 			=> $this->input->post('akses'),
 					'username' 			=> set_value('username'),
                     'nama' 				=> set_value('nama'),
 					'password' 			=> md5(set_value('password')),

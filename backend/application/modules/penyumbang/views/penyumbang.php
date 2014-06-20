@@ -5,11 +5,13 @@
       <div class="table-header">
         <div class="row">                     
           <div class="col-lg-6">
-            <a href="<?php echo site_url()?>/penyumbang/  add" class="btn btn-danger"><i class="fa fa-plus"></i> Tambah Data Penyumbang</a>
+            <a href="<?php echo site_url()?>/penyumbang/add" class="btn btn-danger"><i class="fa fa-plus"></i> Tambah Data Penyumbang</a>
+            <a href="<?php echo site_url()?>/penyumbang/print_all" target="_blank" class="btn btn-inverse"><i class="fa fa-print"></i> Print All</a>
+            <a href="<?php echo site_url()?>/penyumbang/csv_all" target="_blank" class="btn btn-inverse"><i class="fa fa-download"></i> CSV All</a>
           </div>
           <div class="col-lg-6 text-right">
-            <form action="<?php echo current_url()?>" method="POST" class="form-inline" role="form">
-            
+            <form action="<?php echo current_url()?>" method="POST" class="form-inline" role="form">            
+
               <div class="form-group">
                 <select id="filter" name="filter" class="form-control">
                   <option value="nama">Nama</option>
@@ -58,8 +60,8 @@
               <td><?php echo $penyumbang->tgl?></td>
               <td class="text-right" title="<?php echo terbilang($penyumbang->nominal)?> Rupiah">Rp<?php echo ribuan($penyumbang->nominal)?></td>
               <td nowrap>
-                <a href="<?php echo site_url()?>/penyumbang/edit/<?php echo $penyumbang->id_sumbangan?>" class="btn btn-inverse btn-xs"><i class="fa fa-pencil"></i></a>
-                <a href="<?php echo site_url()?>/penyumbang/delete/<?php echo $penyumbang->id_sumbangan?>" class="btn btn-danger btn-xs" onClick="return deletechecked('<?php echo site_url()?>/penyumbang/delete/<?php echo $penyumbang->id_sumbangan?>')"><i class="fa fa-trash-o"></i></a>
+                <a href="<?php echo site_url()?>/penyumbang/edit/<?php echo $penyumbang->id_penyumbang?>" class="btn btn-inverse btn-xs"><i class="fa fa-pencil"></i></a>
+                <a href="<?php echo site_url()?>/penyumbang/delete/<?php echo $penyumbang->id_penyumbang?>" class="btn btn-danger btn-xs" onClick="return deletechecked('<?php echo site_url()?>/penyumbang/delete/<?php echo $penyumbang->id_penyumbang?>')"><i class="fa fa-trash-o"></i></a>
               </td>
             </tr>
             <?php 

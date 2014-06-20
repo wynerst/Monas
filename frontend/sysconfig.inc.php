@@ -187,6 +187,7 @@ if (!defined('DB_PORT')) { define('DB_PORT', '3306'); }
 if (!defined('DB_NAME')) { define('DB_NAME', 'db_jkwjk2'); }
 if (!defined('DB_USERNAME')) { define('DB_USERNAME', 'pengguna'); }
 if (!defined('DB_PASSWORD')) { define('DB_PASSWORD', 'everyone'); }
+
 // database connection
 // we prefer to use mysqli extensions if its available
 if (extension_loaded('mysqli')) {
