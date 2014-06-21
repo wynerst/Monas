@@ -13,14 +13,22 @@ class Log extends MX_Controller {
 	public function index()
 	{
 		// HARUS ADA - Silahkan beri judul halaman
-		$view['page_title'] = 'Bank';
-		$view['page_desc'] 	= 'Data Rekening Bank';  			
+		$view['page_title'] = 'Catatan Sistem';
+		$view['page_desc'] 	= 'Pencatatan Kegiatan Sistem';  			
 
 		// Rekening Bank
 		$sql 				= "	SELECT 
-									*
+									a.message,
+									a.waktu,
+									b.nama,
+									c.modul
 								FROM 
-									log";
+									log a
+								LEFT JOIN 
+									user b ON a.id_user = b.id_user
+								LEFT JOIN 
+									mst_modul c ON a.id_modul = c.id_modul
+								";
 
 		$query 				= $this->db->query($sql);
 		$view['list'] 		= $query->result();			

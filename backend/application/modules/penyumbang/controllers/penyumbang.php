@@ -19,7 +19,6 @@ class Penyumbang extends MX_Controller {
 		$view['page_title'] 	= 'Penyumbang';
 		$view['page_desc'] 		= 'Data Penyumbang Dana';  			
 
-
         // Paging
         $config	= $this->general_model->pagination_rules(site_url().'/penyumbang/index/', 'sumbangan',10	);
         $this->pagination->initialize($config); 	
@@ -110,14 +109,12 @@ class Penyumbang extends MX_Controller {
 		                     'rules'   => 'required'
 		                  )   
         );
+
 		$this->form_validation->set_rules($config);
-
 		$view['custom_error'] 	= '';		
-
         if ($this->form_validation->run() == false) {
              $view['custom_error'] = (validation_errors() ? '<div class="alert alert-danger">'.validation_errors().'</div>' : false);
         } else {                            
-
             $data = array(
                     'nama' 			=> set_value('nama'),
 					'bank_transfer' => set_value('bank_transfer'),
@@ -134,6 +131,7 @@ class Penyumbang extends MX_Controller {
             );
            
 			if ($this->general_model->add('penyumbang', $data) == TRUE) {
+				$this->logs->record($this->session->userdata('name').' Menambah Data Penyumbang Atas Nama '.set_value('nama'));
 				redirect(base_url().'index.php/penyumbang');
 			} else {
 				$view['custom_error'] = '<div class="aler alert-danger">Data Tidak Dapat Disimpan. Mohon dicoba kembali.</div>';
@@ -199,24 +197,30 @@ class Penyumbang extends MX_Controller {
         );
 
 		$this->form_validation->set_rules($config);
-
 		$view['custom_error'] = '';
-		
         if ($this->form_validation->run() == false)
         {
              $view['custom_error'] = (validation_errors() ? '<div class="alert alert-danger">'.validation_errors().'</div>' : false);
 
         } else {                            
-
             $data = array(
                     'nama' 			=> $this->input->post('nama'),
 					'bank_transfer' => $this->input->post('bank_transfer'),
+					'kota'			=> $this->input->post('kota'),
+					'akun_bank'		=> $this->input->post('akun_bank'),
 					'nominal' 		=> $this->input->post('nominal'),
-					'tgl' 			=> $this->input->post('tanggal_transfer')
+					'tgl' 			=> $this->input->post('tanggal_transfer'),
+					'no_identitas'	=> $this->input->post('identitas'),
+					'npwp'			=> $this->input->post('npwp'),
+					'alamat'		=> $this->input->post('alamat'),
+					'pekerjaan'		=> $this->input->post('pekerjaan'),
+					'kantor'		=> $this->input->post('kantor'),
+					'asal_dana'		=> $this->input->post('sumber_dana'),
             );
            
-			if ($this->general_model->edit('sumbangan', $data, 'id_sumbangan', $this->input->post('id_sumbangan')) == TRUE)
+			if ($this->general_model->edit('penyumbang', $data, 'id_penyumbang', $this->input->post('id_penyumbang')) == TRUE)
 			{
+				$this->logs->record($this->session->userdata('name').' Mengubah Data Penyumbang Atas Nama '.$this->input->post('nama'));
 				redirect(site_url().'/penyumbang');
 			} else {
 				$view['custom_error'] = '<div class="alert alert-danger">Data Tidak Dapat Disimpan. Mohon dicoba kembali.</div>';
@@ -224,7 +228,7 @@ class Penyumbang extends MX_Controller {
 		}
 
 		$view['bank_list'] 			= $this->general_model->bank_list();
-		$view['result'] 			= $this->general_model->get('sumbangan','id_sumbangan, nama, bank_transfer, nominal, tgl','id_sumbangan = '.$this->uri->segment(3));		
+		$view['result'] 			= $this->general_model->get('penyumbang','id_penyumbang, nama, bank_transfer, kota, akun_bank, nominal, tgl, no_identitas, npwp, alamat, pekerjaan, kantor, asal_dana, create','id_penyumbang = '.$this->uri->segment(3));		
 		$view['content'] 			= $this->load->view('penyumbang_edit', $view, true);		
 
 		$view['css_files'] 			= array(
@@ -246,9 +250,11 @@ class Penyumbang extends MX_Controller {
 	// -----------------------------------------------------------------------------------
 	// Delete Item
 	// -----------------------------------------------------------------------------------
-    function delete(){
-	    $ID =  $this->uri->segment(3);
-	    $this->general_model->delete('sumbangan','id_sumbangan',$ID);             
+    function delete($ID){
+	    $query 		= $this->db->get_where('penyumbang', array('id_penyumbang' => $ID));
+	    $penyumbang = $query->row(); 
+		$this->logs->record($this->session->userdata('name').' Menghapus Data Penyumbang Atas Nama '.$penyumbang->nama);
+	    $this->general_model->delete('penyumbang','id_penyumbang',$ID);             
 	    redirect(site_url().'/penyumbang');
     }
 
@@ -260,31 +266,26 @@ class Penyumbang extends MX_Controller {
 		// Fasilitas generate table
 		$this->load->library('table');
 
-        $this->db->select('id_penyumbang, nama, bank_transfer, kota, akun_bank, nominal, tgl, no_identitas, npwp, alamat, pekerjaan, kantor, asal_dana, create')
+        $this->db->select('nama, bank_transfer, kota, akun_bank, nominal, tgl, no_identitas, npwp, alamat, pekerjaan, kantor, asal_dana')
                  ->from('penyumbang');
         
-        $query  = $this->db->get(); 
+        $query  		= $this->db->get(); 
 		$tmpl 			= array ('table_open' => '<table border="0" cellpadding="4" cellspacing="0" class="table table-bordered">');
 		$this->table->set_template($tmpl);
+		$this->logs->record($this->session->userdata('name').' Mencetak Seluruh Data Penyumbang');
 		$view['content'] = $this->table->generate($query);
 		$this->load->view('print', $view);    	
     } 
 
     public function csv_all()
     {
-		// Helper untuk membuat download file
-		$this->load->helper('download');
-		$filename = 'bank-'.date('Y-m-d h:i:s').'.csv';
-
-		// Fasilitas untuk konversi hasil database menjadi CSV
-		$this->load->dbutil();
-
-		// Sumbangan
-        $this->db->select('id_penyumbang, nama, bank_transfer, kota, akun_bank, nominal, tgl, no_identitas, npwp, alamat, pekerjaan, kantor, asal_dana, create')
-                 ->from('penyumbang');        
-        $query  = $this->db->get(); 
-		$data 	= $this->dbutil->csv_from_result($query);			
-		force_download($filename, $data);
+		$this->load->library('excsv');
+		$this->logs->record($this->session->userdata('name').' Mengunduh File CSV Data Penyumbang');
+        $this->db->select('nama, bank_transfer, kota, akun_bank, nominal, tgl, no_identitas, npwp, alamat, pekerjaan, kantor, asal_dana, create');
+		$this->db->from('penyumbang');        
+        $query      = $this->db->get();  
+		$filename 	= 'penyumbang-'.date('Ymd-his').'.csv';
+		$this->excsv->export_to_file($query, $filename,TRUE);
 	}
 
 	public function import()
@@ -298,11 +299,19 @@ class Penyumbang extends MX_Controller {
 			if ($_FILES["userfile"]["error"] > 0) {
 			  $view['custom_error'] = "Error: " . $_FILES["userfile"]["error"] . "<br>";
 			} else {
+				if($this->input->post('delimiter'))
+				{
+					$delimiter = $this->input->post('delimiter');
+				} else {
+					$delimiter 	= ",";				
+				}
+
 				$file = $_FILES["userfile"]["tmp_name"];
-				$data = $this->csvimport->get_array($file);	
+				$data = $this->csvimport->get_array($file,'',TRUE,0,$delimiter);	
 				foreach ($data as $sql) {
 					$this->db->insert('penyumbang', $sql);
 				}
+				$this->logs->record($this->session->userdata('name').' Mengimpor File CSV Data Penyumbang');
 				redirect(site_url().'/penyumbang');
 			}
 		}
@@ -325,4 +334,4 @@ class Penyumbang extends MX_Controller {
 
 }
 
-/* End of file welcome.php */
+/* End of file penyumbang.php */

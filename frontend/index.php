@@ -508,7 +508,7 @@ while($row = $result->fetch_array()) {
 $(function(){
   //Line
   var chartData = {
-      labels : [	  <?php echo '"'.implode($_bank['tgl'],'","'),'"'; ?>],
+      labels : [    <?php echo '"'.implode($_bank['tgl'],'","').'"'; ?>],
       datasets : [
           {
               fillColor : "#999999",
@@ -534,65 +534,106 @@ $(function(){
       ]
   }
 
+  var chartData1 = {
+      labels : [    <?php echo '"'.implode($_bank['tgl'],'","').'"'; ?>],
+      datasets : [
+          {
+              fillColor : "#fc0",
+              strokeColor : "#fff",
+              pointColor : "#000000",
+              pointStrokeColor : "#fff",
+              data : [<?php echo implode($_bank['bri'],','); ?>]
+          }
+      ]
+  }
+
+  var chartData2 = {
+      labels : [    <?php echo '"'.implode($_bank['tgl'],'","').'"'; ?>],
+      datasets : [
+          {
+              fillColor : "#ff0",
+              strokeColor : "#fff",
+              pointColor : "#000000",
+              pointStrokeColor : "#fff",
+              data : [<?php echo implode($_bank['bri'],','); ?>]
+          }
+      ]
+  }
+
+  var chartData3 = {
+      labels : [	  <?php echo '"'.implode($_bank['tgl'],'","').'"'; ?>],
+      datasets : [
+          {
+              fillColor : "#ff0",
+              strokeColor : "#fff",
+              pointColor : "#000000",
+              pointStrokeColor : "#fff",
+              data : [<?php echo implode($_bank['bri'],','); ?>]
+          }
+      ]
+  }
+
+
   var chartOption = {
-      animation : false
+      animation : false,
+      scaleOverlay : true
   }
 
   //Line
   var l = $('#bri-chartjs');
   var container = $(l).parent();
   var cl = l.get(0).getContext("2d");
-  $(window).resize( lineChart );
-  function lineChart(){
+  $(window).resize( lineChartx );
+  function lineChartx(){
       l.attr('width', $(container).width() ); //max width
       l.attr('height', $(container).height() ); //max height
       //Call a function to redraw other content (texts, images etc)
-      var briChart = new Chart(cl).Bar(chartData,chartOption);
+      var briChart = new Chart(cl).Bar(chartData3,chartOption);
 
   }
-  lineChart();
+  lineChartx();
 
   //Line
   var l = $('#mandiri-chartjs');
   var container = $(l).parent();
   var cl = l.get(0).getContext("2d");
-  $(window).resize( lineChart );
-  function lineChart(){
+  $(window).resize( lineChart1 );
+  function lineChart1(){
       l.attr('width', $(container).width() ); //max width
       l.attr('height', $(container).height() ); //max height
       //Call a function to redraw other content (texts, images etc)
-      var briChart = new Chart(cl).Bar(chartData,chartOption);
+      var briChart = new Chart(cl).Bar(chartData1,chartOption);
 
   }
-  lineChart();
+  lineChart1();
 
   //Line
   var l = $('#bca-chartjs');
   var container = $(l).parent();
   var cl = l.get(0).getContext("2d");
-  $(window).resize( lineChart );
-  function lineChart(){
+  $(window).resize( lineChart2 );
+  function lineChart2(){
       l.attr('width', $(container).width() ); //max width
       l.attr('height', $(container).height() ); //max height
       //Call a function to redraw other content (texts, images etc)
-      var briChart = new Chart(cl).Bar(chartData,chartOption);
+      var briChart = new Chart(cl).Bar(chartData2,chartOption);
 
   }
-  lineChart();
+  lineChart2();
 
   //Line
   var l = $('#line-chartjs');
   var container = $(l).parent();
   var cl = l.get(0).getContext("2d");
-  $(window).resize( lineChart );
-  function lineChart(){
+  $(window).resize(lineChart3);
+  function lineChart3(){
       l.attr('width', $(container).width() ); //max width
       l.attr('height', $(container).height() ); //max height
       //Call a function to redraw other content (texts, images etc)
       var lineChart = new Chart(cl).Bar(chartData,chartOption);
 
   }
-  lineChart();
+  lineChart3();
 
   var polarData = [
     {

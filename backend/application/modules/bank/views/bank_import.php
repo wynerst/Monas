@@ -1,7 +1,7 @@
       <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-body">
-            <?php echo form_open_multipart('penyumbang/import',array('class' => 'form-horizontal', 'role' => 'form', 'data-validate' => 'parsley'))?>
+            <?php echo form_open_multipart(current_url(),array('class' => 'form-horizontal', 'role' => 'form', 'data-validate' => 'parsley'))?>
               <div class="col-lg-12">
                 <?php echo $custom_error; ?>
               </div>
@@ -16,8 +16,8 @@
                   <label for="delimiter" class="col-lg-6 control-label">Delimiter</label>
                   <div class="col-lg-6">
                     <select name="delimiter" class="form-control">
-                      <option value="," selected>Comma (,) </option>
-                      <option value=";">Semicolon (;) </option>
+                      <option value="," selected>[ , ] Comma</option>
+                      <option value=";">[ ; ] Semicolon</option>
                     </select>
                   </div>
                 </div>

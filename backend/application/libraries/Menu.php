@@ -28,6 +28,7 @@ class Menu {
 		if($query->num_rows() > 0) {
 			foreach ($query->result() as $modul) {
 				$menu[$modul->id_modul]['menu']	= $modul->modul;
+				$menu[$modul->id_modul]['path']	= $modul->path;
 				$sql 		= " SELECT 
 									*
 								FROM 

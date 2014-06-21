@@ -39,7 +39,7 @@
               <th>Nama</th>
               <th>Transfer Ke Bank</th>
               <th>Tanggal Transfer</th>
-              <th class="text-right">Nominal</th>
+              <th>Nominal</th>
               <th width="1">&nbsp;</th>
             </tr>
           </thead>
@@ -58,7 +58,7 @@
               <td class="text-center"><?php echo $i++?></td>
               <td><?php echo $penyumbang->nama?></td>
               <td><?php echo $penyumbang->bank_transfer?></td>
-              <td><?php echo $penyumbang->tgl?></td>
+              <td class="text-right"><?php echo tanggal($penyumbang->tgl)?></td>
               <td class="text-right" title="<?php echo terbilang($penyumbang->nominal)?> Rupiah">Rp<?php echo ribuan($penyumbang->nominal)?></td>
               <td nowrap>
                 <a href="<?php echo site_url()?>/penyumbang/edit/<?php echo $penyumbang->id_penyumbang?>" class="btn btn-inverse btn-xs"><i class="fa fa-pencil"></i></a>

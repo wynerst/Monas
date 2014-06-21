@@ -122,7 +122,38 @@ if(!function_exists('terbilang'))
 /**
  * Debug
  */
-if ( ! function_exists('debug'))
+if (!function_exists('tanggal'))
+{
+	function tanggal($tanggal='', $separator = '-')
+    {
+    	if($tanggal != '')
+    	{		
+	        $d = explode($separator,$tanggal);
+			switch ($d[1]){
+	            case '01'  : $d[1]='Januari';break;
+				case '02'  : $d[1]='Februari';break;
+				case '03'  : $d[1]='Maret';break;
+	            case '04'  : $d[1]='April';break;
+				case '05'  : $d[1]='Mei';break;
+				case '06'  : $d[1]='Juni';break;
+	            case '07'  : $d[1]='Juli';break;
+				case '08'  : $d[1]='Agustus';break;
+				case '09'  : $d[1]='September';break;
+	            case '10'  : $d[1]='Oktober';break;
+				case '11'  : $d[1]='November';break;
+				case '12'  : $d[1]='Desember';break;
+	        }
+			return $d[2].' '.$d[1].' '.$d[0];
+    	} else {
+    		return false;
+    	}
+	}
+}
+
+/**
+ * Debug
+ */
+if (!function_exists('debug'))
 {
 	function debug( $output = '', $is_array = false)
 	{

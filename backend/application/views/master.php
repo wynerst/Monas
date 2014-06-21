@@ -76,7 +76,7 @@
             <ul class="nav navbar-nav">
               <?php foreach($this->menu->access($this->session->userdata('id_group')) as $key => $menu_access) : ?>
               <li>
-                <a href="#"><i class="nav-icon fa fa-home"></i> 
+                <a href="<?php echo ($menu_access['path']!='#')? site_url().'/'.$menu_access['path'] : $menu_access['path']?>"><i class="nav-icon fa fa-home"></i> 
                   <?php echo $menu_access['menu']?>
                 </a>
                 <?php if(count($menu_access['sub']) > 0 ) : ?>                 

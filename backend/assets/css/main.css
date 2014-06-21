@@ -2520,6 +2520,11 @@ a.list-group-item-danger.active:focus {
 .nav-tabs > li.active > a:focus {
   color: #800088;
 }
+
+.nav-pills.nav-justified li {
+  padding-right: 0px; 
+}
+
 @media (min-width: 768px) {
   .nav-tabs.nav-justified > li:last-child > a {
     border-radius: 0px 2px 2px 0px;
@@ -2529,6 +2534,14 @@ a.list-group-item-danger.active:focus {
   .nav-tabs.nav-justified > .active > a:focus {
     border-radius: 2px 2px 0px 0px;
     color: #800088;
+  }
+
+  .nav-pills.nav-justified li {
+    padding-right: 4px; 
+  }
+
+  .nav-pills.nav-justified li:last-child {
+    padding-right: 0;
   }
 }
 .nav-pills > li > a {
