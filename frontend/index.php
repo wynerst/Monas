@@ -98,9 +98,12 @@ $result=$dbs->query($sql);
 $_bank = array();
 $i = 0;
 while($row = $result->fetch_array()) {
-	$_bank['bca'][$i]=number_format($row['bca']/1000, 2,',','.');
-	$_bank['bri'][$i]=number_format($row['bri']/1000, 2,',','.');
-	$_bank['mandiri'][$i]=number_format($row['mandiri']/1000, 2,',','.');
+//	$_bank['bca'][$i]=number_format($row['bca']/1000, 2,',','.');
+//	$_bank['bri'][$i]=number_format($row['bri']/1000, 2,',','.');
+//	$_bank['mandiri'][$i]=number_format($row['mandiri']/1000, 2,',','.');
+	$_bank['bca'][$i]=(int)($row['bca']);
+	$_bank['bri'][$i]=(int)($row['bri']);
+	$_bank['mandiri'][$i]=(int)($row['mandiri']);
 	$_bank['tgl'][$i] = date_format(date_create($row['tanggal']),'d/m');
 	$_bank['subtotal'][$i]=$row['bca']+$row['bri']+$row['mandiri'];
 	$_bank['total']=$_bank['total']+$_data['sub_total'][$i];
@@ -522,17 +525,6 @@ while($row = $result->fetch_array()) {
       <a class="btn btn-inverse" href="#page-top">
           <i class="fa fa-chevron-up"></i>
       </a>
-  </div>
-
-  <div style="display: none;" class="modal fade YouTubeModal" id="YouTubeModal" role="dialog" aria-hidden="true">
-	  <div class="modal-dialog" id="YouTubeModalDialog">
-	  <div class="modal-content" id="YouTubeModalContent">
-		  <div class="modal-header"><button type="button" class="close" data-dismiss="modal">×</button>
-		  <h4 class="modal-title" id="YouTubeModalTitle"></h4>
-		  </div>
-		  <div class="modal-body" id="YouTubeModalBody" style="padding:0;"></div>
-	  </div>
-	  </div>
   </div>
 
   <script src="assets/js/jquery-1.10.2.js"></script>
