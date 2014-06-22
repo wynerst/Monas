@@ -44,9 +44,11 @@ class Auth extends MX_Controller {
 					'logged_in'		=> 1
 				);
 				$this->session->set_userdata($sess_array);
+				$this->logs->record($this->session->userdata('name').' Berhasil Login');
 				redirect(site_url().'/beranda', 'refresh');
 			} else {
 				$view['page_title'] 	= 'Login';
+				$this->logs->record($this->session->userdata('name').' Gagal Login');
 				$view['message'] 		= 'Invalid username or password';
 				$this->load->view('auth', $view);
 			}
@@ -58,6 +60,7 @@ class Auth extends MX_Controller {
 		$array_items = array('id' => '', 'username' => '', 'name' => '');
 		$this->session->unset_userdata($array_items);
 		$this->session->sess_destroy();
+		$this->logs->record($this->session->userdata('name').' Telah Logout');
 		redirect(site_url().'/auth/login', 'location');
 	}
 
