@@ -121,6 +121,7 @@ class Operator extends MX_Controller {
             );
            
 			if ($this->general_model->add('user', $data) == TRUE) {
+				$this->logs->record($this->session->userdata('name').' Menambah Data Operator Atas Nama '.$this->input->post('nama'));
 				redirect(site_url().'/operator');
 			} else {
 				$view['custom_error'] = '<div class="alert alert-danger">'.$this->db->_error_message().'</div>';
@@ -221,6 +222,7 @@ class Operator extends MX_Controller {
             );
            
 			if ($this->general_model->edit('user', $data, 'id_user', $this->input->post('id_user')) == TRUE) {
+				$this->logs->record($this->session->userdata('name').' Mengubah Data Operator Atas Nama '.$this->input->post('nama'));
 				redirect(site_url().'/operator');
 			} else {
 				$view['custom_error'] = '<div class="aler alert-danger">Data Tidak Dapat Disimpan. Mohon dicoba kembali.</div>';
@@ -247,8 +249,10 @@ class Operator extends MX_Controller {
 	// -----------------------------------------------------------------------------------
 	// Delete Item
 	// -----------------------------------------------------------------------------------
-    function delete(){
-	    $ID =  $this->uri->segment(3);
+    function delete($ID){
+	    $query 		= $this->db->get_where('user', array('id_user' => $ID));
+	    $user 		= $query->row(); 
+		$this->logs->record($this->session->userdata('name').' Menghapus Data Operator Atas Nama '.$user->nama);
 	    $this->general_model->delete('user','id_user',$ID);             
 	    redirect(site_url().'/operator');
     }

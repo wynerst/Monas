@@ -14,12 +14,17 @@ $(document).ready(function() {
 				beforeSend 	: function() {
 					parent.find('td').css('backgroundColor','#fb6c6c');
 				},
-				success 	: function() {
+				success 	: function(e) {
 					parent.find('td').fadeOut(600,function() {
 						parent.remove();
-					});
+					});						
 				}
 			});
 		}
 	});
+
+	$('.undelete').click(function(e){
+		e.preventDefault();
+		alert($(this).attr('title'));
+	})
 });

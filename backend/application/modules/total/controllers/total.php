@@ -55,6 +55,7 @@ class Total extends MX_Controller {
 			if($query->num_rows() > 0 )
 			{	
 				if ($this->db->update('settings', $data) == TRUE) {
+					$this->logs->record($this->session->userdata('name').' Memperbaiki Data Total Sementara Dana Sumbangan');
 					redirect(base_url().'index.php/total');
 				} else {
 					$view['custom_error'] = '<div class="aler alert-danger">Data Tidak Dapat Disimpan. Mohon dicoba kembali.</div>';
@@ -116,6 +117,7 @@ class Total extends MX_Controller {
 			$this->db->set('mandiri', $import->mandiri);
 			if($this->db->update('settings'))
 			{
+				$this->logs->record($this->session->userdata('name').' Mengimpor Total Sementara Dana Sumbangan');
 				redirect(base_url().'index.php/total');
 			}
 		}

@@ -3,8 +3,8 @@
     <div class="row">
       <div class="col-lg-5 col-xs-6"><span class="sparkline-1">3,9,2,3,4,16,5,4,2,13,4,6,5,4</span></div>
       <div class="col-lg-7 col-xs-6">
-        <h1 class="no-padding"><span class="text-muted">Rp</span>35 M</h1>
-        <small>Penerimaan</small>
+        <h1 class="no-padding tip" title="Rp<?php echo ribuan($kemaren) ?>"><span class="text-muted">Rp</span><?php echo str_replace('.',',',substr(($kemaren/100000000),0,3)) ?> J</h1>
+        <small>Kemaren</small>
       </div>
     </div>                                                           
   </div>
@@ -15,8 +15,8 @@
     <div class="row">
       <div class="col-lg-5 col-xs-6"><span class="sparkline-1">3,9,2,3,4,16,5,4,2,13,4,6,5,4</span></div>
       <div class="col-lg-7 col-xs-6">
-        <h1 class="no-padding"><span class="text-muted">Rp</span>1,5 M</h1>
-        <small>Pengeluaran</small>
+        <h1 class="no-padding tip" title="Rp<?php echo ribuan($total) ?>"><span class="text-muted">Rp</span><?php echo str_replace('.',',',substr(($total/1000000000),0,3)) ?> M</h1>
+        <small>Total Sementara</small>
       </div>
     </div>                                                           
   </div>
@@ -27,7 +27,7 @@
     <div class="row">
       <div class="col-lg-5 col-xs-6"><span class="sparkbar-1">6:7,3:5,8:12,5:9,2:4,5:8,7:9,3:5</span></div>
       <div class="col-lg-7 col-xs-6">
-        <h1 class="no-padding">1.352 K</h1>
+        <h1 class="no-padding"><?php echo ribuan($donatur) ?></h1>
         <small>Jumlah Donatur</small>
       </div>
     </div>                                                           

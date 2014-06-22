@@ -25,21 +25,23 @@ class Auth extends MX_Controller {
 			$username 		= $this->input->post('username');
 			$password 		= $this->input->post('password');
 
-		    $this->db->select('id_user, id_group, username, password, nama')
-		             ->from('user')
-		             ->where('username', $username)
-		             ->where('password', md5($password))
+		    $this->db->select('a.id_user, a.id_group, a.username, a.password, a.nama, b.nama_group')
+		             ->from('user a')
+		             ->join('user_group b', 'a.id_group = b.id_group', 'left')
+		             ->where('a.username', $username)
+		             ->where('a.password', md5($password))
 		             ->limit(1);
 
 		    $query = $this->db->get();
 		    if($query->num_rows() == 1) {
 		    	$row 		= $query->row();
 				$sess_array = array(
-					'id' 		=> $row->id_user,
-					'id_group'	=> $row->id_group,
-					'username' 	=> $row->username,
-					'name' 		=> $row->nama,
-					'logged_in'	=> 1
+					'id' 			=> $row->id_user,
+					'id_group'		=> $row->id_group,
+					'nama_group'	=> $row->nama_group,
+					'username' 		=> $row->username,
+					'name' 			=> $row->nama,
+					'logged_in'		=> 1
 				);
 				$this->session->set_userdata($sess_array);
 				redirect(site_url().'/beranda', 'refresh');

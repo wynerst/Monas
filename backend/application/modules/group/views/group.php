@@ -26,7 +26,14 @@
               <td><?php echo $group->nama_group?></td>
               <td nowrap>
                 <a href="<?php echo site_url()?>/group/edit/<?php echo $group->id_group?>" class="btn btn-inverse btn-xs"><i class="fa fa-pencil"></i></a>
-                <a href="<?php echo site_url()?>/group/delete/<?php echo $group->id_group?>" class="btn btn-danger btn-xs" onClick="return deletechecked('<?php echo site_url()?>/group/delete/<?php echo $group->id_group?>')"><i class="fa fa-trash-o"></i></a>
+                <?php 
+                  $used_group = $this->db->get_where('user', array('id_group' => $group->id_group));
+                  if($used_group->num_rows() > 0 ) :
+                ?>
+                <a href="#" title="Tidak diperkenankan untuk dihapus karena masih ada operator yang terdaftar dalam group ini." class="btn btn-danger btn-xs undelete"><i class="fa fa-trash-o"></i></a>
+              <?php else : ?>
+                <a href="<?php echo site_url()?>/group/delete/<?php echo $group->id_group?>" class="btn btn-danger btn-xs delete"><i class="fa fa-trash-o"></i></a>
+              <?php endif ?>
               </td>
             </tr>
             <?php 

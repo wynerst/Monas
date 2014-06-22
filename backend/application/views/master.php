@@ -55,13 +55,18 @@
             </div>             
             <div class="user-profil">
               <h4><?php echo ucwords($this->session->userdata('name'))?></h4>
-              <small>Administrasi Keuangan</small>
-            </div>             
+              <small><?php echo ucwords($this->session->userdata('nama_group')) ?></small>
+            </div>           
+            <br>
+            <br>
+            <br>
+<!--
             <div class="user-network">
               <a href="#" class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i></a>
               <a href="#" class="btn btn-social btn-twitter"><i class="fa fa-twitter"></i></a>
               <a href="#" class="btn btn-social btn-google-plus"><i class="fa fa-google-plus"></i></a>
             </div> 
+-->            
           </div> 
         </div>
                   
@@ -76,14 +81,14 @@
             <ul class="nav navbar-nav">
               <?php foreach($this->menu->access($this->session->userdata('id_group')) as $key => $menu_access) : ?>
               <li>
-                <a href="<?php echo ($menu_access['path']!='#')? site_url().'/'.$menu_access['path'] : $menu_access['path']?>"><i class="nav-icon fa fa-home"></i> 
+                <a href="<?php echo ($menu_access['path']!='#')? site_url().'/'.$menu_access['path'] : $menu_access['path']?>"><i class="nav-icon fa fa-list"></i> 
                   <?php echo $menu_access['menu']?>
                 </a>
                 <?php if(count($menu_access['sub']) > 0 ) : ?>                 
                   <ul class="dropdown-menu animated-fast flipInY">
                     <?php foreach ($menu_access['sub'] as $key => $sub) : ?>
                       <li>
-                        <a href="<?php echo site_url().'/'.$key?>/"><?php echo $sub?></a>
+                        <a href="<?php echo site_url().'/'.$key?>/"><i class="nav-icon fa fa-list"></i> <?php echo $sub?></a>
                       </li>                
                     <?php endforeach ?>
                   </ul>
