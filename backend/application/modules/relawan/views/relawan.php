@@ -22,16 +22,20 @@
           <tbody>
             <?php 
             if(count($list) > 0 ) :
-              $i=1;
+              if($this->uri->segment(3) != '' ) {
+                $i = $this->uri->segment(3) + 1;                
+              } else {
+                $i = 1;
+              }
               foreach ($list as $relawan) :
             ?>
             <tr>
-              <td><?php echo $i++?></td>
+              <td class="text-center"><?php echo $i++?></td>
               <td><?php echo $relawan->nama_relawan?></td>
               <td><a href="<?php echo $relawan->url?>" target="_blank"><?php echo $relawan->url?></a></td>
               <td nowrap>
                 <a href="<?php echo site_url()?>/relawan/edit/<?php echo $relawan->id_relawan?>" class="btn btn-inverse btn-xs"><i class="fa fa-pencil"></i></a>
-                <a href="<?php echo site_url()?>/relawan/delete/<?php echo $relawan->id_relawan?>" class="btn btn-danger btn-xs" onClick="return deletechecked('<?php echo site_url()?>/relawan/delete/<?php echo $relawan->id_relawan?>')"><i class="fa fa-trash-o"></i></a>
+                <a href="<?php echo site_url()?>/relawan/delete/<?php echo $relawan->id_relawan?>" class="btn btn-danger btn-xs delete"><i class="fa fa-trash-o"></i></a>
               </td>
             </tr>
             <?php 
@@ -44,10 +48,15 @@
           </tbody>
         </table>
       </div>
+
+      <div class="table-footer">
+        <div class="row">                     
+          <div class="col-lg-12 text-right">
+            <?php echo $this->pagination->create_links()?>
+          </div>
+        </div>
+      </div>  
        
     </div>
-
   </div>
-
-
 </div> 

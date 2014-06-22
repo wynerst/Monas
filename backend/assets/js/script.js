@@ -2,12 +2,24 @@ $(document).ready(function() {
     $('.tip').tooltip()
 });
 
-function deletechecked(link)
-{
-    var answer = confirm('Delete item?')
-    if (answer){
-        window.location = link;
-    }       
-    return false;  
-}
-
+$(document).ready(function() {
+	$('a.delete').click(function(e) {
+		e.preventDefault();
+		var parent = $(this).parent().parent();
+	    var answer = confirm('Delete item?')
+	    if (answer){	
+			$.ajax({
+				type 		: 'get',
+				url 		: $(this).attr('href'),
+				beforeSend 	: function() {
+					parent.find('td').css('backgroundColor','#fb6c6c');
+				},
+				success 	: function() {
+					parent.find('td').fadeOut(600,function() {
+						parent.remove();
+					});
+				}
+			});
+		}
+	});
+});

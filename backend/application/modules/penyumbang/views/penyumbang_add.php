@@ -5,6 +5,7 @@
               <div class="col-lg-12">
                 <?php echo $custom_error; ?>
               </div>
+              <div class="clearfix"></div>
               <div class="col-lg-6">              
                 <div class="form-group">
                   <label for="nama" class="col-lg-4 control-label">Nama Lengkap*</label>

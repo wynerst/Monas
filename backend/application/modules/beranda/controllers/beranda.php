@@ -16,8 +16,43 @@ class Beranda extends MX_Controller {
 		$view['page_title'] = 'Beranda';			//
 		$view['page_desc'] 	= 'Ringkasan Singkat'; 	// 			
 
+		//Chart
+		$sql 					= " SELECT 
+										DATE_FORMAT(tanggal, '%m/%d') AS tanggal,
+										SUM(bca) bca,
+										SUM(bri) bri,
+										SUM(mandiri) mandiri
+									FROM 
+										sumbangan
+									GROUP BY
+										tanggal
+									ORDER BY 
+										tanggal DESC
+									LIMIT 
+										10";
+
+		$query 					= $this->db->query($sql);
+		$tanggal 				= '';
+		$bca 					= '';
+		$bri 					= '';
+		$mandiri 				= '';
+		if($query->num_rows() > 0 )
+		{			
+			foreach($query->result() as $graph) {
+				$tanggal	.= '"'.$graph->tanggal.'",';				
+				$bca		.= $graph->bca.',';				
+				$bri		.= $graph->bri.',';				
+				$mandiri	.= $graph->mandiri.',';				
+			}
+		}
+
+		$view['tanggal']	= substr($tanggal,0,strlen($tanggal)-1);				
+		$view['bca']		= $bca;				
+		$view['bri']		= $bri;				
+		$view['mandiri']	= $mandiri;				
+
 		// HARUS ADA - Semua isi halaman akan diletakkan disini.
-		$view['content'] = $this->load->view('beranda','',true);			
+		$view['content'] = $this->load->view('beranda', $view,true);			
 
 		// CSS dan Plugin
 		$view['css_files'] = array( 

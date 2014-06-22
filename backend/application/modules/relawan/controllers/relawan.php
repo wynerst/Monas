@@ -16,33 +16,19 @@ class Relawan extends MX_Controller {
 
 	public function index()
 	{
-		// HARUS ADA - Silahkan beri judul halaman
-		$view['page_title'] = 'Relawan';
-		$view['page_desc'] 	= 'Data Para Relawan';  			
-
-		// Operator
-		$sql 				= "	SELECT 
-									id_relawan,
-									nama_relawan,
-									url
-								FROM 
-									relawan";
-
-		$query 				= $this->db->query($sql);
-		$view['list'] 		= $query->result();					
-
-		// HARUS ADA - Semua isi halaman akan diletakkan disini.
+		$view['page_title'] 	= 'Relawan';
+		$view['page_desc'] 		= 'Data Para Relawan';  			
+        $config					= $this->general_model->pagination_rules(site_url().'/relawan/index/', 'relawan',10);
+        
+        $this->pagination->initialize($config); 	
+		$view['list'] 			= $this->general_model->get('relawan','id_relawan, nama_relawan,url','',$config['per_page'],$this->uri->segment(3));		
 		$view['content'] 		= $this->load->view('relawan', $view, true);			
-
-		// HARUS ADA - Breadcrumbs - helper/monas_helper.php
 		$view['breadcrumb']		= breadcrumbs(
 									array(
-										array('link'=>'#', 'title'=>'Konten')
+										array('link'=> '#', 'title'=>'Konten')
 									), 
 									'Relawan'
 		);
-
-		// HARUS ADA - Proses keluaran untuk seluruh halaman
 		$this->load->view('master', $view);
 	}
 
@@ -56,8 +42,8 @@ class Relawan extends MX_Controller {
 		$view['page_desc'] 		= 'Data Para Relawan';  			
 		$view['breadcrumb']		= breadcrumbs(
 									array(
-										array('link'=>'#', 'title'=>'Konten'),
-										array('link'=>'#', 'title'=>'Relawan')
+										array('link'=> '#', 'title'=>'Konten'),
+										array('link'=> site_url().'/relawan', 'title'=>'Relawan')
 									), 
 									'Tambah Data Relawan'
 		);
@@ -77,12 +63,10 @@ class Relawan extends MX_Controller {
         if ($this->form_validation->run() == false) {
              $view['custom_error'] = (validation_errors() ? '<div class="alert alert-danger">'.validation_errors().'</div>' : false);
         } else {                            
-
             $data = array(
                     'nama_relawan' 	=> set_value('relawan'),
                     'url' 			=> $this->input->post('link')
-            );
-           
+            );           
 			if ($this->general_model->add('relawan', $data) == TRUE) {
 				redirect(site_url().'/relawan');
 			} else {
@@ -98,10 +82,56 @@ class Relawan extends MX_Controller {
 		$this->load->view('master', $view);
 	}
 
-	public function edit()
-	{
-		
-	}	
+	// -----------------------------------------------------------------------------------
+	// Edit Item
+	// -----------------------------------------------------------------------------------    
+    function edit()
+    {        
+		$view['page_title'] 	= 'Relawan';
+		$view['page_desc'] 		= 'Data Para Relawan';  			
+		$view['breadcrumb']		= breadcrumbs(
+									array(
+										array('link'=>'#', 'title'=>'Konten'),
+										array('link'=> site_url().'/relawan', 'title'=>'Relawan')
+									), 
+									'Ubah Data Relawan'
+		);
+
+		// Aturan data input
+		$config = array(
+		               array(
+		                     'field'   => 'relawan', 
+		                     'label'   => 'Nama Relawan', 
+		                     'rules'   => 'required'
+		                  )   
+        );
+
+		$this->form_validation->set_rules($config);
+		$view['custom_error'] = '';
+        if ($this->form_validation->run() == false)
+        {
+             $view['custom_error'] = (validation_errors() ? '<div class="alert alert-danger">'.validation_errors().'</div>' : false);
+
+        } else {                            
+            $data = array(
+                    'nama_relawan' 	=> $this->input->post('relawan'),
+                    'url' 			=> $this->input->post('link')
+            );
+           
+			if ($this->general_model->edit('relawan', $data, 'id_relawan', $this->input->post('id_relawan')) == TRUE)
+			{
+				$this->logs->record($this->session->userdata('name').' Mengubah Data Relawan Atas Nama '.$this->input->post('nama'));
+				redirect(site_url().'/relawan');
+			} else {
+				$view['custom_error'] = '<div class="alert alert-danger">Data Tidak Dapat Disimpan. Mohon dicoba kembali.</div>';
+			}
+		}
+
+		$view['result'] 			= $this->general_model->get('relawan','id_relawan, nama_relawan, url','id_relawan = '.$this->uri->segment(3));		
+		$view['content'] 			= $this->load->view('relawan_edit', $view, true);		
+
+		$this->load->view('master', $view);
+    }
 
 	// -----------------------------------------------------------------------------------
 	// Delete Item

@@ -20,7 +20,7 @@ class Penyumbang extends MX_Controller {
 		$view['page_desc'] 		= 'Data Penyumbang Dana';  			
 
         // Paging
-        $config	= $this->general_model->pagination_rules(site_url().'/penyumbang/index/', 'sumbangan',10	);
+        $config	= $this->general_model->pagination_rules(site_url().'/penyumbang/index/', 'sumbangan',10);
         $this->pagination->initialize($config); 	
 
 		// List Data
@@ -57,7 +57,6 @@ class Penyumbang extends MX_Controller {
 			base_url().PLUGINS.'daterangepicker/moment.min.js',
 			base_url().PLUGINS.'daterangepicker/daterangepicker.js'
 		);
-
 
 		// HARUS ADA - Breadcrumbs - helper/monas_helper.php
 		$view['breadcrumb']		= breadcrumbs(
@@ -258,6 +257,9 @@ class Penyumbang extends MX_Controller {
 	    redirect(site_url().'/penyumbang');
     }
 
+	// -----------------------------------------------------------------------------------
+	// Print
+	// -----------------------------------------------------------------------------------
     function print_all()
     {
 		// Fasilitas untuk konversi hasil database menjadi CSV
@@ -277,6 +279,9 @@ class Penyumbang extends MX_Controller {
 		$this->load->view('print', $view);    	
     } 
 
+	// -----------------------------------------------------------------------------------
+	// CSV
+	// -----------------------------------------------------------------------------------
     public function csv_all()
     {
 		$this->load->library('excsv');
@@ -288,6 +293,9 @@ class Penyumbang extends MX_Controller {
 		$this->excsv->export_to_file($query, $filename,TRUE);
 	}
 
+	// -----------------------------------------------------------------------------------
+	// Import CSV
+	// -----------------------------------------------------------------------------------
 	public function import()
 	{		
 		// HARUS ADA - Silahkan beri judul halaman

@@ -19,35 +19,41 @@ class Bank extends MX_Controller {
 		$view['page_title'] 	= 'Berdasar Bank';
 		$view['page_desc'] 		= 'Sumbangan Berdasar Bank';  			
 
-
         // Paging
-        $config	= $this->general_model->pagination_rules(site_url().'/bank/index/', 'sumbangan','',null,null);
+        $config	= $this->general_model->pagination_rules(site_url().'/bank/index/', 'sumbangan',10);
         $this->pagination->initialize($config); 	
 
-		$view['list'] 			= $this->general_model->get('sumbangan','id_sumbangan, bca, bri, mandiri, tanggal','',$config['per_page'],$this->uri->segment(3));		
-		$query 					= $this->db->query("SET group_concat_max_len=1024");
-		$sql 					= " SELECT 
-										GROUP_CONCAT(CONCAT(\"'\",DATE_FORMAT(tanggal, '%m/%d'),\"'\")) AS tanggal,
-										GROUP_CONCAT(CONCAT(\"'\",bca,\"'\")) AS bca,
-										GROUP_CONCAT(CONCAT(\"'\",bri,\"'\")) AS bri,
-										GROUP_CONCAT(CONCAT(\"'\",mandiri,\"'\")) AS mandiri
-									FROM 
-										sumbangan
-									ORDER BY 
-										tanggal DESC";
+		// List Data
+		if(isset($_POST['q'])) {
+			switch($_POST['filter']) {
+				default 	:
+				case 'tanggal':
+					$filter = 'tanggal';
+					$this->db->where($filter, "date_format('".$_POST['q']."', '%y/%m/%d')", false);
+				break;
 
-		$query 					= $this->db->query($sql);
-		if($query->num_rows() > 0 )
-		{			
-			$view['graph']		= $query->row();
-		} 
+				case 'bca' :
+					$filter = 'bca';
+					$this->db->like($filter, $_POST['q']);
+				break;
+
+				case 'bri' :
+					$filter = 'bri';
+					$this->db->like($filter, $_POST['q']);
+				break;
+
+				case 'mandiri' :
+					$filter = 'mandiri';
+					$this->db->like($filter, $_POST['q']);
+				break;
+			}
+		}
+
+        $this->db->order_by('date_create', 'desc');
+		$view['list'] 			= $this->general_model->get('sumbangan','id_sumbangan, bca, bri, mandiri, tanggal','',$config['per_page'],$this->uri->segment(3));		
 
 		// HARUS ADA - Semua isi halaman akan diletakkan disini.
 		$view['content'] 		= $this->load->view('bank', $view, true);			
-
-		$view['js_files'] = array(
-			base_url().PLUGINS.'chartjs/chart.min.js'
-		);
 
 		// HARUS ADA - Breadcrumbs - helper/monas_helper.php
 		$view['breadcrumb']		= breadcrumbs(
@@ -66,9 +72,6 @@ class Bank extends MX_Controller {
 		// HARUS ADA - Silahkan beri judul halaman
 		$view['page_title'] 	= 'Berdasar Bank';
 		$view['page_desc'] 		= 'Sumbangan Berdasar Bank';  	
-
-		// HARUS ADA - Semua isi halaman akan diletakkan disini.
-		$view['content'] 		= $this->load->view('bank_add', $view, true);	
 
 		// HARUS ADA - Breadcrumbs - helper/monas_helper.php
 		$view['breadcrumb']		= breadcrumbs(
@@ -103,9 +106,7 @@ class Bank extends MX_Controller {
 		                  )
         );
 		$this->form_validation->set_rules($config);
-
 		$view['custom_error'] 	= '';		
-
         if ($this->form_validation->run() == false) {
              $view['custom_error'] = (validation_errors() ? '<div class="alert alert-danger">'.validation_errors().'</div>' : false);
         } else {                            
@@ -125,6 +126,8 @@ class Bank extends MX_Controller {
 			}
 		}		   
 
+		// HARUS ADA - Semua isi halaman akan diletakkan disini.
+		$view['content'] 		= $this->load->view('bank_add', $view, true);	
 
 		$view['css_files'] = array(
 			base_url().PLUGINS.'select/bootstrap-select.min.css',
@@ -143,6 +146,103 @@ class Bank extends MX_Controller {
 		$this->load->view('master', $view);		
 	}
 
+	// -----------------------------------------------------------------------------------
+	// Edit Item
+	// -----------------------------------------------------------------------------------    
+    function edit()
+    {        
+		$view['page_title'] 	= 'Berdasar Bank';
+		$view['page_desc'] 		= 'Sumbangan Berdasar Bank';  			
+		$view['breadcrumb']		= breadcrumbs(
+									array(
+										array('link'=>'#', 'title'=>'Sumbangan'),
+										array('link'=>site_url().'/bank', 'title'=>'Berdasar Bank')
+									), 
+									'Ubah Data Berdasar Bank'
+		);
+
+		// Aturan data input
+		$config = array(
+		               array(
+		                     'field'   => 'tanggal', 
+		                     'label'   => 'Tanggal', 
+		                     'rules'   => 'required'
+		                  ),
+		               array(
+		                     'field'   => 'bca', 
+		                     'label'   => 'Total Rekening BCA', 
+		                     'rules'   => 'required'
+		                  ),
+		               array(
+		                     'field'   => 'bri', 
+		                     'label'   => 'Total Rekening BRI', 
+		                     'rules'   => 'required'
+		                  ),
+		               array(
+		                     'field'   => 'mandiri', 
+		                     'label'   => 'Total Rekening Mandiri', 
+		                     'rules'   => 'required'
+		                  )
+        );
+
+		$this->form_validation->set_rules($config);
+		$view['custom_error'] = '';
+        if ($this->form_validation->run() == false)
+        {
+             $view['custom_error'] = (validation_errors() ? '<div class="alert alert-danger">'.validation_errors().'</div>' : false);
+
+        } else {                            
+
+            $data = array(
+                    'tanggal' 		=> $this->input->post('tanggal'),
+					'bca' 			=> $this->input->post('bca'),
+					'bri' 			=> $this->input->post('bri'),
+					'mandiri' 		=> $this->input->post('mandiri'),
+					'operator'		=> $this->session->userdata('id')
+            );
+           
+			if ($this->general_model->edit('sumbangan', $data, 'id_sumbangan', $this->input->post('id_sumbangan')) == TRUE)
+			{
+				$this->logs->record($this->session->userdata('name').' Mengubah Data Berdasar Bank Per Tanggal '.$this->input->post('tanggal'));
+				redirect(site_url().'/bank');
+			} else {
+				$view['custom_error'] = '<div class="alert alert-danger">Data Tidak Dapat Disimpan. Mohon dicoba kembali.</div>';
+			}
+		}
+
+		$view['result'] 			= $this->general_model->get('sumbangan','id_sumbangan, tanggal, bca, bri, mandiri','id_sumbangan = '.$this->uri->segment(3));		
+		$view['content'] 			= $this->load->view('bank_edit', $view, true);		
+
+		$view['css_files'] 			= array(
+			base_url().PLUGINS.'select/bootstrap-select.min.css',
+			base_url().PLUGINS.'daterangepicker/daterangepicker-bs3.css'
+		);
+
+		$view['js_files'] 			= array(
+			base_url().PLUGINS.'daterangepicker/moment.min.js',
+			base_url().PLUGINS.'daterangepicker/daterangepicker.js',
+			base_url().PLUGINS.'select/bootstrap-select.min.js',
+			base_url().PLUGINS.'parsley/dist/parsley.min.js',
+			base_url().CUSTOM.'select.js'
+		);
+
+		$this->load->view('master', $view);
+    }
+
+	// -----------------------------------------------------------------------------------
+	// Delete Item
+	// -----------------------------------------------------------------------------------
+    public function delete($ID){
+	    $query 		= $this->db->get_where('sumbangan', array('id_sumbangan' => $ID));
+	    $sumbangan = $query->row(); 
+		$this->logs->record($this->session->userdata('name').' Menghapus Data Sumbangan Per Bank Tanggal '.$sumbangan->tanggal);
+	    $this->general_model->delete('sumbangan','id_sumbangan',$ID);             
+	    redirect(site_url().'/bank');
+    }
+
+	// -----------------------------------------------------------------------------------
+	// Prints
+	// -----------------------------------------------------------------------------------
 	public function prints()
 	{
 		// Fasilitas untuk konversi hasil database menjadi CSV
@@ -172,6 +272,9 @@ class Bank extends MX_Controller {
 		$this->load->view('print', $view);
 	}
 
+	// -----------------------------------------------------------------------------------
+	// CSV
+	// -----------------------------------------------------------------------------------
 	public function csv()
 	{
 		$this->load->library('excsv');
@@ -185,6 +288,9 @@ class Bank extends MX_Controller {
 
 	}
 
+	// -----------------------------------------------------------------------------------
+	// Import CSV
+	// -----------------------------------------------------------------------------------
 	public function import()
 	{		
 		// HARUS ADA - Silahkan beri judul halaman
@@ -230,4 +336,4 @@ class Bank extends MX_Controller {
 	}
 }
 
-/* End of file welcome.php */
+/* End of file bank.php */

@@ -46,8 +46,7 @@
           <tbody>
             <?php 
             if(count($list) > 0 ) :
-              if($this->uri->segment(3) != '' )
-              {
+              if($this->uri->segment(3) != '' ) {
                 $i = $this->uri->segment(3) + 1;                
               } else {
                 $i = 1;
@@ -62,7 +61,7 @@
               <td class="text-right" title="<?php echo terbilang($penyumbang->nominal)?> Rupiah">Rp<?php echo ribuan($penyumbang->nominal)?></td>
               <td nowrap>
                 <a href="<?php echo site_url()?>/penyumbang/edit/<?php echo $penyumbang->id_penyumbang?>" class="btn btn-inverse btn-xs"><i class="fa fa-pencil"></i></a>
-                <a href="<?php echo site_url()?>/penyumbang/delete/<?php echo $penyumbang->id_penyumbang?>" class="btn btn-danger btn-xs" onClick="return deletechecked('<?php echo site_url()?>/penyumbang/delete/<?php echo $penyumbang->id_penyumbang?>')"><i class="fa fa-trash-o"></i></a>
+                <a href="<?php echo site_url()?>/penyumbang/delete/<?php echo $penyumbang->id_penyumbang?>" class="btn btn-danger btn-xs delete"><i class="fa fa-trash-o"></i></a>
               </td>
             </tr>
             <?php 
