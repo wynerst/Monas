@@ -1,0 +1,1 @@
+ALTER TABLE  `log` CHANGE  `id_log`  `id_log` INT( 11 ) NOT NULL AUTO_INCREMENT;

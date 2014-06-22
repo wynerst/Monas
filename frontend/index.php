@@ -185,7 +185,7 @@ while($row = $result->fetch_array()) {
                       <br>
                       <div class="row">
                         <div class="col-lg-6 col-xs-12">
-                          <a href="http://youtu.be/cpmqFBBCiRo" target="blank">
+                          <a class="youtube" href="http://youtu.be/cpmqFBBCiRo">
                           <img src="assets/img/video.png" alt="">
                           <br>
                           Lihat Videonya
@@ -523,6 +523,18 @@ while($row = $result->fetch_array()) {
           <i class="fa fa-chevron-up"></i>
       </a>
   </div>
+
+  <div style="display: none;" class="modal fade YouTubeModal" id="YouTubeModal" role="dialog" aria-hidden="true">
+	  <div class="modal-dialog" id="YouTubeModalDialog">
+	  <div class="modal-content" id="YouTubeModalContent">
+		  <div class="modal-header"><button type="button" class="close" data-dismiss="modal">×</button>
+		  <h4 class="modal-title" id="YouTubeModalTitle"></h4>
+		  </div>
+		  <div class="modal-body" id="YouTubeModalBody" style="padding:0;"></div>
+	  </div>
+	  </div>
+  </div>
+
   <script src="assets/js/jquery-1.10.2.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
   <script src="assets/js/jquery.easing.min.js"></script>
@@ -537,8 +549,11 @@ while($row = $result->fetch_array()) {
   <script src="assets/plugins/tablesorter/js/widgets/widget-output.js"></script>
   <script src="assets/js/table.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/bootstrap.youtubepopup.min.js"></script>
 
 <script>
+// Youtube popup
+  $("a.youtube").YouTubeModal({autoplay:0, width:640, height:480});
 //ChartJS
 $(function(){
   //Line
