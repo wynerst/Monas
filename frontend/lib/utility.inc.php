@@ -556,4 +556,6 @@ class utility
       // Entity not found? Destroy it.
       return isset($_ent_table[$str_xml_data[1]]) ? $_ent_table[$str_xml_data[1]] : '';
     }
+
+
 }
