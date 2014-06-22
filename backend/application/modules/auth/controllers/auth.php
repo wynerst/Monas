@@ -10,21 +10,21 @@ class Auth extends MX_Controller {
 	public function index()
 	{
 		$this->login->is_logged();
-	} 
+	}
 
-	public function login() 
+	public function login()
 	{
 		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
    		$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 
-		if($this->form_validation->run() == FALSE) 
+		if($this->form_validation->run() == FALSE)
 		{
-			$view['page_title'] = 'Login';			
+			$view['page_title'] = 'Login';
 			$this->load->view('auth', $view);
 		} else {
 			$username 		= $this->input->post('username');
 			$password 		= $this->input->post('password');
-	
+
 		    $this->db->select('id_user, id_group, username, password, nama')
 		             ->from('user')
 		             ->where('username', $username)
@@ -39,15 +39,15 @@ class Auth extends MX_Controller {
 					'id_group'	=> $row->id_group,
 					'username' 	=> $row->username,
 					'name' 		=> $row->nama,
-					'logged_in'	=> 1
-				);				
+					'logged_in'	=> TRUE
+				);
 					$this->session->set_userdata($sess_array);
 					redirect(site_url().'/beranda', 'refresh');
 			} else {
-				$view['page_title'] 	= 'Login';			
+				$view['page_title'] 	= 'Login';
 				$view['message'] 		= 'Invalid username or password';
 				$this->load->view('auth', $view);
-			}					    
+			}
 		}
 	}
 

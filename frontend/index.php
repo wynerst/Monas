@@ -1,16 +1,75 @@
 <?php
 require 'sysconfig.inc.php';
 
+/**
+ * Terbilang
+ * @author Rio Astamal <me@rioastamal.net>
+ */
+
+function terbilang($angka) {
+	$angka = (float)$angka;
+	$bilangan = array(
+			'',
+			'Satu',
+			'Dua',
+			'Tiga',
+			'Empat',
+			'Lima',
+			'Enam',
+			'Tujuh',
+			'Delapan',
+			'Sembilan',
+			'Sepuluh',
+			'Sebelas'
+	);
+	if ($angka < 12) {
+		return $bilangan[$angka];
+	} else if ($angka < 20) {
+		return $bilangan[$angka - 10] . ' Belas';
+	} else if ($angka < 100) {
+		$hasil_bagi = (int)($angka / 10);
+		$hasil_mod = $angka % 10;
+		return trim(sprintf('%s Puluh %s', $bilangan[$hasil_bagi], $bilangan[$hasil_mod]));
+	} else if ($angka < 200) {
+		return sprintf('Seratus %s', terbilang($angka - 100));
+	} else if ($angka < 1000) {
+		$hasil_bagi = (int)($angka / 100);
+		$hasil_mod = $angka % 100;
+		return trim(sprintf('%s Ratus %s', $bilangan[$hasil_bagi], terbilang($hasil_mod)));
+	} else if ($angka < 2000) {
+		return trim(sprintf('Seribu %s', terbilang($angka - 1000)));
+	} else if ($angka < 1000000) {
+		$hasil_bagi = (int)($angka / 1000);
+		$hasil_mod = $angka % 1000;
+		return sprintf('%s Ribu %s', terbilang($hasil_bagi), terbilang($hasil_mod));
+	} else if ($angka < 1000000000) {
+		$hasil_bagi = (int)($angka / 1000000);
+		$hasil_mod = $angka % 1000000;
+		return trim(sprintf('%s Juta %s', terbilang($hasil_bagi), terbilang($hasil_mod)));
+	} else if ($angka < 1000000000000) {
+		$hasil_bagi = (int)($angka / 1000000000);
+		$hasil_mod = fmod($angka, 1000000000);
+		return trim(sprintf('%s Milyar %s', terbilang($hasil_bagi), terbilang($hasil_mod)));
+	} else if ($angka < 1000000000000000) {
+		$hasil_bagi = $angka / 1000000000000;
+		$hasil_mod = fmod($angka, 1000000000000);
+		return trim(sprintf('%s Triliun %s', terbilang($hasil_bagi), terbilang($hasil_mod)));
+	} else {
+		return 'Wow...';
+	}
+}
+
 // Create table total
 $sql="SELECT bca,bri,mandiri,date_update FROM settings";
 // Execute query
 $result=$dbs->query($sql);
 
 while($row = $result->fetch_array()) {
-	$_data['bca']=$row['bca'];
-	$_data['bri']=$row['bri'];
-	$_data['mandiri']=$row['mandiri'];
-	$_data['tanggal']=date('d-m-Y',$row['date_update']);
+	$_temp['bca']=$row['bca'];
+	$_temp['bri']=$row['bri'];
+	$_temp['mandiri']=$row['mandiri'];
+	$_temp['total']=$row['bca']+$row['bri']+$row['mandiri'];
+	$_temp['tanggal']=date_format(date_create($row['date_update']),'d-m-Y');
 }
 
 // Create table donuts
@@ -27,8 +86,13 @@ while($row = $result->fetch_array()) {
 	$_data['tanggal']=date_format(date_create($row['date_create']),'d-m-Y');
 }
 
+if ($_temp['total'] > $_data['total']) {
+	$_data['total'] = $_temp['total'];
+	$_data['tanggal'] = $_temp['tanggal'];
+}
+
 // Create table daily bank
-$sql="SELECT bca,bri,mandiri,date_create FROM sumbangan ORDER BY date_create DESC LIMIT 0,7";
+$sql="SELECT sum(bca) as bca, sum(bri) as bri, sum(mandiri) as mandiri, tanggal FROM sumbangan GROUP BY tanggal ORDER BY tanggal DESC LIMIT 0,7";
 // Execute query
 $result=$dbs->query($sql);
 $_bank = array();
@@ -37,9 +101,9 @@ while($row = $result->fetch_array()) {
 	$_bank['bca'][$i]=number_format($row['bca']/1000, 2,',','.');
 	$_bank['bri'][$i]=number_format($row['bri']/1000, 2,',','.');
 	$_bank['mandiri'][$i]=number_format($row['mandiri']/1000, 2,',','.');
-	$_bank['tgl'][$i] = date('d/m',$row['date_create']);
+	$_bank['tgl'][$i] = date_format(date_create($row['tanggal']),'d/m');
 	$_bank['subtotal'][$i]=$row['bca']+$row['bri']+$row['mandiri'];
-	$_data['total']=$_data['total']+$_data['sub_total'][$i];
+	$_bank['total']=$_bank['total']+$_data['sub_total'][$i];
 	$i = $i+1;
 }
 
@@ -113,9 +177,9 @@ while($row = $result->fetch_array()) {
               <div class="col-lg-9">
                   <div class="intro-text">
                       <span class="skills">Sumbangan Per <?php echo $_data['tanggal']; ?></span>
-                      <a href="#infografik" title="Tiga Puluh Lima Milyar Empat Ratus Empat Puluh Lima Juta Sembilan Ratus Tujuh Puluh Enam Ribu Tujuh Ratus Tujuh Puluh Enam Rupiah"><span class="name"><span class="text-inverse">RP</span>
+                      <a href="#infografik" title="<?php echo terbilang($_data['total']); ?>"><span class="name"><span class="text-inverse">RP</span>
                       <?php echo number_format($_data['total'],0,' ','.'); ?></span></a>
-                      <!-- <em>Tiga Puluh Lima Milyar Empat Ratus Empat Puluh Lima Juta Sembilan Ratus Tujuh Puluh Enam Ribu Tujuh Ratus Tujuh Puluh Enam Rupiah</em> -->
+                      <em><?php echo terbilang($_data['total']); ?></em>
                       <br class="hidden-xs">
                       <br>
                       <br>
@@ -304,7 +368,7 @@ while($row = $result->fetch_array()) {
 	echo "<td>".$row['tgl']."</td>\n";
 	echo "<td>".$row['nama']."</td>\n";
 	echo "<td>".$row['kota']."</td>\n";
-	echo '<td class="text-right">Rp'.$row['nominal']."</td>\n";
+	echo '<td class="text-right">Rp'.number_format($row['nominal'],0,' ','.')."</td>\n";
 	echo "<td>".$row['bank']."</td>\n</tr>\n";
 }
 
@@ -351,64 +415,35 @@ while($row = $result->fetch_array()) {
                 <h2>Relawan Jokowi-JK</h2>
               </div>
               <div class="clearfix"></div>
-              <div class="col-lg-3">
-                <ul>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                </ul>
-              </div>
-              <div class="col-lg-3">
-                <ul>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                </ul>
-              </div>
-              <div class="col-lg-3">
-                <ul>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                </ul>
-              </div>
-              <div class="col-lg-3">
-                <ul>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                  <li>Laskar Jokowi</li>
-                </ul>
-              </div>
-          </div>
+<?php
+$sql='SELECT nama_relawan,url FROM relawan ORDER BY nama_relawan limit 0,30';
 
+// Execute query
+$result=$dbs->query($sql);
+$i=0; $j=1;
+echo '<div class="col-lg-3">';
+echo ' <ul>';
+while($row = $result->fetch_array()) {
+	if ($row['url']<>'') {
+		$_url = 'http://'.$row['url'];
+	} else {
+		$_url = '#';
+	}
+	echo '  <li><a href="'.$_url.'">'.$row['nama_relawan'].'</a></li>';
+	$i = $i+1;
+	if ($i>=10) {
+		echo ' </ul>';
+		echo '</div>';
+		$j = $j +1;
+		$i = 0;
+		if ($j <=3) {
+			echo '<div class="col-lg-3">';
+			echo ' <ul>';
+			$j = 0;
+		}
+	}
+}
+?>
       </div>
   </section>
 
@@ -508,7 +543,7 @@ while($row = $result->fetch_array()) {
 $(function(){
   //Line
   var chartData = {
-      labels : [    <?php echo '"'.implode($_bank['tgl'],'","').'"'; ?>],
+      labels : [<?php echo '"'.implode($_bank['tgl'],'","'),'"'; ?>],
       datasets : [
           {
               fillColor : "#999999",
@@ -534,53 +569,13 @@ $(function(){
       ]
   }
 
-  var chartData1 = {
-      labels : [    <?php echo '"'.implode($_bank['tgl'],'","').'"'; ?>],
-      datasets : [
-          {
-              fillColor : "#fc0",
-              strokeColor : "#fff",
-              pointColor : "#000000",
-              pointStrokeColor : "#fff",
-              data : [<?php echo implode($_bank['bri'],','); ?>]
-          }
-      ]
-  }
-
-  var chartData2 = {
-      labels : [    <?php echo '"'.implode($_bank['tgl'],'","').'"'; ?>],
-      datasets : [
-          {
-              fillColor : "#ff0",
-              strokeColor : "#fff",
-              pointColor : "#000000",
-              pointStrokeColor : "#fff",
-              data : [<?php echo implode($_bank['bri'],','); ?>]
-          }
-      ]
-  }
-
-  var chartData3 = {
-      labels : [	  <?php echo '"'.implode($_bank['tgl'],'","').'"'; ?>],
-      datasets : [
-          {
-              fillColor : "#ff0",
-              strokeColor : "#fff",
-              pointColor : "#000000",
-              pointStrokeColor : "#fff",
-              data : [<?php echo implode($_bank['bri'],','); ?>]
-          }
-      ]
-  }
-
-
   var chartOption = {
       animation : false,
       scaleOverlay : true
   }
 
   //Line
-  var l = $('#bri-chartjs');
+  var l = $('#line-chartjs');
   var container = $(l).parent();
   var cl = l.get(0).getContext("2d");
   $(window).resize( lineChartx );
@@ -588,52 +583,91 @@ $(function(){
       l.attr('width', $(container).width() ); //max width
       l.attr('height', $(container).height() ); //max height
       //Call a function to redraw other content (texts, images etc)
-      var briChart = new Chart(cl).Bar(chartData3,chartOption);
+      var lineChart = new Chart(cl).Bar(chartData,chartOption);
 
   }
   lineChartx();
 
   //Line
-  var l = $('#mandiri-chartjs');
+  var briData = {
+      labels : [<?php echo '"'.implode($_bank['tgl'],'","'),'"'; ?>],
+      datasets : [
+          {
+              fillColor : "#999999",
+              strokeColor : "#fff",
+              pointColor : "#000000",
+              pointStrokeColor : "#fff",
+              data : [<?php echo implode($_bank['bri'],','); ?>]
+          }
+      ]
+  }
+
+  var l = $('#bri-chartjs');
   var container = $(l).parent();
   var cl = l.get(0).getContext("2d");
-  $(window).resize( lineChart1 );
-  function lineChart1(){
+  $(window).resize( ChartBri );
+  function ChartBri(){
       l.attr('width', $(container).width() ); //max width
       l.attr('height', $(container).height() ); //max height
       //Call a function to redraw other content (texts, images etc)
-      var briChart = new Chart(cl).Bar(chartData1,chartOption);
+      var briChart = new Chart(cl).Bar(briData,chartOption);
 
   }
-  lineChart1();
+  ChartBri();
+
+  var mandiriData = {
+      labels : [<?php echo '"'.implode($_bank['tgl'],'","'),'"'; ?>],
+      datasets : [
+          {
+              fillColor : "#cc0000",
+              strokeColor : "#fff",
+              pointColor : "#000000",
+              pointStrokeColor : "#fff",
+              data : [<?php echo implode($_bank['mandiri'],','); ?>]
+          }
+      ]
+  }
+
+  //Line
+  var l = $('#mandiri-chartjs');
+  var container = $(l).parent();
+  var cl = l.get(0).getContext("2d");
+  $(window).resize( ChartMandiri );
+  function ChartMandiri(){
+      l.attr('width', $(container).width() ); //max width
+      l.attr('height', $(container).height() ); //max height
+      //Call a function to redraw other content (texts, images etc)
+      var briChart = new Chart(cl).Bar(mandiriData,chartOption);
+
+  }
+  ChartMandiri();
+
+  var bcaData = {
+      labels : [<?php echo '"'.implode($_bank['tgl'],'","'),'"'; ?>],
+      datasets : [
+          {
+              fillColor : "#000000",
+              strokeColor : "#fff",
+              pointColor : "#000000",
+              pointStrokeColor : "#fff",
+              data : [<?php echo implode($_bank['bca'],','); ?>]
+          }
+      ]
+  }
 
   //Line
   var l = $('#bca-chartjs');
   var container = $(l).parent();
   var cl = l.get(0).getContext("2d");
-  $(window).resize( lineChart2 );
-  function lineChart2(){
+  $(window).resize( ChartBca );
+  function ChartBca(){
       l.attr('width', $(container).width() ); //max width
       l.attr('height', $(container).height() ); //max height
       //Call a function to redraw other content (texts, images etc)
-      var briChart = new Chart(cl).Bar(chartData2,chartOption);
+      var briChart = new Chart(cl).Bar(bcaData,chartOption);
 
   }
-  lineChart2();
-
-  //Line
-  var l = $('#line-chartjs');
-  var container = $(l).parent();
-  var cl = l.get(0).getContext("2d");
-  $(window).resize(lineChart3);
-  function lineChart3(){
-      l.attr('width', $(container).width() ); //max width
-      l.attr('height', $(container).height() ); //max height
-      //Call a function to redraw other content (texts, images etc)
-      var lineChart = new Chart(cl).Bar(chartData,chartOption);
-
-  }
-  lineChart3();
+  ChartBca();
 
   var polarData = [
     {
