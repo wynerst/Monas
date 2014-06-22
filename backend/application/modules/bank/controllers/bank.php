@@ -16,8 +16,8 @@ class Bank extends MX_Controller {
 	public function index()
 	{
 		// HARUS ADA - Silahkan beri judul halaman
-		$view['page_title'] 	= 'Bank';
-		$view['page_desc'] 		= 'Data Total Per Bank';  			
+		$view['page_title'] 	= 'Berdasar Bank';
+		$view['page_desc'] 		= 'Sumbangan Berdasar Bank';  			
 
 
         // Paging
@@ -54,7 +54,7 @@ class Bank extends MX_Controller {
 									array(
 										array('link'=>'#', 'title'=>'Sumbangan')
 									), 
-									'Per Bank'
+									'Berdasar Bank'
 		);
 
 		// HARUS ADA - Proses keluaran untuk seluruh halaman
@@ -64,8 +64,8 @@ class Bank extends MX_Controller {
 	public function add()
 	{
 		// HARUS ADA - Silahkan beri judul halaman
-		$view['page_title'] 	= 'Bank';
-		$view['page_desc'] 		= 'Data Total Per Bank';  
+		$view['page_title'] 	= 'Berdasar Bank';
+		$view['page_desc'] 		= 'Sumbangan Berdasar Bank';  	
 
 		// HARUS ADA - Semua isi halaman akan diletakkan disini.
 		$view['content'] 		= $this->load->view('bank_add', $view, true);	
@@ -73,9 +73,10 @@ class Bank extends MX_Controller {
 		// HARUS ADA - Breadcrumbs - helper/monas_helper.php
 		$view['breadcrumb']		= breadcrumbs(
 									array(
-										array('link'=>'#', 'title'=>'Sumbangan')
+										array('link'=>'#', 'title'=>'Sumbangan'),
+										array('link'=>site_url().'/bank', 'title'=>'Berdasar Bank')
 									), 
-									'Per Bank'
+									'Tambah Data Berdasar Bank'
 		);
 
 		// Aturan data input
@@ -173,29 +174,59 @@ class Bank extends MX_Controller {
 
 	public function csv()
 	{
-		// Helper untuk membuat download file
-		$this->load->helper('download');
-		$filename = 'sumbangan-'.date('Y-m-d h:i:s').'.csv';
+		$this->load->library('excsv');
+		$this->logs->record($this->session->userdata('name').' Mengunduh File CSV Data Sumbangan Per Bank');
+		$this->logs->record($this->session->userdata('name').' Mengunduh File CSV Data Penyumbang');
+        $this->db->select('tanggal, bca, bri, mandiri, date_create');
+		$this->db->from('sumbangan');        
+		$query 		= $this->db->get();
+		$filename 	= 'bank-'.date('Ymd-his').'.csv';
+		$this->excsv->export_to_file($query, $filename,TRUE);
 
-		// Fasilitas untuk konversi hasil database menjadi CSV
-		$this->load->dbutil();
+	}
 
-		// Sumbangan
-		$sql 				= "	SELECT 
-									tanggal,
-									bca,
-									bri,
-									mandiri,
-									date_create
-								FROM 
-									sumbangan
-								ORDER BY
-									tanggal DESC
-								";
+	public function import()
+	{		
+		// HARUS ADA - Silahkan beri judul halaman
+		$view['page_title'] 	= 'Berdasar Bank';
+		$view['page_desc'] 		= 'Sumbangan Per Bank';  			
+		$view['custom_error'] 	= '';			
+		
+		if(isset($_POST['submit'])) {
+			if ($_FILES["userfile"]["error"] > 0) {
+			  $view['custom_error'] = "Error: " . $_FILES["userfile"]["error"] . "<br>";
+			} else {
+				if($this->input->post('delimiter'))
+				{
+					$delimiter = $this->input->post('delimiter');
+				} else {
+					$delimiter 	= ",";				
+				}
 
-		$query 	= $this->db->query($sql);
-		$data 	= $this->dbutil->csv_from_result($query);			
-		force_download($filename, $data);
+				$file = $_FILES["userfile"]["tmp_name"];
+				$data = $this->csvimport->get_array($file,'',TRUE,0,$delimiter);	
+				foreach ($data as $sql) {
+					$this->db->insert('sumbangan', $sql);
+				}
+				$this->logs->record($this->session->userdata('name').' Mengimpor File CSV Data Penyumbang');
+				redirect(site_url().'/bank');
+			}
+		}
+
+		// HARUS ADA - Semua isi halaman akan diletakkan disini.
+		$view['content'] 		= $this->load->view('bank_import', $view, true);			
+
+		// HARUS ADA - Breadcrumbs - helper/monas_helper.php
+		$view['breadcrumb']		= breadcrumbs(
+									array(
+										array('link'=> '#', 'title'=>'Sumbangan'),
+										array('link'=> site_url().'/bank', 'title'=>'Berdasar Bank')
+									), 
+									'Import CSV'
+		);
+
+		// HARUS ADA - Proses keluaran untuk seluruh halaman
+		$this->load->view('master', $view);
 	}
 }
 

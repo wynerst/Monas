@@ -26,8 +26,8 @@
               foreach ($list as $log) :
             ?>
             <tr>
-              <td><?php echo $log->id_user?></td>
-              <td><?php echo $log->id_modul?></td>
+              <td><?php echo $log->modul?></td>
+              <td><?php echo $log->nama?></td>
               <td><?php echo $log->message?></td>
               <td><?php echo $log->waktu?></td>
             </tr>

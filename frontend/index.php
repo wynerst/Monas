@@ -570,22 +570,23 @@ $(function(){
   }
 
   var chartOption = {
-      animation : false
+      animation : false,
+      scaleOverlay : true
   }
 
   //Line
   var l = $('#line-chartjs');
   var container = $(l).parent();
   var cl = l.get(0).getContext("2d");
-  $(window).resize( lineChart );
-  function lineChart(){
+  $(window).resize( lineChartx );
+  function lineChartx(){
       l.attr('width', $(container).width() ); //max width
       l.attr('height', $(container).height() ); //max height
       //Call a function to redraw other content (texts, images etc)
       var lineChart = new Chart(cl).Bar(chartData,chartOption);
 
   }
-  lineChart();
+  lineChartx();
 
   //Line
   var briData = {

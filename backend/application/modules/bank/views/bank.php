@@ -3,16 +3,17 @@
         <div class="panel-body">   
           <div class="table-header">
             <div class="row">                     
-              <div class="col-lg-6">
-                <ul class="nav nav-pills">
+              <div class="col-lg-8">
+                <a href="<?php echo current_url()?>/add" class="btn btn-danger"><i class="fa fa-plus"></i> Tambah Data Berdasar Bank</a>
+                <a href="<?php echo current_url()?>/import" class="btn btn-danger"><i class="fa fa-upload"></i> Import CSV</a>
+                <a href="<?php echo current_url()?>/prints" target="_blank" class="btn btn-inverse"><i class="fa fa-print"></i> Print Table</a>
+                <a href="<?php echo current_url()?>/csv" class="btn btn-inverse"><i class="fa fa-download"></i> CSV Table</a>
+              </div>
+              <div class="col-lg-4 text-right">
+                <ul class="nav nav-pills nav-justified">
                   <li class="active"><a href="#grafik" data-toggle="tab">Grafik</a></li>
                   <li><a href="#table" data-toggle="tab" >Table</a></li>
                 </ul>
-              </div>
-              <div class="col-lg-6 text-right">
-                <a href="<?php echo current_url()?>/add" class="btn btn-danger"><i class="fa fa-plus"></i> Tambah Data Per Bank</a>
-                <a href="<?php echo current_url()?>/prints" target="_blank" class="btn btn-inverse"><i class="fa fa-print"></i> Print Table</a>
-                <a href="<?php echo current_url()?>/csv" class="btn btn-inverse"><i class="fa fa-download"></i> Unduh CSV Table</a>
               </div>
             </div>
           </div>  

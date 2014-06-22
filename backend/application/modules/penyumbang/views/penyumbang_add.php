@@ -39,7 +39,7 @@
                 <div class="form-group">
                   <label for="tanggal_transfer" class="col-lg-4 control-label">Tanggal Transfer *</label>
                   <div class="col-lg-8">
-                    <input id="tanggal_transfer" type="text" class="form-control date-range" name="tanggal_transfer" placeholder="yyyy/mm/dd" data-required="true" />
+                    <input id="tanggal_transfer" type="text" class="form-control date-range text-right" name="tanggal_transfer" placeholder="yyyy/mm/dd" data-required="true" />
                   </div>
                 </div>
                 <div class="form-group">
