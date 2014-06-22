@@ -37,6 +37,7 @@ class Login {
 						a.path = '$modul'
 						AND b.id_group = '$group'
 					";
+
 			$query = $this->ci->db->query($sql);
 			if($query->num_rows() > 0)
 			{

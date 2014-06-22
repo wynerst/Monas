@@ -39,10 +39,10 @@ class Auth extends MX_Controller {
 					'id_group'	=> $row->id_group,
 					'username' 	=> $row->username,
 					'name' 		=> $row->nama,
-					'logged_in'	=> TRUE
+					'logged_in'	=> 1
 				);
-					$this->session->set_userdata($sess_array);
-					redirect(site_url().'/beranda', 'refresh');
+				$this->session->set_userdata($sess_array);
+				redirect(site_url().'/beranda', 'refresh');
 			} else {
 				$view['page_title'] 	= 'Login';
 				$view['message'] 		= 'Invalid username or password';
