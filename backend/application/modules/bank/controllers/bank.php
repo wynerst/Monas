@@ -120,6 +120,7 @@ class Bank extends MX_Controller {
             );
            
 			if ($this->general_model->add('sumbangan', $data) == TRUE) {
+				$this->logs->record($this->session->userdata('name').' Menambah Data Berdasar Bank Per Tanggal '.set_value('tanggal'));
 				redirect(base_url().'index.php/bank');
 			} else {
 				$view['custom_error'] = '<div class="aler alert-danger">Data Tidak Dapat Disimpan. Mohon dicoba kembali.</div>';
@@ -201,8 +202,7 @@ class Bank extends MX_Controller {
 					'operator'		=> $this->session->userdata('id')
             );
            
-			if ($this->general_model->edit('sumbangan', $data, 'id_sumbangan', $this->input->post('id_sumbangan')) == TRUE)
-			{
+			if ($this->general_model->edit('sumbangan', $data, 'id_sumbangan', $this->input->post('id_sumbangan')) == TRUE) {
 				$this->logs->record($this->session->userdata('name').' Mengubah Data Berdasar Bank Per Tanggal '.$this->input->post('tanggal'));
 				redirect(site_url().'/bank');
 			} else {
@@ -234,7 +234,7 @@ class Bank extends MX_Controller {
 	// -----------------------------------------------------------------------------------
     public function delete($ID){
 	    $query 		= $this->db->get_where('sumbangan', array('id_sumbangan' => $ID));
-	    $sumbangan = $query->row(); 
+	    $sumbangan 	= $query->row(); 
 		$this->logs->record($this->session->userdata('name').' Menghapus Data Sumbangan Per Bank Tanggal '.$sumbangan->tanggal);
 	    $this->general_model->delete('sumbangan','id_sumbangan',$ID);             
 	    redirect(site_url().'/bank');
@@ -245,13 +245,9 @@ class Bank extends MX_Controller {
 	// -----------------------------------------------------------------------------------
 	public function prints()
 	{
-		// Fasilitas untuk konversi hasil database menjadi CSV
+		$this->logs->record($this->session->userdata('name').' Mencetak Seluruh Data Sumbangan Berdasar Bank');
 		$this->load->dbutil();
-
-		// Fasilitas generate table
 		$this->load->library('table');
-
-		// Sumbangan
 		$sql 				= "	SELECT 
 									tanggal,
 									bca,
@@ -264,9 +260,8 @@ class Bank extends MX_Controller {
 									tanggal DESC
 								";
 
-		$query 	= $this->db->query($sql);
-
-		$tmpl = array ('table_open' => '<table border="0" cellpadding="4" cellspacing="0" class="table table-bordered">');
+		$query 		= $this->db->query($sql);
+		$tmpl 		= array ('table_open' => '<table border="0" cellpadding="4" cellspacing="0" class="table table-bordered">');
 		$this->table->set_template($tmpl);
 		$view['content'] = $this->table->generate($query);
 		$this->load->view('print', $view);
@@ -278,8 +273,7 @@ class Bank extends MX_Controller {
 	public function csv()
 	{
 		$this->load->library('excsv');
-		$this->logs->record($this->session->userdata('name').' Mengunduh File CSV Data Sumbangan Per Bank');
-		$this->logs->record($this->session->userdata('name').' Mengunduh File CSV Data Penyumbang');
+		$this->logs->record($this->session->userdata('name').' Mengunduh File CSV Seluruh Data Sumbangan Berdasar Bank');
         $this->db->select('tanggal, bca, bri, mandiri, date_create');
 		$this->db->from('sumbangan');        
 		$query 		= $this->db->get();
@@ -309,12 +303,14 @@ class Bank extends MX_Controller {
 					$delimiter 	= ",";				
 				}
 
+				$i = 1;
 				$file = $_FILES["userfile"]["tmp_name"];
 				$data = $this->csvimport->get_array($file,'',TRUE,0,$delimiter);	
 				foreach ($data as $sql) {
 					$this->db->insert('sumbangan', $sql);
+					$i++;
 				}
-				$this->logs->record($this->session->userdata('name').' Mengimpor File CSV Data Penyumbang');
+				$this->logs->record($this->session->userdata('name').' Mengimpor File CSV Untuk '.$i.' Data Sumbangan Baru');
 				redirect(site_url().'/bank');
 			}
 		}

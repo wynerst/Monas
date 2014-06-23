@@ -25,8 +25,8 @@
             <tr>
               <td><?php echo $akses->nama_group?></td>
               <td nowrap>
-                <a href="<?php echo base_url()?>akses/edit/<?php echo $akses->id_group?>" class="btn btn-inverse btn-xs"><i class="fa fa-pencil"></i></a>
-                <a href="<?php echo base_url()?>akses/delete/<?php echo $akses->id_group?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i></a>
+                <a href="<?php echo site_url()?>/akses/edit/<?php echo $akses->id_group?>" class="btn btn-inverse btn-xs"><i class="fa fa-pencil"></i></a>
+                <a href="<?php echo site_url()?>/akses/delete/<?php echo $akses->id_group?>" class="btn btn-danger btn-xs delete"><i class="fa fa-trash-o"></i></a>
               </td>
             </tr>
             <?php 

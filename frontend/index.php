@@ -98,12 +98,13 @@ $result=$dbs->query($sql);
 $_bank = array();
 $i = 0;
 while($row = $result->fetch_array()) {
-//	$_bank['bca'][$i]=number_format($row['bca']/1000, 2,',','.');
-//	$_bank['bri'][$i]=number_format($row['bri']/1000, 2,',','.');
-//	$_bank['mandiri'][$i]=number_format($row['mandiri']/1000, 2,',','.');
-	$_bank['bca'][$i]=(int)($row['bca']);
-	$_bank['bri'][$i]=(int)($row['bri']);
-	$_bank['mandiri'][$i]=(int)($row['mandiri']);
+  // $_bank['bca'][$i]=number_format($row['bca']/1000, 2,',','.');
+  // $_bank['bri'][$i]=number_format($row['bri']/1000, 2,',','.');
+  // $_bank['mandiri'][$i]=number_format($row['mandiri']/1000, 2,',','.');
+	$_bank['bca'][$i]      =(int)($row['bca']);
+	$_bank['bri'][$i]      =(int)($row['bri']);
+	$_bank['mandiri'][$i]  =(int)($row['mandiri']);
+
 	$_bank['tgl'][$i] = date_format(date_create($row['tanggal']),'d/m');
 	$_bank['subtotal'][$i]=$row['bca']+$row['bri']+$row['mandiri'];
 	$_bank['total']=$_bank['total']+$_data['sub_total'][$i];
@@ -529,6 +530,7 @@ while($row = $result->fetch_array()) {
 
   <script src="assets/js/jquery-1.10.2.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/bootstrap.youtubepopup.min.js"></script>
   <script src="assets/js/jquery.easing.min.js"></script>
   <script src="assets/js/classie.js"></script>
   <script src="assets/js/cbpAnimatedHeader.min.js"></script>
@@ -541,7 +543,6 @@ while($row = $result->fetch_array()) {
   <script src="assets/plugins/tablesorter/js/widgets/widget-output.js"></script>
   <script src="assets/js/table.js"></script>
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/bootstrap.youtubepopup.min.js"></script>
 
 <script>
 // Youtube popup

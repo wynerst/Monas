@@ -73,6 +73,7 @@ class Pribadi extends MX_Controller {
 								'password' 			=> md5(set_value('retype_password'))
 			            );		           
 						if ($this->general_model->edit('user', $data, 'id_user', $this->session->userdata('id')) == TRUE) {
+							$this->logs->record($this->session->userdata('name').' Mengubah Password');
 							$view['custom_error'] = '<div class="alert alert-success">Password telah diubah.</div>';
 						} else {
 							$view['custom_error'] = '<div class="alert alert-danger">Data Tidak Dapat Disimpan. Mohon dicoba kembali.</div>';
@@ -81,9 +82,9 @@ class Pribadi extends MX_Controller {
 			     		$view['custom_error']	= '<div class="alert alert-danger">Password lama salah. Silahkan dicoba kembali.</div>';
 		        	}
 	        	} else {
+					$this->logs->record($this->session->userdata('name').' Mengubah Data Pribadi');
 					redirect(site_url().'/pribadi');
 	        	}
-
 			} else {
 				$view['custom_error'] = '<div class="alert alert-danger">'.$this->db->_error_message().'</div>';
 			}
@@ -101,6 +102,8 @@ class Pribadi extends MX_Controller {
 		$query 				= $this->db->query($sql);
 		$pribadi 			= $query->row();
 		$view['pribadi'] 	= $pribadi;			
+
+/*
 		$fileread 			= 'uploads/'.$pribadi->username.'.jpg';
 		$photo 				= base64_encode(read_file($fileread));
 		if($photo != '') {
@@ -108,7 +111,7 @@ class Pribadi extends MX_Controller {
 		} else {
 			$view['photo']		= base_url().IMG.'/avatar/blank.jpg';
 		}
-
+*/
 		// CSS Files
 		$view['css_files'] 	= array(
 							  base_url().PLUGINS.'select/bootstrap-select.min.css'

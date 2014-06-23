@@ -20,7 +20,7 @@ class Penyumbang extends MX_Controller {
 		$view['page_desc'] 		= 'Data Penyumbang Dana';  			
 
         // Paging
-        $config	= $this->general_model->pagination_rules(site_url().'/penyumbang/index/', 'sumbangan',10);
+        $config	= $this->general_model->pagination_rules(site_url().'/penyumbang/index/', 'penyumbang',10);
         $this->pagination->initialize($config); 	
 
 		// List Data
@@ -44,7 +44,7 @@ class Penyumbang extends MX_Controller {
 			}
 		}
 
-		$view['list'] 			= $this->general_model->get('penyumbang','id_penyumbang, nama, bank_transfer, nominal, tgl','',$config['per_page'],$this->uri->segment(3));
+		$view['list'] 			= $this->general_model->get('penyumbang','id_penyumbang, nama, bank_transfer, nominal, tgl','',10,$this->uri->segment(3));
 		
 		// HARUS ADA - Semua isi halaman akan diletakkan disini.
 		$view['content'] 		= $this->load->view('penyumbang', $view, true);			
@@ -217,8 +217,7 @@ class Penyumbang extends MX_Controller {
 					'asal_dana'		=> $this->input->post('sumber_dana'),
             );
            
-			if ($this->general_model->edit('penyumbang', $data, 'id_penyumbang', $this->input->post('id_penyumbang')) == TRUE)
-			{
+			if ($this->general_model->edit('penyumbang', $data, 'id_penyumbang', $this->input->post('id_penyumbang')) == TRUE) {
 				$this->logs->record($this->session->userdata('name').' Mengubah Data Penyumbang Atas Nama '.$this->input->post('nama'));
 				redirect(site_url().'/penyumbang');
 			} else {
@@ -284,8 +283,8 @@ class Penyumbang extends MX_Controller {
 	// -----------------------------------------------------------------------------------
     public function csv_all()
     {
+		$this->logs->record($this->session->userdata('name').' Mengunduh File CSV Seluruh Data Penyumbang');
 		$this->load->library('excsv');
-		$this->logs->record($this->session->userdata('name').' Mengunduh File CSV Data Penyumbang');
         $this->db->select('nama, bank_transfer, kota, akun_bank, nominal, tgl, no_identitas, npwp, alamat, pekerjaan, kantor, asal_dana, create');
 		$this->db->from('penyumbang');        
         $query      = $this->db->get();  
@@ -313,13 +312,14 @@ class Penyumbang extends MX_Controller {
 				} else {
 					$delimiter 	= ",";				
 				}
-
+				$i = 1;
 				$file = $_FILES["userfile"]["tmp_name"];
 				$data = $this->csvimport->get_array($file,'',TRUE,0,$delimiter);	
 				foreach ($data as $sql) {
 					$this->db->insert('penyumbang', $sql);
+					$i++;
 				}
-				$this->logs->record($this->session->userdata('name').' Mengimpor File CSV Data Penyumbang');
+				$this->logs->record($this->session->userdata('name').' Mengimpor File CSV Untuk '.$i.' Data Penyumbang Baru');
 				redirect(site_url().'/penyumbang');
 			}
 		}

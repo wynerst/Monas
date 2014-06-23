@@ -16,6 +16,20 @@ class Beranda extends MX_Controller {
 		$view['page_title'] = 'Beranda';			//
 		$view['page_desc'] 	= 'Ringkasan Singkat'; 	// 			
 
+		// Donatur
+		$view['donatur'] 	= $this->db->count_all('penyumbang');
+
+		//Total Sementara
+		$query	 			= $this->db->get('settings');
+		$sum 				= $query->row();
+		$view['total']		= (int)$sum->bca + (int)$sum->bri + (int)$sum->mandiri;
+
+		//Jumlah Kemaren
+		$this->db->limit(1)->order_by('date_create');
+		$query	 			= $this->db->get('sumbangan');
+		$sum 				= $query->row();
+		$view['kemaren']	= (int)$sum->bca + (int)$sum->bri + (int)$sum->mandiri;
+
 		//Chart
 		$sql 					= " SELECT 
 										DATE_FORMAT(tanggal, '%m/%d') AS tanggal,

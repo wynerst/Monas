@@ -4,8 +4,7 @@
       <div class="table-header">
         <div class="row">                     
           <div class="col-lg-12 text-right">
-            <a href="<?php echo current_url()?>/clear" class="btn btn-inverse"><i class="fa fa-refresh"></i> Clear Log</a>
-            <a href="<?php echo current_url()?>/csv" class="btn btn-inverse"><i class="fa fa-arrow-down"></i> Unduh CSV</a>
+            <a href="<?php echo site_url()?>/log/clear" class="btn btn-inverse"><i class="fa fa-refresh"></i> Clear Log</a>
           </div>
         </div>
       </div>  
@@ -29,7 +28,7 @@
               <td><?php echo $log->modul?></td>
               <td><?php echo $log->nama?></td>
               <td><?php echo $log->message?></td>
-              <td><?php echo $log->waktu?></td>
+              <td class="text-right"><?php echo $log->waktu?></td>
             </tr>
             <?php 
               endforeach;

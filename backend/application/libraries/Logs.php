@@ -25,8 +25,12 @@ class Logs {
 							path = '$path'
 						";
 			$query 		= $this->ci->db->query($sql);
-			$menu 		= $query->row(); 
-			$modul		= $menu->id_modul;
+			if($query->num_rows() > 0) {				
+				$menu 		= $query->row(); 
+				$modul		= $menu->id_modul;
+			} else {
+				$modul		= 'Login';				
+			}
 
 			$data = array(
 				'id_modul'	=> $modul,

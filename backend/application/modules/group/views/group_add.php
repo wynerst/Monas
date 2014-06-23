@@ -2,7 +2,11 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <form action="<?php echo current_url()?>" method="post" role="form" class="form-horizontal" data-validate="parsley">
-              <div class="col-lg-7">              
+              <div class="col-lg-12">
+                <?php echo $custom_error; ?>
+              </div>
+              <div class="clearfix"></div>
+              <div class="col-lg-6">              
                 <div class="form-group">
                   <label for="group" class="col-lg-5 control-label">Nama Group</label>
                   <div class="col-lg-7">

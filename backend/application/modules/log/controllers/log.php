@@ -28,6 +28,8 @@ class Log extends MX_Controller {
 									user b ON a.id_user = b.id_user
 								LEFT JOIN 
 									mst_modul c ON a.id_modul = c.id_modul
+								ORDER BY
+									waktu DESC
 								";
 
 		$query 				= $this->db->query($sql);
@@ -46,6 +48,13 @@ class Log extends MX_Controller {
 
 		// HARUS ADA - Proses keluaran untuk seluruh halaman
 		$this->load->view('master', $view);
+	}
+
+	public function clear()
+	{
+		$this->db->truncate('log'); 
+		$this->logs->record($this->session->userdata('name').' Menghapus Data Log');
+		redirect(site_url().'/log');
 	}
 }
 

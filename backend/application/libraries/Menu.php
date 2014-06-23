@@ -21,6 +21,8 @@ class Menu {
 								WHERE
 									b.id_group = $user_group
 									AND a.modul_parent = 0
+								ORDER BY
+									a.id_modul
 								";
 
 		$query 				= $this->ci->db->query($sql);
@@ -37,7 +39,10 @@ class Menu {
 									hak_akses b ON a.id_modul = b.id_modul
 								WHERE
 									b.id_group = $user_group
-									AND a.modul_parent = ".$modul->id_modul;
+									AND a.modul_parent = ".$modul->id_modul."
+								ORDER BY
+									a.id_modul																		
+								";
 				$sub_modul 	= $this->ci->db->query($sql);
 				if($sub_modul->num_rows() > 0 )
 				{

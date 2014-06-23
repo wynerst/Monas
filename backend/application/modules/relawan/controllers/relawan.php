@@ -68,6 +68,7 @@ class Relawan extends MX_Controller {
                     'url' 			=> $this->input->post('link')
             );           
 			if ($this->general_model->add('relawan', $data) == TRUE) {
+				$this->logs->record($this->session->userdata('name').' Menambah Data Relawan Atas Nama ' . ucwords(set_value('relawan')));
 				redirect(site_url().'/relawan');
 			} else {
 				$view['custom_error'] = '<div class="aler alert-danger">Data Tidak Dapat Disimpan. Mohon dicoba kembali.</div>';
@@ -108,8 +109,7 @@ class Relawan extends MX_Controller {
 
 		$this->form_validation->set_rules($config);
 		$view['custom_error'] = '';
-        if ($this->form_validation->run() == false)
-        {
+        if ($this->form_validation->run() == false) {
              $view['custom_error'] = (validation_errors() ? '<div class="alert alert-danger">'.validation_errors().'</div>' : false);
 
         } else {                            
@@ -118,8 +118,7 @@ class Relawan extends MX_Controller {
                     'url' 			=> $this->input->post('link')
             );
            
-			if ($this->general_model->edit('relawan', $data, 'id_relawan', $this->input->post('id_relawan')) == TRUE)
-			{
+			if ($this->general_model->edit('relawan', $data, 'id_relawan', $this->input->post('id_relawan')) == TRUE) {
 				$this->logs->record($this->session->userdata('name').' Mengubah Data Relawan Atas Nama '.$this->input->post('nama'));
 				redirect(site_url().'/relawan');
 			} else {
@@ -136,8 +135,11 @@ class Relawan extends MX_Controller {
 	// -----------------------------------------------------------------------------------
 	// Delete Item
 	// -----------------------------------------------------------------------------------
-    function delete(){
-	    $ID =  $this->uri->segment(3);
+    function delete($ID)
+    {
+	    $query 		= $this->db->get_where('relawan', array('id_relawan' => $ID));
+	    $relawan 	= $query->row(); 
+		$this->logs->record($this->session->userdata('name').' Menghapus Data Relawan Atas Nama '.$relawan->nama_relawan);
 	    $this->general_model->delete('relawan','id_relawan',$ID);             
 	    redirect(site_url().'/relawan');
     }

@@ -3,7 +3,10 @@
     <div class="panel-body">
       <?php if($user_group != 0 ) { ?>
       <form action="<?php echo current_url()?>" method="post" role="form" class="form-horizontal" data-validate="parsley">
-        <?php echo $custom_error?>
+        <div class="col-lg-12">
+          <?php echo $custom_error ?>
+        </div>
+        <div class="clearfix"></div>
         <div class="col-lg-7">              
           <div class="form-group">
             <label for="input-3" class="col-lg-5 control-label">Hak Akses</label>
@@ -30,14 +33,34 @@
               ?>
               <tr>
                 <td><label for="check<?php echo $i?>"><strong><?php echo $modul['menu']?></strong></label></td>
-                <td class="text-center"><input type="checkbox" id="check<?php echo $i?>" name="modul_id[]" value="<?php echo $key?>"></td>
+                <td class="text-center">
+                  <?php
+                    $has_access = $this->db->get_where('hak_akses', array('id_modul' => $key, 'id_group' => $this->uri->segment(3)));
+                    if($has_access->num_rows() > 0) {
+                      $checked = 'checked';
+                    } else {
+                      $checked = '';
+                    }
+                  ?>
+                  <input type="checkbox" id="check<?php echo $i?>" name="modul_id[]" value="<?php echo $key?>" <?php echo $checked ?> >
+                </td>
               </tr>
               <?php 
               if(count($modul['sub']) > 0 ) :
                 foreach ($modul['sub'] as $key => $sub) : ?>
                 <tr>
                   <td><label for="check<?php echo $i?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-sign-out"></i>&nbsp;&nbsp;<?php echo $sub?></label></td>
-                  <td class="text-center"><input type="checkbox" id="check<?php echo $i?>" name="modul_id[]" value="<?php echo $key?>"></td>
+                  <td class="text-center">
+                    <?php
+                      $has_access = $this->db->get_where('hak_akses', array('id_modul' => $key, 'id_group' => $this->uri->segment(3)));
+                      if($has_access->num_rows() > 0) {
+                        $checked = 'checked';
+                      } else {
+                        $checked = '';
+                      }
+                    ?>
+                    <input type="checkbox" id="check<?php echo $i?>" name="modul_id[]" value="<?php echo $key ?>" <?php echo $checked ?> >
+                  </td>
                 </tr>                
                 <?php $i++; endforeach; endif; ?>
               <?php endforeach; ?>
