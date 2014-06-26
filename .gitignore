@@ -9,4 +9,5 @@ source/psd/*
 backend/application/config/database.php
 frontend/application/config/database.php
 frontend/sysconfig.inc.php
+backend/captcha/*.jpg
 *.zip

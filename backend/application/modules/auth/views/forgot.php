@@ -32,74 +32,55 @@
   <![endif]-->   
   <section class="login nav nav-tabs">
     <div class="container">
-      <div class="row tab-content">                 
-        <div id="login" class="tab-pane active animated-fast flipInY">
-          <header>Login</header>
-          <form action="<?php echo current_url()?>" role="form" method="post">
-            <?php if($this->session->flashdata('item') != '') { ?>
-            <p class="text-danger text-center"><?php echo $this->session->flashdata('item')?></p>
-            <?php } ?>
-            <div class="login-error nousername hide animated shake text-center">Mohon isikan username</div>
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-male"></i></span>
-                <input type="text" class="form-control" name="username" id="username" placeholder="Username">
-              </div>
-            </div> 
-            <div class="login-error nopassword hide animated shake text-center">Mohon isikan sandi</div>
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                <input type="password" class="form-control" name="password" id="password" placeholder="Kata Sandi">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <div class="icheck fa">
-                    <input type="checkbox" id="remember" name="rememberme" value="1">
-                  </div>
-                </span>
-                <label for="remember" class="form-control">Ingat Saya</label>
-              </div>
-            </div>
-            <button type="submit" name="submit" class="btn btn-rounded btn-block btn-inverse">Proses</button>
-            <br>             
-            <br>             
-            <br>             
-            <br>             
-            <br>             
-          </form>
-        </div>
-         
-        <div id="forgot" class="tab-pane animated-fast flipInY">
+      <div class="row ">                          
+        <div id="forgot">
           <header>Pengingat Sandi</header>
-          <form action="<?php echo site_url()?>/auth/forgot" role="form" method="post">
+          <form action="<?php echo current_url()?>" method="POST" role="form">
+            <div class="col-lg-12">
+              <?php echo $custom_error ?>
+            </div>
+            <div class="clearfix"></div>
             <div class="form-group">
               <p class="text-center">
-                Silahkan Masukkan Alamat Surel Anda
+                Password Baru
                 <br/>
               </p>
               <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                <input type="text" class="form-control" id="forgot_email" name="forgot_email" placeholder="yourmail@address">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input type="password" class="form-control" name="new_password">
+              </div>
+            </div> 
+            <div class="form-group">
+              <p class="text-center">
+                Ketik Ulang Password
+                <br/>
+              </p>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                <input type="password" class="form-control" name="retype_new_password">
+              </div>
+            </div> 
+            <div class="form-group">
+              <p class="text-center">
+                Ketik Kode Gambar Berikut
+                <br/>
+                <?php echo $captcha?>
+                <br/>
+              </p>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-barcode"></i></span>
+                <input type="text" class="form-control" name="captcha" value="" />
               </div>
             </div> 
             <button type="submit" class="btn btn-block btn-rounded btn-inverse">Reset Password</button>
-            <br>             
-            <br>             
-            <br>             
-            <br>             
-            <br>             
           </form>
         </div>
                  
-       <footer>
-          <ul>
-            <li><a href="#login" data-toggle="tab">Login</a></li>
-            <li><a href="#forgot" data-toggle="tab">Lupa ?</a></li>
-          </ul>
-        </footer>        
+      <footer>
+        <br>
+        <br>
+        <br>
+      </footer>        
         
       </div>
     </div> 

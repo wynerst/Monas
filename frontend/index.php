@@ -82,7 +82,7 @@ $_bank = daily_Bank();
               <div class="col-lg-9">
                   <div class="intro-text">
                       <span class="skills">Sumbangan Per <?php echo $_data['tanggal']; ?></span>
-                      <a href="#infografik" title="<?php echo terbilang($_data['total']); ?>"><span class="name"><span class="text-inverse">RP</span>
+                      <a href="#infografik" class="page-scroll" title="<?php echo terbilang($_data['total']); ?>"><span class="name"><span class="text-inverse">RP</span>
                       <?php echo number_format($_data['total'],0,' ','.'); ?></span></a>
                       <em><?php echo terbilang($_data['total']); ?></em>
                       <br class="hidden-xs">

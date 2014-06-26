@@ -51,17 +51,15 @@ class Login {
     public function user_by_id($id = '')
     {
 		$this->ci->load->library('session');
-    	if($id != '')
-    	{
+    	if($id != '') {
 			$set_id = $id;
     	} else {
 			$set_id = $this->ci->session->userdata('id');
     	}
 
-		$query = $this->ci->db->get_where('user', array('id_user' => $set_id));    		
-		if($query->num_rows() > 0)
-		{
-			$row = $query->row();
+		$query 		= $this->ci->db->get_where('user', array('id_user' => $set_id));    		
+		if($query->num_rows() > 0) {
+			$row 	= $query->row();
 			return $row->nama;
 		} else {
 			return 'Name of user is not found';

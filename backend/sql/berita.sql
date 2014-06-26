@@ -25,5 +25,7 @@ CREATE TABLE `berita` (
 # Data for table "berita"
 #
 
+ALTER TABLE `user` ADD `forgot_key` VARCHAR( 50 ) NULL ;
+
 /*!40000 ALTER TABLE `berita` DISABLE KEYS */;
 /*!40000 ALTER TABLE `berita` ENABLE KEYS */;
