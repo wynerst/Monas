@@ -38,7 +38,7 @@ header {
 header .container {
   padding-top: 150px;
   padding-bottom: 50px;
-  background: transparent url(../img/h1.png) bottom left no-repeat;
+  background: transparent url(../img/j1.png) bottom left no-repeat;
   text-align: center;
 }
 header .intro-text .name {
@@ -1611,7 +1611,7 @@ select.input-lg {
 }
 
 #contact {
-  background: #fff url(../img/h2.png) center right no-repeat;
+  background: #fff url(../img/j2.png) center right no-repeat;
 }
 
 #relawan {

@@ -125,10 +125,10 @@ while($row = $result->fetch_array()) {
   <meta name="description"            content="Website Dana Gotong Royong ini digunakan untuk untuk mendata penerimaan sumbangan dari masyarakat kepada pasangan capres Jokowo dan Jusuf Kalla serta memberikan laporan penggunaan secara terbuka agar dapat diakses dan diketahui secara luas guna mendukung transparansi penggunaan keuangan hasil sumbangan masyarakat Indonesia" />
   <meta name="keywords"               content="jokowi jk, jk4p, sumbangan, donasi, capres">
   <meta name="author"                 content="Eddy Subratha, Wardiyono">
-  <link rel="shortcut icon" href="assets/ico//favicon.png">
-  <link rel="apple-touch-icon" href="assets/ico//apple-touch-icon-precomposed.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="assets/ico//apple-touch-icon-72-precomposed.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="assets/ico//apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="assets/ico/favicon.png">
+  <link rel="apple-touch-icon" href="assets/ico/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="assets/ico/apple-touch-icon-144-precomposed.png">
   <link href="assets/plugins/select/bootstrap-select.min.css" rel="stylesheet">
   <link href="assets/plugins/tablesorter/addons/pager/jquery.tablesorter.pager.css" rel="stylesheet">
   <link href="assets/plugins/tablesorter/css/theme.bootstrap.css" rel="stylesheet">
