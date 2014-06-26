@@ -1,115 +1,16 @@
 <?php
 require 'sysconfig.inc.php';
+include LIB_DIR.'tools.php';
 
-/**
- * Terbilang
- * @author Rio Astamal <me@rioastamal.net>
- */
-
-function terbilang($angka) {
-	$angka = (float)$angka;
-	$bilangan = array(
-			'',
-			'Satu',
-			'Dua',
-			'Tiga',
-			'Empat',
-			'Lima',
-			'Enam',
-			'Tujuh',
-			'Delapan',
-			'Sembilan',
-			'Sepuluh',
-			'Sebelas'
-	);
-	if ($angka < 12) {
-		return $bilangan[$angka];
-	} else if ($angka < 20) {
-		return $bilangan[$angka - 10] . ' Belas';
-	} else if ($angka < 100) {
-		$hasil_bagi = (int)($angka / 10);
-		$hasil_mod = $angka % 10;
-		return trim(sprintf('%s Puluh %s', $bilangan[$hasil_bagi], $bilangan[$hasil_mod]));
-	} else if ($angka < 200) {
-		return sprintf('Seratus %s', terbilang($angka - 100));
-	} else if ($angka < 1000) {
-		$hasil_bagi = (int)($angka / 100);
-		$hasil_mod = $angka % 100;
-		return trim(sprintf('%s Ratus %s', $bilangan[$hasil_bagi], terbilang($hasil_mod)));
-	} else if ($angka < 2000) {
-		return trim(sprintf('Seribu %s', terbilang($angka - 1000)));
-	} else if ($angka < 1000000) {
-		$hasil_bagi = (int)($angka / 1000);
-		$hasil_mod = $angka % 1000;
-		return sprintf('%s Ribu %s', terbilang($hasil_bagi), terbilang($hasil_mod));
-	} else if ($angka < 1000000000) {
-		$hasil_bagi = (int)($angka / 1000000);
-		$hasil_mod = $angka % 1000000;
-		return trim(sprintf('%s Juta %s', terbilang($hasil_bagi), terbilang($hasil_mod)));
-	} else if ($angka < 1000000000000) {
-		$hasil_bagi = (int)($angka / 1000000000);
-		$hasil_mod = fmod($angka, 1000000000);
-		return trim(sprintf('%s Milyar %s', terbilang($hasil_bagi), terbilang($hasil_mod)));
-	} else if ($angka < 1000000000000000) {
-		$hasil_bagi = $angka / 1000000000000;
-		$hasil_mod = fmod($angka, 1000000000000);
-		return trim(sprintf('%s Triliun %s', terbilang($hasil_bagi), terbilang($hasil_mod)));
-	} else {
-		return 'Wow...';
-	}
-}
-
-// Create table total
-$sql="SELECT bca,bri,mandiri,date_update FROM settings";
-// Execute query
-$result=$dbs->query($sql);
-
-while($row = $result->fetch_array()) {
-	$_temp['bca']=$row['bca'];
-	$_temp['bri']=$row['bri'];
-	$_temp['mandiri']=$row['mandiri'];
-	$_temp['total']=$row['bca']+$row['bri']+$row['mandiri'];
-	$_temp['tanggal']=date_format(date_create($row['date_update']),'d-m-Y');
-}
-
-// Create table donuts
-//$sql="SELECT bca+bri+mandiri as total,bca,bri,mandiri,date_create FROM sumbangan2 ORDER BY date_create DESC LIMIT 0,1";
-$sql="SELECT sum(bca)+sum(bri)+sum(mandiri) as total,sum(bca) as bca,sum(bri) as bri,sum(mandiri) as mandiri, max(date_create) as date_create FROM sumbangan";
-// Execute query
-$result=$dbs->query($sql);
-
-while($row = $result->fetch_array()) {
-	$_data['bca']=$row['bca'];
-	$_data['bri']=$row['bri'];
-	$_data['mandiri']=$row['mandiri'];
-	$_data['total']=$row['total'];
-	$_data['tanggal']=date_format(date_create($row['date_create']),'d-m-Y');
-}
+$_temp = total_Table();
+$_data = total_Bank();
 
 if ($_temp['total'] > $_data['total']) {
 	$_data['total'] = $_temp['total'];
 	$_data['tanggal'] = $_temp['tanggal'];
 }
 
-// Create table daily bank
-$sql="SELECT sum(bca) as bca, sum(bri) as bri, sum(mandiri) as mandiri, tanggal FROM sumbangan GROUP BY tanggal ORDER BY tanggal DESC LIMIT 0,7";
-// Execute query
-$result=$dbs->query($sql);
-$_bank = array();
-$i = 0;
-while($row = $result->fetch_array()) {
-  // $_bank['bca'][$i]=number_format($row['bca']/1000, 2,',','.');
-  // $_bank['bri'][$i]=number_format($row['bri']/1000, 2,',','.');
-  // $_bank['mandiri'][$i]=number_format($row['mandiri']/1000, 2,',','.');
-	$_bank['bca'][$i]      =(int)($row['bca']);
-	$_bank['bri'][$i]      =(int)($row['bri']);
-	$_bank['mandiri'][$i]  =(int)($row['mandiri']);
-
-	$_bank['tgl'][$i] = date_format(date_create($row['tanggal']),'d/m');
-	$_bank['subtotal'][$i]=$row['bca']+$row['bri']+$row['mandiri'];
-	$_bank['total']=$_bank['total']+$_data['sub_total'][$i];
-	$i = $i+1;
-}
+$_bank = daily_Bank();
 
 ?>
 <!DOCTYPE html>
@@ -361,14 +262,11 @@ while($row = $result->fetch_array()) {
                     </thead>
                     <tbody>
 <?php
-$sql='SELECT nama,bank_transfer as bank,kota,tgl,nominal FROM penyumbang ORDER BY tgl';
-
-// Execute query
-$result=$dbs->query($sql);
-$i=0;
-while($row = $result->fetch_array()) {
-	$i=$i+1;
-	echo "<tr>\n<td>".$i."</td>\n";
+$_penyumbang = tabel_Penyumbang();
+$i = 0;
+foreach ($_penyumbang as $key => $row) {
+	$i = $i + 1;
+	echo "<tr>\n<td>". $i ."</td>\n";
 	echo "<td>".$row['tgl']."</td>\n";
 	echo "<td>".$row['nama']."</td>\n";
 	echo "<td>".$row['kota']."</td>\n";
@@ -420,33 +318,7 @@ while($row = $result->fetch_array()) {
               </div>
               <div class="clearfix"></div>
 <?php
-$sql='SELECT nama_relawan,url FROM relawan ORDER BY nama_relawan limit 0,30';
-
-// Execute query
-$result=$dbs->query($sql);
-$i=0; $j=1;
-echo '<div class="col-lg-3">';
-echo ' <ul>';
-while($row = $result->fetch_array()) {
-	if ($row['url']<>'') {
-		$_url = 'http://'.$row['url'];
-	} else {
-		$_url = '#';
-	}
-	echo '  <li><a href="'.$_url.'">'.$row['nama_relawan'].'</a></li>';
-	$i = $i+1;
-	if ($i>=10) {
-		echo ' </ul>';
-		echo '</div>';
-		$j = $j +1;
-		$i = 0;
-		if ($j <=3) {
-			echo '<div class="col-lg-3">';
-			echo ' <ul>';
-			$j = 0;
-		}
-	}
-}
+echo tabel_Relawan();
 ?>
       </div>
   </section>
@@ -526,17 +398,6 @@ while($row = $result->fetch_array()) {
       <a class="btn btn-inverse" href="#page-top">
           <i class="fa fa-chevron-up"></i>
       </a>
-  </div>
-
-  <div style="display: none;" class="modal fade YouTubeModal" id="YouTubeModal" role="dialog" aria-hidden="true">
-	  <div class="modal-dialog" id="YouTubeModalDialog">
-	  <div class="modal-content" id="YouTubeModalContent">
-		  <div class="modal-header"><button type="button" class="close" data-dismiss="modal">×</button>
-		  <h4 class="modal-title" id="YouTubeModalTitle"></h4>
-		  </div>
-		  <div class="modal-body" id="YouTubeModalBody" style="padding:0;"></div>
-	  </div>
-	  </div>
   </div>
 
   <script src="assets/js/jquery-1.10.2.js"></script>
